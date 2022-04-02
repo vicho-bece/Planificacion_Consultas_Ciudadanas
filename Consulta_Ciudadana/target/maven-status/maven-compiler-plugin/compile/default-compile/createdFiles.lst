@@ -1,0 +1,9 @@
+Modelo\CSV.class
+Controlador\PruebaDatos.class
+Modelo\CiudadanoPorRut.class
+Modelo\Consulta.class
+Modelo\ListaVotantes.class
+Modelo\Ciudadano.class
+Modelo\FormatoBinario.class
+Modelo\Resultado.class
+Modelo\ConsultaPorID.class
