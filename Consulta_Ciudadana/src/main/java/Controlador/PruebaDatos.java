@@ -1,16 +1,11 @@
 package Controlador;
 
 
-import Modelo.CiudadanoPorRut;
 import Modelo.*;
 import java.io.*;
 import java.util.*;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 /**
  *
@@ -25,8 +20,7 @@ public class PruebaDatos {
         CiudadanoPorRut pp = new CiudadanoPorRut();
         HashMap<String, Ciudadano> dato;
         Ciudadano ciudadano = new Ciudadano();
-        
-        pp.agregarCiudadanos();
+       
         //Obtengo mapa utilizado
         dato = pp.getMap();
         
@@ -60,34 +54,55 @@ public class PruebaDatos {
         ciudadano.setHabilitado(false);
         dato.put("9231456-k", ciudadano);
         
-        //Ingreso los datos a la clase CiudadanoPorRut que contiene el hashmap...
-        pp.setMap(dato);
         ciudadano = new Ciudadano();
-        //Ingreso por teclado
-        pp.agregarCiudadanos(pp,ciudadano);
-        dato = pp.getMap();
         
-        ciudadano = dato.get("9231456-k");
-        System.out.println(ciudadano.getNombre());
-                
-        
-        //Variables para las Consultas
+        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        int eleccion = 1;
         ConsultaPorID cc = new ConsultaPorID();
-        TreeMap<Integer, Consulta> mapa;
         
-        Consulta consulta = new Consulta();
-        mapa = cc.getTreemap();
+        //MENU DESDE LA CONSOLA...
         
-        //Ingreso un ejemplo de consulta...
-        consulta.setEnunciado("Prueba de uso el treemap de consultas...");
-        consulta.setFecha("01042022");
-        
-        mapa.put(1, consulta);
-        cc.setTreemap(mapa);
-        
-        //Se busca la consulta
-        consulta = cc.buscarConsulta("01042022");
-        System.out.println("FUNCIONA... " + consulta.getEnunciado());
+        //Se ingresa a este ciclo
+        while(eleccion != 0)
+        {
+            //Se imprime el menu y sus funciones...
+            System.out.println("\n1 - Ingresar un nuevo ciudadano desde teclado");
+            System.out.println("2 - Ingresar un nuevo ciudadano desde archivo.csv");
+            System.out.println("3 - Mostrar los ciudadanos");
+            System.out.println("4 - Ingresar nueva consulta desde teclado");
+            System.out.println("5 - Mostrar todas las consultas");
+            System.out.println("6 - Cargar votos de una consulta");
+            System.out.println("0 - Salir del programa");
+
+            System.out.println("Ingrese el numero de la operacion que desea realizar...");
+            
+            //Se debe ingresar un numero en el campo de la consola
+            eleccion = Integer.parseInt(read.readLine());
+            System.out.println();
+            switch(eleccion){
                 
+                case 0: break;
+                
+                case 1: pp.agregarCiudadanos(pp, ciudadano); break;
+                
+                case 2: pp.agregarCiudadanos(); break;
+                
+                case 3: pp.mostrarCiudadanos(); break;
+                
+                case 4: cc.insertaConsulta(); break;
+                
+                case 5: cc.mostrarConsultas(); break;
+                
+                case 6:
+                {
+                    System.out.println("Ingrese la clave de la consulta para cargar sus votos...");
+                    cc.cargarVotos( Integer.parseInt( read.readLine() ) );
+                    break;
+                }
+                
+                default: System.out.println("El numero que ingreso no esta dentro de las operaciones..."); break;
+                
+            }
+        }        
     }
 }

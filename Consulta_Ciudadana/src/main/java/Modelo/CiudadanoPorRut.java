@@ -56,7 +56,6 @@ public class CiudadanoPorRut {
         {
             //Ingreso al ciudadano al mapa con el rut como key
             Map.put(nuevoRut, ciudadanoDatos);
-            pp.setMap(Map);
         }
     }
     
@@ -111,6 +110,42 @@ public class CiudadanoPorRut {
                 }  
             }   
     }        
+    
+    //Metodo para mostrar los ciudadanos
+    public void mostrarCiudadanos(){
+        
+        //Variable tipo iterador y ciudadano para acceder a los datos
+        Iterator it = Map.keySet().iterator();
+        Ciudadano ciudadano;
+        String key;
+        
+        //Pregunto si el mapa esta vacio...
+        if( Map.isEmpty() )
+        {
+            System.out.println("No ciudadanos registrados...");
+            return;
+        }
+        
+        //Recorre cada mapa de la coleccion
+        while(it.hasNext()){
             
+            //Obtiene la clave, los datos del ciudadano y los imprime...
+            key = (String) it.next();
+            ciudadano = Map.get(key);
+            
+            System.out.println("RUT: " + key);
+            System.out.println("NOMBRE: " + ciudadano.getNombre());
+            
+            if(ciudadano.isSexo())
+                System.out.println("SEXO: Hombre");
+            else
+                System.out.println("SEXO: Mujer");
+            
+            if(ciudadano.isHabilitado())
+                System.out.println("PERMISO PARA SUGRAGAR: Habilitado\n");
+            else
+                System.out.println("PERMISO PARA SUFRAGAR: No Habilitado\n");
+        }  
+    }
 }
    
