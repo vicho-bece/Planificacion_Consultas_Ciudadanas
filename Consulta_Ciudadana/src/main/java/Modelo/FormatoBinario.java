@@ -12,9 +12,9 @@ package Modelo;
  */
 public class FormatoBinario {
     
-    String rut; //Rut del votante, no necesariamente tiene que estar en el mapa
+    private String rut; //Rut del votante, no necesariamente tiene que estar en el mapa
     //de CiudadanoPorRut...
-    boolean voto; //true = si, false = no
+    private boolean voto; //true = si, false = no
     
     //Constructor
     public FormatoBinario()
@@ -34,23 +34,21 @@ public class FormatoBinario {
         this.voto = voto;
     }
 
-    //Getter del rut
     public String getRut() {
         return rut;
     }
 
-    //Setter del rut
     public void setRut(String rut) {
         this.rut = rut;
     }
 
-    //Getter del voto
     public boolean isVoto() {
         return voto;
     }
-    
-    //Setter del voto
+
     public void setVoto(boolean voto) {
         this.voto = voto;
     }
+
+    
 }
