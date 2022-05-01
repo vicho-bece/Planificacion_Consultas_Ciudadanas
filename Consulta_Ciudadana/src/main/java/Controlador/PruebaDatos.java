@@ -155,10 +155,11 @@ public class PruebaDatos {
                         System.out.println("4 - Cargar votos de una consulta");
                         System.out.println("5 - Modificar datos de una consulta");
                         System.out.println("6 - Eliminar una Consulta");
-                        System.out.println("7 - Verificar los votos y contar");
-                        System.out.println("8 - Cambiar un voto de una consulta");
-                        System.out.println("9 - Buscar una consulta asociada a una clave");
-                        System.out.println("10 - Buscar una consulta asociada a una fecha");
+                        System.out.println("7 - Generar archivo de Consultas");
+                        System.out.println("8 - Verificar los votos y contar");
+                        System.out.println("9 - Cambiar un voto de una consulta");
+                        System.out.println("10 - Buscar una consulta asociada a una clave");
+                        System.out.println("11 - Buscar una consulta asociada a una fecha");
                         
                         eleccionSubmenu = sub.readLine();
                         
@@ -200,8 +201,10 @@ public class PruebaDatos {
                                 cc.eliminarConsulta(Integer.parseInt( sub.readLine() ));
                                 break;
                             }
+                            
+                            case "7": cc.archivoConsulta(); break;
                 
-                            case "7":
+                            case "8":
                             {
                                 System.out.println("\nIngrese la clave de la consulta"
                                         + " para revisar sus votos");
@@ -211,7 +214,7 @@ public class PruebaDatos {
                                 break;
                             }
                             
-                            case "8":
+                            case "9":
                             {
                                 System.out.println("\nIngrese la clave de la consulta"
                                         + " para cambiar el voto");
@@ -221,7 +224,7 @@ public class PruebaDatos {
                                 break;
                             }
                             
-                            case "9":
+                            case "10":
                             {
                                 System.out.println("\nIngrese la clave de la consulta"
                                         + " que busca");
@@ -230,7 +233,7 @@ public class PruebaDatos {
                                 break;
                             }
                             
-                            case "10":
+                            case "11":
                             {
                                 System.out.println("\nIngrese la fecha para buscar"
                                         + " la o las consultas asociadas a tal fecha");

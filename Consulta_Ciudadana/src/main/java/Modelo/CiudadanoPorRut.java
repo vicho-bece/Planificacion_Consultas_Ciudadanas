@@ -233,34 +233,46 @@ public class CiudadanoPorRut {
     }
     
     
-    //REVISAR
-    //Metodo para generar archivo.csv
+    //Metodo para generar archivo.csv a paritr de lo que contenga la coleccion
     public void archivoCiudadano() throws IOException{
         
+        //Estrucutra de intento para prevenir errores de ejecucion
         try
         {
-            
+            //Declaro una variable string que contenga el directorio de salido y nombre del archivo
+            //Y variable tipo Archivo
             String ruta = "./Salida_CSV/Ciudadano/CIUDADANOS.csv";        
             File nuevoArchivo = new File(ruta);
-        
+            
+            //Pregunto si existe el archivo (CIUDADANOS.csv en este caso)
             if(!nuevoArchivo.exists())
-                nuevoArchivo.createNewFile();
-        
+                nuevoArchivo.createNewFile(); //Se crea el archivo
+            
+            //Declaro variable tipo Archivo/Escritura para modificar dentro del archivo
+            //este mismo apunta hacia el dato tipo Archivo
             FileWriter archivoEscritura = new FileWriter(nuevoArchivo);
+            
+            //Declaro una variable tipo escritura para escribir en el Archivo/Escritura
             BufferedWriter escribirDatos = new BufferedWriter(archivoEscritura);
+            
+            //Variable para obtener los datos
             Ciudadano ciudadano;
             
+            //Recorro la coleccion
             for(Map.Entry<String, Ciudadano> mapa: mapaCiudadano.entrySet())
-                {
+            {
+                //Escribo en el archivo su RUT(key), NOMBRE, SEXO(boolean) y HABILITADO(boolean)
+                //En formato csv
                 ciudadano = mapa.getValue();
                 escribirDatos.write(mapa.getKey() + ";" + ciudadano.getNombre() + ";"
                         + ciudadano.isSexo() + ";" + ciudadano.isHabilitado() + "\n");
-                }
+            }
+            //Cierro el archivo.
             escribirDatos.close();
         }
-        catch(Exception e)
+        catch(Exception e)//En caso de encontrar un error
         {
-            e.printStackTrace();
+            e.printStackTrace();//Imprime el supuesto error en la consola
         }
             
     }

@@ -80,8 +80,7 @@ public class ConsultaPorID {
     //Recibe como parametro un dato numerico (Key de una consulta)
     public void modificarConsulta(int num) throws IOException{
         
-        //Pregunto si la coleccion esta vacia y luego si esta la consulta asociado
-        //a un  numero
+        //Paso por estas estructuras para evitar errores de ejecucion
         if( vacioConsultas() )return;
         if( !claveConsulta(num)) return;
         
@@ -151,7 +150,7 @@ public class ConsultaPorID {
     //Recibe como parametro un dato tipo int (Key de una consulta)
     public void eliminarConsulta(int num) throws IOException{
         
-        //Pregunto si la coleccion esta vacio y luego si esta la consulta 
+        //Paso por estas estructuras para evitar errores de ejecucion
         if( vacioConsultas() )return;
         if( !claveConsulta(num)) return;
         
@@ -166,7 +165,7 @@ public class ConsultaPorID {
     //Recibo una "key de una consulta" de tipo int
     public void buscarConsulta(int key) throws IOException {
         
-        //Pregunto si la coleccion esta vacia y luego si esta la consulta
+        //Paso por estas estructuras para evitar errores de ejecucion
         if( vacioConsultas() )return;
         if( !claveConsulta(key)) return;
         
@@ -205,14 +204,58 @@ public class ConsultaPorID {
         }
     }
     
+    //Metodo para generar archivo.csv de la coleccion consulta
+    public void archivoConsulta() throws IOException{
+        //Intentar ejecutar
+        try
+        {
+            //Directorio para las consultas, variable tipo archivo
+            String ruta = "./Salida_CSV/Consulta/CONSULTAS.csv";
+            File nuevoArchivo = new File(ruta);
+            
+            //Verifico que no exista
+            if(!nuevoArchivo.exists())
+                nuevoArchivo.createNewFile();//Crea uno nuevo
+            
+            //Archivo de escritura y buffer de escritura en el archivo
+            FileWriter archivoEscritura = new FileWriter(nuevoArchivo);
+            BufferedWriter escribirDatos = new BufferedWriter(archivoEscritura);
+            
+            Consulta consulta;
+            
+            //Recorro la coleccion
+            for(Map.Entry<Integer, Consulta> mapa: treemap.entrySet())
+            {                         
+                consulta = mapa.getValue();
+                
+                //Pregunto si la lista de votantes NO esta vacia
+                if(!consulta.getLista().isEmpty())
+                    archivoListaVotantes(mapa.getKey(), consulta.getLista());
+                    //Aprovecho la instancia de crear un archivo de dicha lista
+                
+                //Escribo en el archivo la Key, eunciado, fecha, numero de SI y No       
+                escribirDatos.write(mapa.getKey() + ";" + consulta.getEnunciado() +
+                        ";" + consulta.getFecha() + ";" + consulta.getContSi() + 
+                        ";" + consulta.getContNo() + "\n");
+            }
+            escribirDatos.close();//Cierro el archivo
+                    
+        }
+        catch(Exception e)//Encuentra un error
+        {
+            e.printStackTrace();//Imprime dicho error
+        }
+    }
+    
     
     //METODO PARA LOS ELEMENTOS DE LA LISTA
+    
     
     //Metodo para imprimir los datos de una sola consulta y sus Votos
     //Recibo una key de una consulta tipo int
     public void imprimirVotos(int num) throws IOException{
         
-        //Pregunto si la coleccion esta vacia y luego si esta la consulta
+        //Paso por estas estructuras para evitar errores de ejecucion
         if( vacioConsultas() )return;
         if( !claveConsulta(num)) return;
         
@@ -239,7 +282,7 @@ public class ConsultaPorID {
     //Tambien recibo una key de una consulta donde se encuentra el voto
     public void modificarVoto(int num, String rut) throws IOException {
         
-        //Pregunto si la coleccion esta vacia y luego si esta la consulta
+        //Paso por estas estructuras para evitar errores de ejecucion
         if( vacioConsultas() )return;
         if( !claveConsulta(num)) return;
         
@@ -268,7 +311,7 @@ public class ConsultaPorID {
     //SE ASUME QUE SOLO HAY UN ARCHIVO
     public void cargarVotos(int num) throws IOException {
         
-        //Paso por estos metodos para evitar errores
+        //Paso por estas estructuras para evitar errores de ejecucion
         if( vacioConsultas() )return;
         if( !claveConsulta(num)) return;
         
@@ -338,23 +381,28 @@ public class ConsultaPorID {
         return true;
     }
     
-    //Metodo para eliminar votos de los votantes que no estan coleccion y esta No habilitados
+    //Metodo para eliminar votos de los votantes que no estan coleccion del mapa y esta No habilitados
+    //Retorna true cuando termino de revisar la lista y false alguna de las 2 "if"
     public boolean eliminarVotos(int num, HashMap<String, Ciudadano> mapaCiudadano) throws IOException{
         
+        //Paso por estas estructuras para evitar errores de ejecucion
         if( vacioConsultas() )return false;
         if( !claveConsulta(num)) return false;
         
         Consulta consulta = treemap.get(num);
         FormatoBinario voto;
         
-        
+        //Recorro la lista
         for(int i = 0; i < consulta.getLista().size(); i++)
         {
             voto = consulta.getLista().get(i);
+            //Pregunto si el votante esta en la coleccion del mapa
             if(mapaCiudadano.containsKey(voto.getRut()))
             {
+                //Pregunto si esta habilitado
                 if( !mapaCiudadano.get(voto.getRut()).isHabilitado() )
                 {
+                    //Se elimina si esta NO HABILITADO
                     System.out.println("VOTO ELIMINADO");
                     consulta.getLista().remove(i);
                     i--;
@@ -362,6 +410,7 @@ public class ConsultaPorID {
             }
             else
             {
+                //Se elimina si NO ESTA EN LA COLECCION
                 System.out.println("VOTO ELIMINADO...");
                 consulta.getLista().remove(i);
                 i--;
@@ -374,16 +423,20 @@ public class ConsultaPorID {
     
     //Metodo para contar los votos de una consulta (despues de revisar la lista)
     public void contarVotos(int num) throws IOException {
+        
+        //Paso por las estructuras de control para eviar error de ejecucion
         if( vacioConsultas() )return;
         if( !claveConsulta(num)) return;
         
+        //Variable para acceder a los datos
         Consulta consulta = treemap.get(num);
         FormatoBinario voto;
-                
+           
+        //Recorro la lista
         for(int i = 0; i < consulta.getLista().size(); i++)
         {
             voto = consulta.getLista().get(i);
-
+            //Aumento por unidad los contadores dependiendo del voto (TRUE O FALSE)
             if(voto.isVoto())
                 consulta.setContSi();
             else
@@ -391,6 +444,9 @@ public class ConsultaPorID {
         }
     }
     
+    //Los sgtes metodos son para evitar errores de ejecucion
+    //Metodo para verificar que la coleccion esta vacio
+    //Retorna true en caso de que este vacio, caso contrario retorna false
     public boolean vacioConsultas() throws IOException{
         if(treemap.isEmpty())
         {
@@ -400,6 +456,8 @@ public class ConsultaPorID {
         return false;
     }
     
+    //Metodo para verificar que la clave de la consulta este en la coleccion
+    //Retorna true en caso de que lo encuentra, false no lo encuentra
     public boolean claveConsulta(int num) throws IOException{
         if( !treemap.containsKey(num) )
         {
@@ -407,5 +465,44 @@ public class ConsultaPorID {
             return false;
         }
         return true;
+    }
+    
+    //Metodo para generar archivo.csv de la lista de votantes dada la consulta
+    //Recibo la lista y key de la consulta
+    public void archivoListaVotantes(int num, ArrayList<FormatoBinario> lista) throws IOException{
+        //Aplico el intento
+        try
+        {
+            //Directorio para los votos y variable tipo archivo
+            String ruta = ("./Salida_CSV/Voto/VOTOS" +num+ ".csv");
+            File newfile = new File(ruta);
+            
+            //Pregunto si no existe un archivo
+            if(!newfile.exists())
+                newfile.createNewFile();//Se crea uno nuevo
+            
+            //Archivo de escritura y buffer de escritura en el archivo
+            FileWriter archivoEscritura = new FileWriter(newfile);
+            BufferedWriter escribirDatos = new BufferedWriter(archivoEscritura);
+            FormatoBinario voto;
+            
+            //Escribo la key en la primera, en referencia a los archivos de lectura
+            escribirDatos.write(num + "\n");
+            
+            //Recorro la lista de votantes
+            for(int i = 0; i < lista.size(); i++)
+            {
+                //Escribo el rut y su voto
+                voto = lista.get(i);
+                escribirDatos.write(voto.getRut() + ";" + voto.isVoto() + "\n");
+            }
+       
+            escribirDatos.close();//Cierro el archivo
+                    
+        }
+        catch(Exception e)//Encuentra el error
+        {
+            e.printStackTrace();//Imprime dicho error
+        }      
     }
 }
