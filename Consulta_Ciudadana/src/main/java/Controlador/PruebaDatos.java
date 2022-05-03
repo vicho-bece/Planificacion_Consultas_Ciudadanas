@@ -59,8 +59,19 @@ public class PruebaDatos {
         BufferedReader sub = new BufferedReader(new InputStreamReader(System.in));
         
         String eleccionMenu = "1";
-        String eleccionSubmenu; 
+        String eleccionSubmenu;
+        
         ConsultaPorID cc = new ConsultaPorID();
+        Consulta consulta = new Consulta();
+        consulta.setEnunciado("Estas de acuerdo con el nuevo gobierno?");
+        consulta.setFecha("02/05/2022");
+        
+        cc.getTreemap().put(1, consulta);
+        
+        consulta = new Consulta();
+        consulta.setEnunciado("aaa");
+        consulta.setFecha("02/05/2022");
+        cc.getTreemap().put(2, consulta);
         
         //MENU DESDE LA CONSOLA...
         

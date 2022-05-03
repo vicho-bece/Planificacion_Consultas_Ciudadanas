@@ -2,7 +2,7 @@
 
 <ClassDiagram name="Consulta_Ciudadana">
   <ClassDiagramComponents>
-    <Class name="PruebaDatos" package="Controlador" visibility="public" xPosition="79.0" yPosition="9.0">
+    <Class name="PruebaDatos" package="Controlador" visibility="public" xPosition="866.0" yPosition="109.0">
       <Fields/>
       <Constructors/>
       <Methods>
@@ -11,7 +11,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Ciudadano" package="Modelo" visibility="public" xPosition="389.0" yPosition="334.0">
+    <Class name="Ciudadano" package="Modelo" visibility="public" xPosition="1155.0" yPosition="782.0">
       <Fields>
         <Field name="nombre" type="String" visibility="private"/>
         <Field name="sexo" type="boolean" visibility="private"/>
@@ -43,9 +43,9 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="CiudadanoPorRut" package="Modelo" visibility="public" xPosition="376.0" yPosition="9.0">
+    <Class name="CiudadanoPorRut" package="Modelo" visibility="public" xPosition="1266.0" yPosition="55.0">
       <Fields>
-        <Field name="Map" type="HashMap&lt;String, Ciudadano&gt;" visibility="private"/>
+        <Field name="mapaCiudadano" type="HashMap&lt;String, Ciudadano&gt;" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
@@ -53,23 +53,37 @@
       <Methods>
         <Method name="getMap" returnType="HashMap&lt;String, Ciudadano&gt;" visibility="public"/>
         <Method name="setMap" returnType="void" visibility="public">
-          <Argument type="HashMap&lt;String, Ciudadano&gt;" name="Map"/>
+          <Argument type="HashMap&lt;String, Ciudadano&gt;" name="mapaCiudadano"/>
         </Method>
         <Method name="agregarCiudadanos" returnType="void" visibility="public">
-          <Argument type="CiudadanoPorRut" name="pp"/>
           <Argument type="Ciudadano" name="ciudadanoDatos"/>
         </Method>
         <Method name="agregarCiudadanos" returnType="void" visibility="public"/>
         <Method name="mostrarCiudadanos" returnType="void" visibility="public"/>
+        <Method name="modificarCiudadano" returnType="void" visibility="public">
+          <Argument type="String" name="rut"/>
+        </Method>
+        <Method name="valorCiudadano" returnType="void" visibility="public">
+          <Argument type="Ciudadano" name="ciudadano"/>
+        </Method>
+        <Method name="ingresarDatosCiudadano" returnType="Ciudadano" visibility="public"/>
+        <Method name="eliminarCiudadano" returnType="void" visibility="public">
+          <Argument type="String" name="rut"/>
+        </Method>
+        <Method name="vacioCiudadanos" returnType="boolean" visibility="public"/>
+        <Method name="rutCiudadano" returnType="boolean" visibility="public">
+          <Argument type="String" name="rut"/>
+        </Method>
+        <Method name="archivoCiudadano" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Consulta" package="Modelo" visibility="public" xPosition="1161.0" yPosition="366.0">
+    <Class name="Consulta" package="Modelo" visibility="public" xPosition="81.0" yPosition="751.0">
       <Fields>
         <Field name="enunciado" type="String" visibility="private"/>
         <Field name="fecha" type="String" visibility="private"/>
         <Field name="contSi" type="int" visibility="private"/>
         <Field name="contNo" type="int" visibility="private"/>
-        <Field name="list" type="ListaVotantes" visibility="private"/>
+        <Field name="listaVotantes" type="ArrayList&lt;FormatoBinario&gt;" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
@@ -79,7 +93,6 @@
         <Constructor visibility="public">
           <Argument type="String" name="enunciado"/>
           <Argument type="String" name="fecha"/>
-          <Argument type="ListaVotantes" name="list"/>
         </Constructor>
       </Constructors>
       <Methods>
@@ -95,13 +108,13 @@
         <Method name="setContSi" returnType="void" visibility="public"/>
         <Method name="getContNo" returnType="int" visibility="public"/>
         <Method name="setContNo" returnType="void" visibility="public"/>
-        <Method name="getList" returnType="ListaVotantes" visibility="public"/>
-        <Method name="setList" returnType="void" visibility="public">
-          <Argument type="ListaVotantes" name="list"/>
+        <Method name="getLista" returnType="ArrayList&lt;FormatoBinario&gt;" visibility="public"/>
+        <Method name="agregarVoto" returnType="void" visibility="public">
+          <Argument type="FormatoBinario" name="formato"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="ConsultaPorID" package="Modelo" visibility="public" xPosition="990.0" yPosition="9.0">
+    <Class name="ConsultaPorID" package="Modelo" visibility="public" xPosition="58.0" yPosition="55.0">
       <Fields>
         <Field name="treemap" type="TreeMap&lt;Integer, Consulta&gt;" visibility="private"/>
       </Fields>
@@ -113,20 +126,57 @@
         <Method name="setTreemap" returnType="void" visibility="public">
           <Argument type="TreeMap&lt;Integer, Consulta&gt;" name="treemap"/>
         </Method>
-        <Method name="buscarConsulta" returnType="Consulta" visibility="public">
+        <Method name="agregarConsulta" returnType="void" visibility="public"/>
+        <Method name="mostrarConsultas" returnType="void" visibility="public"/>
+        <Method name="modificarConsulta" returnType="void" visibility="public">
+          <Argument type="int" name="num"/>
+        </Method>
+        <Method name="valorConsulta" returnType="void" visibility="public">
+          <Argument type="Consulta" name="consulta"/>
+        </Method>
+        <Method name="ingresarDatosConsulta" returnType="Consulta" visibility="public"/>
+        <Method name="eliminarConsulta" returnType="void" visibility="public">
+          <Argument type="int" name="num"/>
+        </Method>
+        <Method name="buscarConsulta" returnType="void" visibility="public">
           <Argument type="int" name="key"/>
         </Method>
-        <Method name="insertaConsulta" returnType="void" visibility="public"/>
-        <Method name="mostrarConsultas" returnType="void" visibility="public"/>
-        <Method name="buscarConsulta" returnType="Consulta" visibility="public">
+        <Method name="buscarConsulta" returnType="void" visibility="public">
           <Argument type="String" name="date"/>
+        </Method>
+        <Method name="archivoConsulta" returnType="void" visibility="public"/>
+        <Method name="imprimirVotos" returnType="void" visibility="public">
+          <Argument type="int" name="num"/>
+        </Method>
+        <Method name="modificarVoto" returnType="void" visibility="public">
+          <Argument type="int" name="num"/>
+          <Argument type="String" name="rut"/>
         </Method>
         <Method name="cargarVotos" returnType="void" visibility="public">
           <Argument type="int" name="num"/>
         </Method>
+        <Method name="eliminarVotos" returnType="boolean" visibility="public">
+          <Argument type="String" name="rut"/>
+          <Argument type="ArrayList&lt;FormatoBinario&gt;" name="list"/>
+        </Method>
+        <Method name="eliminarVotos" returnType="boolean" visibility="public">
+          <Argument type="int" name="num"/>
+          <Argument type="HashMap&lt;String, Ciudadano&gt;" name="mapaCiudadano"/>
+        </Method>
+        <Method name="contarVotos" returnType="void" visibility="public">
+          <Argument type="int" name="num"/>
+        </Method>
+        <Method name="vacioConsultas" returnType="boolean" visibility="public"/>
+        <Method name="claveConsulta" returnType="boolean" visibility="public">
+          <Argument type="int" name="num"/>
+        </Method>
+        <Method name="archivoListaVotantes" returnType="void" visibility="public">
+          <Argument type="int" name="num"/>
+          <Argument type="ArrayList&lt;FormatoBinario&gt;" name="lista"/>
+        </Method>
       </Methods>
     </Class>
-    <Class name="CSV" package="Modelo" visibility="public" xPosition="46.0" yPosition="550.0">
+    <Class name="CSV" package="Modelo" visibility="public" xPosition="852.0" yPosition="335.0">
       <Fields>
         <Field name="file" type="BufferedReader" visibility="private"/>
         <Field name="currentLine" type="String" visibility="private"/>
@@ -155,10 +205,10 @@
         <Method name="close" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="FormatoBinario" package="Modelo" visibility="public" xPosition="376.0" yPosition="695.0">
+    <Class name="FormatoBinario" package="Modelo" visibility="public" xPosition="533.0" yPosition="810.0">
       <Fields>
-        <Field name="rut" type="String" visibility="package"/>
-        <Field name="voto" type="boolean" visibility="package"/>
+        <Field name="rut" type="String" visibility="private"/>
+        <Field name="voto" type="boolean" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
@@ -181,65 +231,21 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="ListaVotantes" package="Modelo" visibility="public" xPosition="767.0" yPosition="733.0">
-      <Fields>
-        <Field name="lista" type="ArrayList&lt;FormatoBinario&gt;" visibility="private"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="public"/>
-        <Constructor visibility="public">
-          <Argument type="ArrayList" name="lista"/>
-        </Constructor>
-      </Constructors>
-      <Methods>
-        <Method name="getLista" returnType="ArrayList&lt;FormatoBinario&gt;" visibility="public"/>
-        <Method name="agregarVoto" returnType="void" visibility="public">
-          <Argument type="FormatoBinario" name="formato"/>
-        </Method>
-      </Methods>
-    </Class>
-    <Class name="Resultado" package="Modelo" visibility="public" xPosition="39.0" yPosition="198.0">
-      <Fields>
-        <Field name="resolucion" type="String" visibility="private"/>
-        <Field name="si" type="int" visibility="private"/>
-        <Field name="no" type="int" visibility="private"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="public"/>
-        <Constructor visibility="public">
-          <Argument type="Resultado" name="resultado"/>
-        </Constructor>
-        <Constructor visibility="public">
-          <Argument type="String" name="resolucion"/>
-          <Argument type="int" name="si"/>
-          <Argument type="int" name="no"/>
-        </Constructor>
-      </Constructors>
-      <Methods>
-        <Method name="getResolucion" returnType="String" visibility="public"/>
-        <Method name="setResolucion" returnType="void" visibility="public">
-          <Argument type="String" name="resolucion"/>
-        </Method>
-        <Method name="getSi" returnType="int" visibility="public"/>
-        <Method name="setSi" returnType="void" visibility="public">
-          <Argument type="int" name="si"/>
-        </Method>
-        <Method name="getNo" returnType="int" visibility="public"/>
-        <Method name="setNo" returnType="void" visibility="public">
-          <Argument type="int" name="no"/>
-        </Method>
-      </Methods>
-    </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <UseRelation source="Modelo.ListaVotantes" target="Modelo.FormatoBinario" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="list" source="Modelo.Consulta" target="Modelo.ListaVotantes" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ListaVotantes"/>
-    <HasRelation name="treemap" source="Modelo.ConsultaPorID" target="Modelo.Consulta" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="TreeMap&lt;Integer, Consulta&gt;"/>
-    <HasRelation name="lista" source="Modelo.ListaVotantes" target="Modelo.FormatoBinario" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;FormatoBinario&gt;"/>
+    <UseRelation name="" source="Modelo.CiudadanoPorRut" target="Modelo.CSV" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="Modelo.CiudadanoPorRut" target="Modelo.Ciudadano" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="Modelo.Consulta" target="Modelo.ListaVotantes" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="Modelo.CiudadanoPorRut" target="Modelo.CiudadanoPorRut" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="Map" source="Modelo.CiudadanoPorRut" target="Modelo.Ciudadano" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="HashMap&lt;String, Ciudadano&gt;"/>
+    <HasRelation name="listaVotantes" source="Modelo.Consulta" target="Modelo.FormatoBinario" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;FormatoBinario&gt;"/>
+    <HasRelation name="mapaCiudadano" source="Modelo.CiudadanoPorRut" target="Modelo.Ciudadano" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="HashMap&lt;String, Ciudadano&gt;"/>
+    <HasRelation name="treemap" source="Modelo.ConsultaPorID" target="Modelo.Consulta" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="TreeMap&lt;Integer, Consulta&gt;"/>
     <UseRelation source="Modelo.ConsultaPorID" target="Modelo.Consulta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Controlador.PruebaDatos" target="Modelo.Ciudadano" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Controlador.PruebaDatos" target="Modelo.CiudadanoPorRut" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Modelo.ConsultaPorID" target="Modelo.CSV" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Controlador.PruebaDatos" target="Modelo.ConsultaPorID" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Modelo.ConsultaPorID" target="Modelo.FormatoBinario" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Modelo.Consulta" target="Modelo.FormatoBinario" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Controlador.PruebaDatos" target="Modelo.Consulta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Modelo.ConsultaPorID" target="Modelo.Ciudadano" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>

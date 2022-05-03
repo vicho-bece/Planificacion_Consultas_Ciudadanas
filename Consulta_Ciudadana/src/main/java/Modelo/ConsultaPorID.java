@@ -361,7 +361,7 @@ public class ConsultaPorID {
                     fileVotos.close();
                     break;//Finaliza la busqueda de archivo
                 }
-                     
+                fileVotos.close();     
             }   
     }
     
