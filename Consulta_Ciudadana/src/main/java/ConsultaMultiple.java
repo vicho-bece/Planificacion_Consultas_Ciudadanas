@@ -16,68 +16,130 @@ import java.util.*;
 //Clase hijo de Consulta
 public class ConsultaMultiple extends Consulta{
     
-    private ArrayList<FormatoMultiple> listaVotantes = new ArrayList(); //registro
-    //de ciudadanos que votaron
+    /**
+     * listaVotantes: lista de registro de ciudadanos que votaron
+     * admite el formato de seleccion multiple
+     * 
+     * cont1: contador de opcion 1
+     * cont2: contador de opcion 2
+     * cont3: contador de opcion 3
+     * cont4: contador de opcion 4
+     * cont5: contador de opcion 5
+     */
+    private ArrayList<FormatoMultiple> listaVotantes = new ArrayList(); 
+    private int cont1, cont2, cont3, cont4, cont5; 
     
-    
-    private int cont1, cont2, cont3, cont4, cont5; //Contadores para las 5 opciones
-    
-    //Constructor
+    /**
+     * Constructor de la clase
+     */
     public ConsultaMultiple(){}
 
-    //Metodos de Getter Y Setter
+    /**
+     * Getter de listaVotantes
+     * 
+     * @return retorna la lista de votantes de una consulta 
+     */
     public ArrayList<FormatoMultiple> getListaVotantes() {
         return listaVotantes;
     }
     
+    /**
+     * Setter de listaVotantes
+     * 
+     * @param formato corresponde al voto de seleccion multiple, con Rut y voto
+     */
     public void agregarVoto(FormatoMultiple formato){
         listaVotantes.add(formato);
     }
-
+    
+    /**
+     * Getter de cont1
+     * 
+     * @return el numero de votos de cont1 
+     */
     public int getCont1() {
         return cont1;
     }
-
+    
+    /**
+     * Setter de cont1
+     * Incrementa una unidad a este atributo
+     */
     public void setCont1() {
         this.cont1++;
     }
-
+    
+    /**
+     * Getter de cont2
+     * @return el numero de votos de cont2 
+     */
     public int getCont2() {
         return cont2;
     }
-
+    
+    /**
+     * Setter de cont2
+     * Incrementa una unidad a este atributo
+     */
     public void setCont2() {
         this.cont2++;
     }
-
+    
+    /**
+     * Getter de cont3
+     * @return el numero de votos de cont3
+     */
     public int getCont3() {
         return cont3;
     }
-
+    
+    /**
+     * Setter de cont3
+     * Incrementa una unidad a este atributo
+     */
     public void setCont3() {
         this.cont3++;
     }
-
+    
+    /**
+     * Getter de cont4
+     * @return el numero de votos de cont4
+     */
     public int getCont4() {
         return cont4;
     }
-
+    
+    /**
+     * Setter de cont4
+     * Incrementa una unidad a este atributo
+     */
     public void setCont4() {
         this.cont4++;
     }
-
+    
+    /**
+     * Getter de cont5
+     * @return el numero de votos de cont5
+     */
     public int getCont5() {
         return cont5;
     }
-
+    
+    /**
+     * Setter de cont5
+     * Incrementa una unidad a este atributo
+     */
     public void setCont5() {
         this.cont5++;
     }
 
-    
+    /**
+     * /Metodo implementado para mostrar los datos de una consulta
+     * 
+     * @param lista para acceder la lista segun lo implementa en ConsultaPorID
+     * @throws IOException excepciones de input/output
+     */
     @Override
-    //Metodo implementado para mostrar los datos de una consulta
-    //y la lista segun el caso (lo implementado en ConsultaPorID)
     public void mostrarConsulta(boolean lista) throws IOException{
         
         System.out.println("ENUNCIADO: " + getEnunciado() + "\nFECHA: " + getFecha());
@@ -106,8 +168,10 @@ public class ConsultaMultiple extends Consulta{
         }  
     }
     
+    /**
+     * Metodo implementado para contar los votos de una consulta multiple
+     */
     @Override
-    //Metodo implementado para contar los votos de una consulta multiple
     public void contarVotos(){
         
         //Reviso cada votante
@@ -130,17 +194,25 @@ public class ConsultaMultiple extends Consulta{
         }
     }
     
+    /**
+     * Metodo para retornar la suma de votos de las 5 contadores
+     * @return retorna la suma total entre los 5 contadores
+     * @throws IOException excepciones de input/output
+     */
     @Override
-    //Metodo para retornar la suma de votos de las 5 contadores
     public int sumaVotos() throws IOException{
         return (getCont1() + getCont2() + getCont3() + getCont4() + getCont5());
     }
     
-    
+    /**
+     * Metodo para retornar la opcion mas votada, se compara los 5 contadores partiendo
+     * desde el primero. Se asume que un contador no es el mas votado cuando no
+     * cumple con la sentencia
+     * 
+     * @return la opcion mas votada en String
+     * @throws IOException excepciones de input/output
+     */
     @Override
-    //Metodo para retornar la opcion mas votada, se compara los 5 contadores partiendo
-    //desde el primero. Se asume que un contador no es el mas votado cuando no
-    //cumple con la sentencia
     public String opcionMasVotada() throws IOException{
         
         
@@ -164,12 +236,12 @@ public class ConsultaMultiple extends Consulta{
             
         return "OPCION 5: " + getCont5();
     }
+    
     /**
-     * 
-     * @param key
-     * @throws IOException 
+     * Metodo para generar un archivo de los votos de una consulta multiple
+     * @param key la clave de una consulta
+     * @throws IOException excepciones de input/output
      */
-    //Metodo para generar un archivo de los votos de una consulta multiple
     public void generarArchivoVOTOSMultiple(Object key) throws IOException{
         
         //Si no hay datos en la lista finalizo la operacion

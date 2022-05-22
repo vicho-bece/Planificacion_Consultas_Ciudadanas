@@ -10,32 +10,62 @@
  */
 public class FormatoMultiple {
     
-    private String rut; //Rut del votante
-    private int voto; //El voto del votante (del 1 al 5)
+    /**
+     * rut: rut del votante
+     * voto: el voto del votante del 1 al 5
+     */
+    private String rut;
+    private int voto;
     
     
-    //Constructores
+    /**
+     * Constructor sin parametros
+     */
     public FormatoMultiple(){}
-
+    
+    /**
+     * Constructor con parametros
+     * @param rut: rut del votante
+     * @param voto: voto que realizo
+     */
     public FormatoMultiple(String rut, int voto) {
         this.rut = rut;
         this.voto = voto;
     }
     
     
-    //Metodos de Getter y Setter
+    /**
+     * Getter de rut
+     * 
+     * @return retorna el rut del votante 
+     */
     public String getRut() {
         return rut;
     }
-
+    
+    /**
+     * Setter de rut
+     * 
+     * @param rut rut del votante
+     */
     public void setRut(String rut) {
         this.rut = rut;
     }
-
+    
+    /**
+     * Getter de voto
+     * 
+     * @return retorna el voto del votante 
+     */
     public int getVoto() {
         return voto;
     }
-
+    
+    /**
+     * Setter de voto
+     * 
+     * @param voto voto que realizo
+     */
     public void setVoto(int voto) {
         this.voto = voto;
     }

@@ -220,8 +220,8 @@ public class main {
                             
                             case "7":
                             {
-                                cc.generarArchivoMultiple(null);
-                                cc.generarArchivoBinario(null);
+                                cc.generarArchivoMultiple();
+                                cc.generarArchivoBinario();
                                 break;
                             }
                 

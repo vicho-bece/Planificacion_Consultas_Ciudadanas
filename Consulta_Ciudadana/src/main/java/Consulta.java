@@ -9,24 +9,45 @@
  * @author vicho
  */
 
-//Clase abstracta y padre, e implementa esta interfaz
+
+/**
+ * 
+ * Clase abstracta y padre, e implementa esta interfaz
+ * 
+ */
 public abstract class Consulta implements funcionalidadConsulta{
     
-    private String enunciado; //Enunciado de la consulta propuesta
-    private String fecha; //Fecha estimada a realizar
     
-    //Constructor
+    /**
+     * fecha: Fecha de la consulta realizada
+     * enunciado: Enunciado de la consulta propuesta
+     */
+    private String enunciado; 
+    private String fecha; 
+    
+    
+    /**
+     * Constructor sin parametros
+     */
      public Consulta(){        
     }
     
-    //Constructor para instanciar una variable
+    
+     /**
+      * Constructor para instanciar una variable
+      * @param consulta una consulta con datos almacenados
+      */
     public Consulta(Consulta consulta){
         this.enunciado = consulta.enunciado;
         this.fecha = consulta.fecha;
         
     }
     
-    //Constructor de consulta
+    /**
+     * Constructor con parametros
+     * @param enunciado enunciado para la consulta
+     * @param fecha fecha realizada
+     */
     public Consulta(String enunciado, String fecha){
         
         //Con parametros
@@ -34,27 +55,40 @@ public abstract class Consulta implements funcionalidadConsulta{
         this.fecha = fecha;
      
     }
-    
-    //Getter del enunciado
+    /**
+     * Getter de enunciado
+     * @return Se retorna el enunciado tipo String
+     */
     public String getEnunciado() {
         return enunciado;
     }
     
-    //Setter del enunciado
+    /**
+     * Setter de enunciado
+     * @param enunciado para setear 
+     */
     public void setEnunciado(String enunciado) {
         this.enunciado = enunciado;
     }
     
-    //Getter de fecha
+    /**
+     * Getter de fecha
+     * @return Se retorna la fecha tipo String 
+     */
     public String getFecha() {
         return fecha;
     }
     
-    //Setter de fecha
+    /**
+     * Setter de fecha
+     * @param fecha para setear 
+     */
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
     
-    //Metodo abstracto para contar los votos
+    /**
+     * Metodo abstracto para contar votos
+     */
     public abstract void contarVotos();
 }

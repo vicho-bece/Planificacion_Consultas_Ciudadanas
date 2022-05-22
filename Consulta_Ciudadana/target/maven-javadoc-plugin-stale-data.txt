@@ -6,70 +6,70 @@
 -source
 '1.8'
 -sourcepath
-'C:/Users/vicho/Documents/NetBeansProjects/abstracto/src/main/java'
+'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/src/main/java'
 -author
 -bottom
 'Copyright &#169; 2022. All rights reserved.'
 -charset
 'UTF-8'
 -d
-'C:/Users/vicho/Documents/NetBeansProjects/abstracto/target/site/apidocs'
+'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/target/site/apidocs'
 -docencoding
 'UTF-8'
 -doctitle
-'abstracto 1.0-SNAPSHOT API'
+'Consulta_Ciudadana 1.0-SNAPSHOT API'
 -linkoffline
-'https://docs.oracle.com/javase/8/docs/api' 'C:/Users/vicho/Documents/NetBeansProjects/abstracto/target/javadoc-bundle-options'
+'https://docs.oracle.com/javase/8/docs/api' 'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/target/javadoc-bundle-options'
 -use
 -version
 -windowtitle
-'abstracto 1.0-SNAPSHOT API'
-'C:/Users/vicho/Documents/NetBeansProjects/abstracto/src/main/java/Ciudadano.java'
-'C:/Users/vicho/Documents/NetBeansProjects/abstracto/src/main/java/CiudadanoPorRut.java'
-'C:/Users/vicho/Documents/NetBeansProjects/abstracto/src/main/java/Consulta.java'
-'C:/Users/vicho/Documents/NetBeansProjects/abstracto/src/main/java/ConsultaBinaria.java'
-'C:/Users/vicho/Documents/NetBeansProjects/abstracto/src/main/java/ConsultaMultiple.java'
-'C:/Users/vicho/Documents/NetBeansProjects/abstracto/src/main/java/ConsultaPorID.java'
-'C:/Users/vicho/Documents/NetBeansProjects/abstracto/src/main/java/CSV.java'
-'C:/Users/vicho/Documents/NetBeansProjects/abstracto/src/main/java/FormatoBinario.java'
-'C:/Users/vicho/Documents/NetBeansProjects/abstracto/src/main/java/FormatoMultiple.java'
-'C:/Users/vicho/Documents/NetBeansProjects/abstracto/src/main/java/funcionalidadConsulta.java'
-'C:/Users/vicho/Documents/NetBeansProjects/abstracto/src/main/java/main.java'
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\src\main\java\Ciudadano.java = 1652654377021
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\src\main\java\CiudadanoPorRut.java = 1653093289585
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\src\main\java\Consulta.java = 1652996391398
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\src\main\java\ConsultaBinaria.java = 1653092530198
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\src\main\java\ConsultaMultiple.java = 1653091637510
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\src\main\java\ConsultaPorID.java = 1653092674062
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\src\main\java\CSV.java = 1652647018930
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\src\main\java\FormatoBinario.java = 1652560541241
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\src\main\java\FormatoMultiple.java = 1652561813531
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\src\main\java\funcionalidadConsulta.java = 1653086104133
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\src\main\java\main.java = 1653093342879
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\src\main\java = 1652654376888
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\allclasses-frame.html = 1653156402094
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\allclasses-noframe.html = 1653156402094
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\Ciudadano.html = 1653156401875
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\CiudadanoPorRut.html = 1653156401907
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\constant-values.html = 1653156402032
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\Consulta.html = 1653156401907
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\ConsultaBinaria.html = 1653156401922
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\ConsultaMultiple.html = 1653156401938
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\ConsultaPorID.html = 1653156401954
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\CSV.html = 1653156401954
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\deprecated-list.html = 1653156402094
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\FormatoBinario.html = 1653156402000
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\FormatoMultiple.html = 1653156402000
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\funcionalidadConsulta.html = 1653156402016
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\help-doc.html = 1653156402094
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\index-all.html = 1653156402079
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\index.html = 1653156402094
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\main.html = 1653156402016
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\overview-tree.html = 1653156402063
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\package-frame.html = 1653156402016
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\package-list = 1653156402016
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\package-summary.html = 1653156402016
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\package-tree.html = 1653156402032
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\package-use.html = 1653156402063
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\script.js = 1653156402094
-C:\Users\vicho\Documents\NetBeansProjects\abstracto\target\site\apidocs\stylesheet.css = 1653156402094
+'Consulta_Ciudadana 1.0-SNAPSHOT API'
+'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/src/main/java/Ciudadano.java'
+'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/src/main/java/CiudadanoPorRut.java'
+'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/src/main/java/Consulta.java'
+'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/src/main/java/ConsultaBinaria.java'
+'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/src/main/java/ConsultaMultiple.java'
+'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/src/main/java/ConsultaPorID.java'
+'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/src/main/java/CSV.java'
+'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/src/main/java/FormatoBinario.java'
+'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/src/main/java/FormatoMultiple.java'
+'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/src/main/java/funcionalidadConsulta.java'
+'C:/Users/vicho/Documents/NetBeansProjects/Consulta_Ciudadana/src/main/java/main.java'
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\src\main\java\Ciudadano.java = 1653186153266
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\src\main\java\CiudadanoPorRut.java = 1653188257983
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\src\main\java\Consulta.java = 1653188385615
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\src\main\java\ConsultaBinaria.java = 1653188482614
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\src\main\java\ConsultaMultiple.java = 1653188507679
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\src\main\java\ConsultaPorID.java = 1653188309406
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\src\main\java\CSV.java = 1652647018930
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\src\main\java\FormatoBinario.java = 1653188438487
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\src\main\java\FormatoMultiple.java = 1653185797039
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\src\main\java\funcionalidadConsulta.java = 1653157021840
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\src\main\java\main.java = 1653093342879
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\src\main\java = 1653171539353
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\allclasses-frame.html = 1653188514316
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\allclasses-noframe.html = 1653188514317
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\Ciudadano.html = 1653188514111
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\CiudadanoPorRut.html = 1653188514134
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\constant-values.html = 1653188514258
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\Consulta.html = 1653188514143
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\ConsultaBinaria.html = 1653188514182
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\ConsultaMultiple.html = 1653188514194
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\ConsultaPorID.html = 1653188514211
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\CSV.html = 1653188514220
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\deprecated-list.html = 1653188514314
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\FormatoBinario.html = 1653188514226
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\FormatoMultiple.html = 1653188514231
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\funcionalidadConsulta.html = 1653188514236
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\help-doc.html = 1653188514322
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\index-all.html = 1653188514310
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\index.html = 1653188514319
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\main.html = 1653188514241
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\overview-tree.html = 1653188514295
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\package-frame.html = 1653188514245
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\package-list = 1653188514243
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\package-summary.html = 1653188514251
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\package-tree.html = 1653188514253
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\package-use.html = 1653188514291
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\script.js = 1653188514323
+C:\Users\vicho\Documents\NetBeansProjects\Consulta_Ciudadana\target\site\apidocs\stylesheet.css = 1653156402094

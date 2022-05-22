@@ -10,51 +10,91 @@ import java.util.*;
  * @author vicho
  */
 
-//Clase hijo de Consulta
+/**
+ * 
+ * Clase hijo de Consulta
+ */
 public class ConsultaBinaria extends Consulta{
     
-    private ArrayList<FormatoBinario> listaVotantes = new ArrayList(); //registro 
-    //de ciudadanos que votaron
-    
-    private int contSi, contNo; //Contadores
+    /**
+     * listaVotantes: lista de registro de ciudadanos que votaron 
+     * admite el formato binario
+     * 
+     * contSi: contador de votos de Si
+     * contNo: contador de votos de No
+     */
+    private ArrayList<FormatoBinario> listaVotantes = new ArrayList();
+    private int contSi, contNo; 
 
 
-    //Constructor
+    /**
+     * Constructor de la clase
+     */
     public ConsultaBinaria(){}
     
-    //Metodos de Getter y Setter
+    /**
+     * Getter de listaVotantes
+     * 
+     * @return la listaVotantes de una consulta 
+     */
     public ArrayList<FormatoBinario> getListaVotantes() {
         return listaVotantes;
     }
     
+    /**
+     * Setter del ArrayList
+     * 
+     * @param formato el voto binario, contiene el rut y voto 
+     */
     public void agregarVoto(FormatoBinario formato){
         listaVotantes.add(formato);
     }
 
-    
+    /**
+     * Getter de contNo
+     * 
+     * @return numero de votos de contSi
+     */
     public int getContSi() {
         return contSi;
     }
 
-    
+    /**
+     * Setter de contSi
+     * 
+     * Incrementa en una unidad a este atributo
+     */
     public void setContSi() {
         this.contSi++;
     }
 
-    
+    /**
+     * Getter de contNo
+     * 
+     * @return numero de votos de contNo 
+     */
     public int getContNo() {
         return contNo;
     }
 
-    
+    /**
+     * Setter de contNo
+     * 
+     * Incrementa en una unidad a este atributo
+     */
     public void setContNo() {
         this.contNo++;
     }
     
     
+    /**
+     * Metodo implementado para mostrar los datos de una consulta 
+     * y la lista de los votantes segun la situacion
+     * 
+     * @param lista para acceder a los datos de la lista de votantes 
+     * @throws IOException excepciones de input/output
+     */
     @Override
-    //Metodo implementado para mostrar los datos de una consulta 
-    //y la lista de los votantes segun la situacion
     public void mostrarConsulta(boolean lista) throws IOException{
         System.out.println("ENUNCIADO: " + getEnunciado() + "\nFECHA: " + getFecha());
         System.out.println("SI: " + getContSi() + "\nNO: " + getContNo());
@@ -80,9 +120,10 @@ public class ConsultaBinaria extends Consulta{
             }
         }  
     }
-    
+    /**
+     * Metodo implementado para contar los votos de una consulta binaria
+     */
     @Override
-    //Metodo implementado para contar los votos de una consulta binaria
     public void contarVotos(){
         
         //Reviso cada votante
@@ -98,14 +139,22 @@ public class ConsultaBinaria extends Consulta{
         }
     }
     
+    /**
+     * Metodo implementado para retornar la sumar los 2 contadores
+     * @return la suma de votos de contSi y contNo
+     * @throws IOException excepciones de input/output
+     */
     @Override
-    //Metodo implementado para retornar la sumar los 2 contadores
     public int sumaVotos() throws IOException{
         return (getContSi() + getContNo());
     }
     
+    /**
+     * Metodo implementado para retornar la opcion mas votada
+     * @return un String para imprimir que indica la opcion mas votada
+     * @throws IOException excepciones de input/output
+     */
     @Override
-    //Metodo implementado para retornar la opcion mas votada
     public String opcionMasVotada() throws IOException{
         
         if( getContSi() > getContNo() )
@@ -114,7 +163,11 @@ public class ConsultaBinaria extends Consulta{
             return("NO: " + getContNo());
     }
     
-    //Metodo de la clase para generar un archivo de los votos de una consulta binaria
+    /**
+     * Metodo de la clase para generar un archivo de los votos de una consulta binaria
+     * @param key la clave de una consulta
+     * @throws IOException excepciones de input/output
+     */
     public void generarArchivoVOTOSBinario(Object key) throws IOException{
         
         //Si no hay datos en la lista finalizo la operacion

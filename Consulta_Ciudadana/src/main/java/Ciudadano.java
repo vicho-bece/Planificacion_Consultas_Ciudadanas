@@ -12,17 +12,28 @@
  */
 public class Ciudadano {
     
-    //ATRIBUTOS...
-    private String nombre; //identidad del ciudadano
+    /**
+     * nombre: la identidad del ciudadano
+     * sexo: el sexo del ciudadano. 
+     * habilitado: el permiso de sufragar del ciudadano
+     * 
+     */
+    private String nombre;
     private boolean sexo; //True = Hombre, False = Mujer
-    private boolean habilitado; //habilitado para sufragar
+    private boolean habilitado; //True = Sufragar, False = NO Sufragar
     
-    //Constructor por defecto
+    /**
+     * Constructor sin parametros
+     */
     public Ciudadano(){
         
     }
     
-    //Constructor para instanciar una variable
+    /**
+     * Constructor con parametros
+     * 
+     * @param ciudadano dato tipo Ciudadano que contiene los 3 atributos 
+     */
     public Ciudadano(Ciudadano ciudadano)
     {
         this.nombre = ciudadano.nombre;
@@ -30,39 +41,69 @@ public class Ciudadano {
         this.habilitado = ciudadano.habilitado;
     }
     
-    //Constructor ciudadano con parametros
+    /**
+     * Constructor con parametros
+     * 
+     * @param name nombre del ciudadano
+     * @param sex sexo del ciudadano
+     * @param permitido el permiso de sufragar
+     */
     public Ciudadano(String name, boolean sex, boolean permitido){
         this.nombre = name;
         this.sexo = sex; 
         this.habilitado = permitido;
     }
     
-    //Getter de nombre
+    /**
+     * Getter de nombre
+     * 
+     * @return retorna el nombre del ciudadano en String 
+     */
     public String getNombre() {
         return nombre;
     }
     
-    //Setter de nombre
+    /**
+     * Setter de nombre
+     * 
+     * @param nombre ingresa el nombre del ciudadano
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
     
-    //Getter de sexo
+    /**
+     * Getter de sexo
+     * 
+     * @return retorna el sexo del ciudadano
+     */
     public boolean isSexo() {
         return sexo;
     }
     
-    //Setter de sexo
+    /**
+     * Setter de sexo
+     * 
+     * @param sexo ingresa el sexo del ciudadano
+     */
     public void setSexo(boolean sexo) {
         this.sexo = sexo;
     }
     
-    //Getter de habilitado
+    /**
+     * Getter de habilitado
+     * 
+     * @return retorna el permiso de sufragar 
+     */
     public boolean isHabilitado() {
         return habilitado;
     }
     
-    //Setter de habilitado
+    /**
+     * Setter de habilitado
+     * 
+     * @param habilitado ingresa el permiso de sufragar
+     */
     public void setHabilitado(boolean habilitado) {
         this.habilitado = habilitado;
     }

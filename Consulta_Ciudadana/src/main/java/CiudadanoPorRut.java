@@ -12,26 +12,45 @@ import java.util.*;
  */
 public class CiudadanoPorRut {
     
-    private HashMap<String, Ciudadano> mapaCiudadano;//Coleccion de Ciudadano
-    //HashMap cuya clave es el rut en formato String y el valor la clase Ciudadano
+    /**
+     * mapaCiudadano: Coleccion de Ciudadano, HashMap cuya clave es el rut
+     * en formato String y el valor la clase Ciudadano
+     */
+    private HashMap<String, Ciudadano> mapaCiudadano;
     
-    //Constructor...
+    /**
+     * Constructor sin parametros
+     */
     public CiudadanoPorRut(){
         this.mapaCiudadano = new HashMap();
     }
     
-    //Getter...
+    /**
+     * Getter de mapaCiudadano
+     * 
+     * @return retorna la coleccion de ciudadanos 
+     */
     public HashMap<String, Ciudadano> getMap() {
         return mapaCiudadano;
     }
 
-    //Setter
-    public void setMap(HashMap<String, Ciudadano> mapaCiudadano) {
-        this.mapaCiudadano = mapaCiudadano;
+    /**
+     * Setter de mapaCiudadano
+     *
+     * @param ciudadano los datos de un ciudadano
+     * @param rut el rut como key
+     * 
+     */
+    public void setMap(String rut, Ciudadano ciudadano) {
+        mapaCiudadano.put(rut, ciudadano);
     }
     
-    //Metodo para agregar Ciudadanos al HashMap leyendo los datos desde teclado
-    //Recibe de parametro un dato tipo Ciudadano
+    /**
+     * Metodo para agregar Ciudadanos al HashMap leyendo los datos desde teclado
+     *  
+     * @param ciudadanoDatos un ciudadano sin datos almacenados
+     * @throws IOException excepciones de input/output
+     */
     public void agregarCiudadanos(Ciudadano ciudadanoDatos) throws IOException{
         
         //Instancio la variable de lectura desde teclado
@@ -52,10 +71,13 @@ public class CiudadanoPorRut {
         }
         
         //Ingresa el dato Ciudadano al mapa
-        mapaCiudadano.put(nuevoRut, ciudadanoDatos);
+        setMap(nuevoRut, ciudadanoDatos);
     }
     
-    //Metodo para agregar ciudadanos a partir de un archivo CSV
+    /**
+     * Metodo para agregar ciudadanos a partir de un archivo CSV
+     * @throws IOException excepciones de input/output
+     */
     public void agregarCiudadanos() throws IOException {
         
         //Declaro variable para tener el directorio dentro del proyecto
@@ -95,7 +117,7 @@ public class CiudadanoPorRut {
                         persona.setHabilitado(Boolean.parseBoolean(fileCiudadano.get_csvField(linea,3)));
                         
                         //Ingreso el ciudadano al mapa
-                        mapaCiudadano.put(fileCiudadano.get_csvField(linea,0), persona);
+                        setMap(fileCiudadano.get_csvField(linea,0), persona);
                     }
                     else
                         System.out.println("RUT :" + fileCiudadano.get_csvField(linea,0) + " Ya existe...");
@@ -108,7 +130,10 @@ public class CiudadanoPorRut {
             }   
     }        
     
-    //Metodo para mostrar los ciudadanos que hay en la coleccion
+    /**
+     * /Metodo para mostrar los ciudadanos que hay en la coleccion
+     * @throws IOException excepciones de input/output
+     */
     public void mostrarCiudadanos() throws IOException{
         
         //Variable tipo ciudadano para acceder a los datos
@@ -126,8 +151,11 @@ public class CiudadanoPorRut {
         }
     }
     
-    //Metodo para modificar los datos de un ciudadano dado rut
-    //Recibe de parametro un dato tipo String 
+    /**
+     * Metodo para modificar los datos de un ciudadano dado rut
+     * @param rut el rut de un ciudadano
+     * @throws IOException excepciones de input/output
+     */
     public void modificarCiudadano(String rut) throws IOException{
         
         //Pregunto primero si la coleccion esta vacia y despues si el ciudadano
@@ -148,8 +176,11 @@ public class CiudadanoPorRut {
         valorCiudadano(ciudadano);
     }
     
-    //Metodo para mostrar el nombre, sexo y permiso de sufragio del ciudadano
-    //Recibe de parametro un dato tipo Ciudadano 
+    /**
+     * Metodo para mostrar el nombre, sexo y permiso de sufragio del ciudadano
+     * @param ciudadano un ciudadano con datos almacenados
+     * @throws IOException excepciones de input/output
+     */
     public void valorCiudadano(Ciudadano ciudadano) throws IOException{
             
         //Imprime el nombre, sexo y permiso para sufragar
@@ -166,8 +197,11 @@ public class CiudadanoPorRut {
                 System.out.println("PERMISO PARA SUFRAGAR: No Habilitado");
     }
     
-    //Metodo para leer el nombre(String), sexo(bool)y habilitado(bool)
-    //Retorna el dato tipo Ciudadano
+    /**
+     * Metodo para leer el nombre(String), sexo(bool)y habilitado(bool)
+     * @return retorna un ciudadano con datos ingresados
+     * @throws IOException excepciones de input/output
+     */
     public Ciudadano ingresarDatosCiudadano() throws IOException{
         
         //Declarar variable tipo Ciudadano y un lector
@@ -192,8 +226,11 @@ public class CiudadanoPorRut {
         return ciudadano;
     }
     
-    //Metodo para eliminar un ciudadano
-    //Recibe un dato tipo String, supuestamente es una key
+    /**
+     * Metodo para eliminar un ciudadano
+     * @param rut el rut de un ciudadano
+     * @throws IOException excepciones de input/output
+     */
     public void eliminarCiudadano(String rut) throws IOException {
         
         //Pregunta si la coleccion esta vacia y si no esta el ciudadano asociado
@@ -207,8 +244,11 @@ public class CiudadanoPorRut {
         valorCiudadano(mapaCiudadano.remove(rut));
     }
     
-    //Metodo para verificar si la coleccion esta vacia.
-    //Retorna true en caso de que este vacia y false que hay al menos 1
+    /**
+     * Metodo para verificar si la coleccion esta vacia.
+     * @return true en caso de que este vacia y false que hay al menos 1
+     * @throws IOException excepciones de input/output
+     */
     public boolean vacioCiudadanos() throws IOException{
         //Pregunto si esta vacia la coleccion
         if(mapaCiudadano.isEmpty())
@@ -219,9 +259,13 @@ public class CiudadanoPorRut {
         return false;
     }
     
-    //Metodo para verificar que el ciudadano asociado al rut se encuentra dentro
-    //de la coleccion. Retorna false que no lo encontro y true si lo encontro.
-    //Recibe de parametro un dato tipo String, key
+    /**
+     * Metodo para verificar que el ciudadano asociado al rut se encuentra dentro
+     * de la coleccion
+     * @param rut rut del ciudadano
+     * @return false que no lo encontro y true si lo encontro.
+     * @throws IOException excepciones de input/output
+     */
     public boolean rutCiudadano(String rut) throws IOException{
         //Pregunto si la coleccion contiene el rut entregado
         if(!mapaCiudadano.containsKey(rut))
@@ -233,7 +277,10 @@ public class CiudadanoPorRut {
     }
     
     
-    //Metodo para generar archivo.csv a paritr de lo que contenga la coleccion
+    /**
+     * Metodo para generar archivo.csv a paritr de lo que contenga la coleccion
+     * @throws IOException excepciones de input/output
+     */
     public void archivoCiudadano() throws IOException{
         
         //Estrucutra de intento para prevenir errores de ejecucion
@@ -276,11 +323,11 @@ public class CiudadanoPorRut {
         }
             
     }
+    
     /**
-     * 
-     * @throws void
+     * Metodo para mostrar el ciudadano mas viejo
+     * @throws IOException excepciones de input/output
      */
-    //Metodo para mostrar el ciudadano mas viejo
     public void mostrarCiudadanoMasViejo()  throws IOException {
         
         //Pregunto si el mapa esta vacio...
@@ -310,7 +357,10 @@ public class CiudadanoPorRut {
         
     }
     
-    //Metodo para mostrar todos los ciudadanos habilitados
+    /**
+     * Metodo para mostrar todos los ciudadanos habilitados
+     * @throws IOException excepciones de input/output
+     */
     public void mostrarHabilitados() throws IOException{
         
         //Verifico si esta vacia la coleccion
