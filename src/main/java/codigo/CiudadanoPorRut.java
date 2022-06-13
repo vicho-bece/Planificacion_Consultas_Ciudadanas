@@ -1,4 +1,6 @@
-package codigo;
+package Codigo;
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -47,6 +49,51 @@ public class CiudadanoPorRut {
      */
     public void setMap(String rut, Ciudadano ciudadano) {
         mapaCiudadano.put(rut, ciudadano);
+    }
+    
+    public void datosINICIALES(){
+        
+        Ciudadano ciudadano = new Ciudadano();
+        
+        ciudadano.setNombre("Mr Juan");
+        ciudadano.setSexo(true);
+        ciudadano.setHabilitado(true);
+        setMap("12345678-9", ciudadano);
+        
+        ciudadano = new Ciudadano();
+        ciudadano.setNombre("Vladimir Putin");
+        ciudadano.setSexo(true);
+        ciudadano.setHabilitado(true);
+        setMap("6666666-6", ciudadano);
+        
+        ciudadano = new Ciudadano();
+        ciudadano.setNombre("Barack Obama");
+        ciudadano.setSexo(true);
+        ciudadano.setHabilitado(true);
+        setMap("0000000-0", ciudadano);
+        
+        ciudadano = new Ciudadano();
+        ciudadano.setNombre("Michelle Obama");
+        ciudadano.setSexo(false);
+        ciudadano.setHabilitado(true);
+        setMap("10000000-0", ciudadano);
+        
+        ciudadano = new Ciudadano();
+        ciudadano.setNombre("Donald Trump");
+        ciudadano.setSexo(true);
+        ciudadano.setHabilitado(false);
+        setMap("9231456-k", ciudadano);
+        
+        CiudadanoMenor mm = new CiudadanoMenor();
+        mm.setNombre("Jack Sparrow");
+        mm.setSexo(true);
+        mm.setNacimiento("12/06/2022");
+        if( calcularEDAD(mm.getNacimiento()) < 18 )
+            mm.setHabilitado(false);
+        else
+            mm.setHabilitado(true);
+        
+        setMap("100000000-0", mm);
     }
     
     /**
@@ -375,7 +422,7 @@ public class CiudadanoPorRut {
         String rut,respaldo,respaldoDefinitivo = "";
          int joven= 999999999, comparar;
        
-        //quita los guiones y los pasa a int, despues los va comparando y imprime el mas joven
+        //quita los guiones y los pasa a int, despues los va comparando y imprime el mas viejo
         for(Map.Entry<String, Ciudadano> mapa : mapaCiudadano.entrySet())
         {
             rut= mapa.getKey();

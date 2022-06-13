@@ -1,4 +1,6 @@
-package codigo;
+package Codigo;
+
+
 
 
 import java.io.IOException;

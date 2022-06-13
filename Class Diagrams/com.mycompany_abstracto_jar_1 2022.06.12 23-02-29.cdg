@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="com.mycompany_abstracto_jar_1">
+  <ClassDiagramComponents>
+    <Class name="Ciudadano" package="Codigo" visibility="public" xPosition="88.0" yPosition="363.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="sexo" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Ciudadano" name="ciudadano"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="boolean" name="sex"/>
+          <Argument type="boolean" name="permitido"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="isSexo" returnType="boolean" visibility="public"/>
+        <Method name="setSexo" returnType="void" visibility="public">
+          <Argument type="boolean" name="sexo"/>
+        </Method>
+        <Method name="isHabilitado" returnType="boolean" visibility="public"/>
+        <Method name="setHabilitado" returnType="void" visibility="public">
+          <Argument type="boolean" name="habilitado"/>
+        </Method>
+        <Method name="mostrarCiudadano" returnType="void" visibility="public"/>
+        <Method name="formato_csv" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="CiudadanoMenor" package="Codigo" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="nacimiento" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nacimiento"/>
+          <Argument type="String" name="name"/>
+          <Argument type="boolean" name="sex"/>
+          <Argument type="boolean" name="permitido"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNacimiento" returnType="String" visibility="public"/>
+        <Method name="setNacimiento" returnType="void" visibility="public">
+          <Argument type="String" name="nacimiento"/>
+        </Method>
+        <Method name="mostrarCiudadano" returnType="void" visibility="public"/>
+        <Method name="formato_csv" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="CiudadanoPorRut" package="Codigo" visibility="public" xPosition="607.0" yPosition="193.0">
+      <Fields>
+        <Field name="mapaCiudadano" type="HashMap&lt;String, Ciudadano&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getMap" returnType="HashMap&lt;String, Ciudadano&gt;" visibility="public"/>
+        <Method name="setMap" returnType="void" visibility="public">
+          <Argument type="String" name="rut"/>
+          <Argument type="Ciudadano" name="ciudadano"/>
+        </Method>
+        <Method name="datosINICIALES" returnType="void" visibility="public"/>
+        <Method name="agregarCiudadanos" returnType="void" visibility="public">
+          <Argument type="Ciudadano" name="ciudadanoDatos"/>
+        </Method>
+        <Method name="agregarCiudadanos" returnType="void" visibility="public"/>
+        <Method name="mostrarCiudadanos" returnType="void" visibility="public"/>
+        <Method name="modificarCiudadano" returnType="void" visibility="public">
+          <Argument type="String" name="rut"/>
+        </Method>
+        <Method name="eliminarCiudadano" returnType="void" visibility="public">
+          <Argument type="String" name="rut"/>
+        </Method>
+        <Method name="vacioCiudadanos" returnType="boolean" visibility="public"/>
+        <Method name="rutCiudadano" returnType="boolean" visibility="public">
+          <Argument type="String" name="rut"/>
+        </Method>
+        <Method name="calcularEDAD" returnType="int" visibility="public">
+          <Argument type="String" name="fecha"/>
+        </Method>
+        <Method name="archivoCiudadano" returnType="void" visibility="public"/>
+        <Method name="mostrarCiudadanoMasViejo" returnType="void" visibility="public"/>
+        <Method name="mostrarHabilitados" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Consulta" package="Codigo" visibility="public" isAbstract="true" xPosition="304.0" yPosition="1144.0">
+      <Fields>
+        <Field name="enunciado" type="String" visibility="private"/>
+        <Field name="fecha" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Consulta" name="consulta"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="enunciado"/>
+          <Argument type="String" name="fecha"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getEnunciado" returnType="String" visibility="public"/>
+        <Method name="setEnunciado" returnType="void" visibility="public">
+          <Argument type="String" name="enunciado"/>
+        </Method>
+        <Method name="getFecha" returnType="String" visibility="public"/>
+        <Method name="setFecha" returnType="void" visibility="public">
+          <Argument type="String" name="fecha"/>
+        </Method>
+        <Method name="contarVotos" returnType="void" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Class>
+    <Class name="ConsultaBinaria" package="Codigo" visibility="public" xPosition="381.0" yPosition="755.0">
+      <Fields>
+        <Field name="listaVotantes" type="ArrayList&lt;FormatoBinario&gt;" visibility="private"/>
+        <Field name="contSi" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getListaVotantes" returnType="ArrayList&lt;FormatoBinario&gt;" visibility="public"/>
+        <Method name="agregarVoto" returnType="void" visibility="public">
+          <Argument type="FormatoBinario" name="formato"/>
+        </Method>
+        <Method name="getContSi" returnType="int" visibility="public"/>
+        <Method name="setContSi" returnType="void" visibility="public"/>
+        <Method name="getContNo" returnType="int" visibility="public"/>
+        <Method name="setContNo" returnType="void" visibility="public"/>
+        <Method name="mostrarConsulta" returnType="void" visibility="public">
+          <Argument type="boolean" name="lista"/>
+        </Method>
+        <Method name="contarVotos" returnType="void" visibility="public"/>
+        <Method name="sumaVotos" returnType="int" visibility="public"/>
+        <Method name="opcionMasVotada" returnType="String" visibility="public"/>
+        <Method name="generarArchivoVOTOSBinario" returnType="void" visibility="public">
+          <Argument type="Object" name="key"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ConsultaMultiple" package="Codigo" visibility="public" xPosition="1036.0" yPosition="1417.0">
+      <Fields>
+        <Field name="listaVotantes" type="ArrayList&lt;FormatoMultiple&gt;" visibility="private"/>
+        <Field name="cont1" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getListaVotantes" returnType="ArrayList&lt;FormatoMultiple&gt;" visibility="public"/>
+        <Method name="agregarVoto" returnType="void" visibility="public">
+          <Argument type="FormatoMultiple" name="formato"/>
+        </Method>
+        <Method name="getCont1" returnType="int" visibility="public"/>
+        <Method name="setCont1" returnType="void" visibility="public"/>
+        <Method name="getCont2" returnType="int" visibility="public"/>
+        <Method name="setCont2" returnType="void" visibility="public"/>
+        <Method name="getCont3" returnType="int" visibility="public"/>
+        <Method name="setCont3" returnType="void" visibility="public"/>
+        <Method name="getCont4" returnType="int" visibility="public"/>
+        <Method name="setCont4" returnType="void" visibility="public"/>
+        <Method name="getCont5" returnType="int" visibility="public"/>
+        <Method name="setCont5" returnType="void" visibility="public"/>
+        <Method name="mostrarConsulta" returnType="void" visibility="public">
+          <Argument type="boolean" name="lista"/>
+        </Method>
+        <Method name="contarVotos" returnType="void" visibility="public"/>
+        <Method name="sumaVotos" returnType="int" visibility="public"/>
+        <Method name="opcionMasVotada" returnType="String" visibility="public"/>
+        <Method name="generarArchivoVOTOSMultiple" returnType="void" visibility="public">
+          <Argument type="Object" name="key"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ConsultaPorID" package="Codigo" visibility="public" xPosition="1401.0" yPosition="784.0">
+      <Fields>
+        <Field name="treemap" type="TreeMap&lt;Integer, Consulta&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getTreemap" returnType="TreeMap&lt;Integer, Consulta&gt;" visibility="public"/>
+        <Method name="agregarConsultas" returnType="void" visibility="public">
+          <Argument type="Consulta" name="consulta"/>
+          <Argument type="Integer" name="key"/>
+        </Method>
+        <Method name="datosINICIAL" returnType="void" visibility="public"/>
+        <Method name="agregarConsulta" returnType="void" visibility="public"/>
+        <Method name="mostrarConsultas" returnType="void" visibility="public"/>
+        <Method name="modificarConsulta" returnType="void" visibility="public">
+          <Argument type="int" name="key"/>
+        </Method>
+        <Method name="eliminarConsulta" returnType="void" visibility="public">
+          <Argument type="int" name="key"/>
+        </Method>
+        <Method name="buscarConsulta" returnType="void" visibility="public">
+          <Argument type="int" name="key"/>
+        </Method>
+        <Method name="buscarConsulta" returnType="void" visibility="public">
+          <Argument type="String" name="date"/>
+        </Method>
+        <Method name="generarArchivoMultiple" returnType="void" visibility="public"/>
+        <Method name="generarArchivoBinario" returnType="void" visibility="public"/>
+        <Method name="cargarVotosMultiples" returnType="void" visibility="public">
+          <Argument type="int" name="key"/>
+        </Method>
+        <Method name="cargarVotosBinarios" returnType="void" visibility="public">
+          <Argument type="int" name="key"/>
+        </Method>
+        <Method name="imprimirVotos" returnType="void" visibility="public">
+          <Argument type="int" name="key"/>
+        </Method>
+        <Method name="modificarVotoBinario" returnType="void" visibility="public">
+          <Argument type="int" name="key"/>
+          <Argument type="String" name="rut"/>
+        </Method>
+        <Method name="modificarVotoMultiple" returnType="void" visibility="public">
+          <Argument type="int" name="key"/>
+          <Argument type="String" name="rut"/>
+        </Method>
+        <Method name="eliminarVotosBinarios" returnType="boolean" visibility="public">
+          <Argument type="String" name="rut"/>
+          <Argument type="ArrayList&lt;FormatoBinario&gt;" name="list"/>
+        </Method>
+        <Method name="eliminarVotosMultiples" returnType="boolean" visibility="public">
+          <Argument type="String" name="rut"/>
+          <Argument type="ArrayList&lt;FormatoMultiple&gt;" name="list"/>
+        </Method>
+        <Method name="eliminarVotosBinarios" returnType="boolean" visibility="public">
+          <Argument type="int" name="key"/>
+          <Argument type="HashMap&lt;String, Ciudadano&gt;" name="ciudadanos"/>
+        </Method>
+        <Method name="eliminarVotosMultiples" returnType="boolean" visibility="public">
+          <Argument type="int" name="key"/>
+          <Argument type="HashMap&lt;String, Ciudadano&gt;" name="ciudadanos"/>
+        </Method>
+        <Method name="consultaMenosVotos" returnType="void" visibility="public"/>
+        <Method name="opcionesMasVotadas" returnType="void" visibility="public"/>
+        <Method name="contarVOTOS" returnType="void" visibility="public">
+          <Argument type="int" name="key"/>
+        </Method>
+        <Method name="evitarCaidas" returnType="boolean" visibility="public">
+          <Argument type="Object" name="key"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CSV" package="Codigo" visibility="public" xPosition="1350.0" yPosition="463.0">
+      <Fields>
+        <Field name="file" type="BufferedReader" visibility="private"/>
+        <Field name="currentLine" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="ruta"/>
+          <Argument type="String" name="archivo"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="firstLine" returnType="String" visibility="public"/>
+        <Method name="nextLine" returnType="String" visibility="public"/>
+        <Method name="get_csvField" returnType="String" visibility="public">
+          <Argument type="String" name="line"/>
+          <Argument type="int" name="field"/>
+        </Method>
+        <Method name="get_csvField" returnType="String" visibility="public">
+          <Argument type="int" name="field"/>
+          <Argument type="String" name="line"/>
+        </Method>
+        <Method name="close" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="FormatoBinario" package="Codigo" visibility="public" xPosition="779.0" yPosition="875.0">
+      <Fields>
+        <Field name="rut" type="String" visibility="private"/>
+        <Field name="voto" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="FormatoBinario" name="formato"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="rut"/>
+          <Argument type="boolean" name="voto"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getRut" returnType="String" visibility="public"/>
+        <Method name="setRut" returnType="void" visibility="public">
+          <Argument type="String" name="rut"/>
+        </Method>
+        <Method name="isVoto" returnType="boolean" visibility="public"/>
+        <Method name="setVoto" returnType="void" visibility="public">
+          <Argument type="boolean" name="voto"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FormatoMultiple" package="Codigo" visibility="public" xPosition="520.0" yPosition="1519.0">
+      <Fields>
+        <Field name="rut" type="String" visibility="private"/>
+        <Field name="voto" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="rut"/>
+          <Argument type="int" name="voto"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getRut" returnType="String" visibility="public"/>
+        <Method name="setRut" returnType="void" visibility="public">
+          <Argument type="String" name="rut"/>
+        </Method>
+        <Method name="getVoto" returnType="int" visibility="public"/>
+        <Method name="setVoto" returnType="void" visibility="public">
+          <Argument type="int" name="voto"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="main" package="Ventanas" visibility="public" xPosition="1053.0" yPosition="534.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="arg"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="VentanaMenuCiudadanos" package="Ventanas" visibility="public" xPosition="2010.0" yPosition="828.0">
+      <Fields>
+        <Field name="Ciudadanos_Archivo" type="javax.swing.JButton" visibility="private"/>
+        <Field name="VolverMenu" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton3" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel4" type="javax.swing.JLabel" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="VolverMenuActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="Ciudadanos_ArchivoActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="VentanaMenuConsultas" package="Ventanas" visibility="public" xPosition="2511.0" yPosition="307.0">
+      <Fields>
+        <Field name="VolverMENU" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="VolverMENUActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="VentanaMenuPrincipal" package="Ventanas" visibility="public" xPosition="1755.0" yPosition="61.0">
+      <Fields>
+        <Field name="ciudadanos" type="CiudadanoPorRut" visibility="private"/>
+        <Field name="consultas" type="ConsultaPorID" visibility="private"/>
+        <Field name="Finalizar_Programa" type="javax.swing.JButton" visibility="private"/>
+        <Field name="Submenu_Ciudadano" type="javax.swing.JButton" visibility="private"/>
+        <Field name="Submenu_Consultas" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jDialog1" type="javax.swing.JDialog" visibility="private"/>
+        <Field name="jFrame1" type="javax.swing.JFrame" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel4" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel6" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel7" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jMenu1" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jMenu2" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jMenu3" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jMenu4" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jMenu5" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jMenuBar1" type="javax.swing.JMenuBar" visibility="private"/>
+        <Field name="jMenuBar2" type="javax.swing.JMenuBar" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="Finalizar_ProgramaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="Submenu_CiudadanoActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="Submenu_ConsultasActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="funcionalidadConsulta" package="Codigo" visibility="public" xPosition="43.0" yPosition="828.0">
+      <Methods>
+        <Method name="mostrarConsulta" returnType="void" visibility="public">
+          <Argument type="boolean" name="lista"/>
+        </Method>
+        <Method name="sumaVotos" returnType="int" visibility="public"/>
+        <Method name="opcionMasVotada" returnType="String" visibility="public"/>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="ciudadanos" source="Ventanas.VentanaMenuPrincipal" target="Codigo.CiudadanoPorRut" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Codigo.ConsultaPorID" target="Codigo.FormatoBinario" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Ventanas.VentanaMenuPrincipal" target="Ventanas.VentanaMenuCiudadanos" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Ventanas.VentanaMenuConsultas" target="Ventanas.VentanaMenuPrincipal" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Codigo.ConsultaMultiple" target="Codigo.FormatoMultiple" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Codigo.ConsultaPorID" target="Codigo.Consulta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="consultas" source="Ventanas.VentanaMenuPrincipal" target="Codigo.ConsultaPorID" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Codigo.CiudadanoPorRut" target="Codigo.Ciudadano" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="listaVotantes" source="Codigo.ConsultaBinaria" target="Codigo.FormatoBinario" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;FormatoBinario&gt;"/>
+    <HasRelation name="treemap" source="Codigo.ConsultaPorID" target="Codigo.Consulta" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="TreeMap&lt;Integer, Consulta&gt;"/>
+    <UseRelation source="Codigo.ConsultaPorID" target="Codigo.Ciudadano" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Codigo.ConsultaPorID" target="Codigo.FormatoMultiple" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Codigo.ConsultaPorID" target="Codigo.CSV" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Codigo.ConsultaBinaria" target="Codigo.FormatoBinario" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Codigo.ConsultaMultiple" target="Codigo.Consulta"/>
+    <UseRelation name="" source="Codigo.CiudadanoPorRut" target="Codigo.CSV" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Ventanas.main" target="Codigo.CiudadanoPorRut" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Ventanas.VentanaMenuCiudadanos" target="Ventanas.VentanaMenuPrincipal" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Ventanas.main" target="Codigo.ConsultaPorID" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Codigo.Consulta" target="Codigo.funcionalidadConsulta"/>
+    <HasRelation name="mapaCiudadano" source="Codigo.CiudadanoPorRut" target="Codigo.Ciudadano" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="HashMap&lt;String, Ciudadano&gt;"/>
+    <IsRelation name="is" source="Codigo.CiudadanoMenor" target="Codigo.Ciudadano"/>
+    <IsRelation name="is" source="Codigo.ConsultaBinaria" target="Codigo.Consulta"/>
+    <UseRelation name="" source="Ventanas.VentanaMenuPrincipal" target="Ventanas.VentanaMenuConsultas" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="listaVotantes" source="Codigo.ConsultaMultiple" target="Codigo.FormatoMultiple" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;FormatoMultiple&gt;"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

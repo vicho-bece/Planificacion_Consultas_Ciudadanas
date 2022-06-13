@@ -1,4 +1,6 @@
-package codigo;
+package Codigo;
+
+
 
 
 
@@ -16,13 +18,13 @@ public class Ciudadano {
     
     /**
      * nombre: la identidad del ciudadano
-     * sexo: el sexo del ciudadano. 
-     * habilitado: el permiso de sufragar del ciudadano
+     * sexo: el sexo del ciudadano. True = Hombre, False = Mujer
+     * habilitado: el permiso de sufragar del ciudadano. True = Sufragar, False = NO Sufragar
      * 
      */
     private String nombre;
-    private boolean sexo; //True = Hombre, False = Mujer
-    private boolean habilitado; //True = Sufragar, False = NO Sufragar
+    private boolean sexo, habilitado; 
+    
     
     /**
      * Constructor sin parametros

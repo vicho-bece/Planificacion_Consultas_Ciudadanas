@@ -1,4 +1,6 @@
-package codigo;
+package Codigo;
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -51,6 +53,19 @@ public class ConsultaPorID {
      * 
      * @throws IOException excepciones de input/output
      */
+    public void datosINICIAL(){
+        Consulta consulta = new ConsultaMultiple();
+        consulta.setEnunciado("Estas de acuerdo con el nuevo gobierno?");
+        consulta.setFecha("02/05/2022");
+        
+        agregarConsultas(consulta, 1);
+        
+        consulta = new ConsultaBinaria();
+        consulta.setEnunciado("aaa");
+        consulta.setFecha("02/05/2022");
+        agregarConsultas(consulta, 2);
+    }
+    
     public void agregarConsulta() throws IOException{
         
         BufferedReader campo = new BufferedReader(new InputStreamReader(System.in));
