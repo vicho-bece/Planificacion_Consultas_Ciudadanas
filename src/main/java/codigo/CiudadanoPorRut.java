@@ -102,60 +102,30 @@ public class CiudadanoPorRut {
      * @param ciudadanoDatos un ciudadano sin datos almacenados
      * @throws IOException excepciones de input/output
      */
-    public void agregarCiudadanos(Ciudadano ciudadanoDatos) throws IOException{
+    public String agregarCiudadanos(String nombre, Boolean sexo, Boolean habilitado, String fecha, String rut) throws IOException{
         
-        //Instancio la variable de lectura desde teclado
-        BufferedReader campo = new BufferedReader(new InputStreamReader(System.in));
-        
-        //Variables para almacenar datos de input
-        String fecha, nombre;
-        Boolean sexo, habilitado;
-        
-        //Se pide los datos al usuario
-        System.out.println("\nIngrese nombre y apellido");
-        nombre = campo.readLine();
-        
-        System.out.println("\nIndique el sexo\ntrue = hombre, false = mujer.\n"
-                + "Si ingresa otro valor diferente a esos 2, se tomara como mujer");
-        sexo = Boolean.parseBoolean(campo.readLine());
-        
-        System.out.println("Ingrese la fecha de nacimiento (formato dd/mm/yyyy)");
-        fecha = campo.readLine();
+        Ciudadano ciudadanoDatos;
         
         //Verifico si es menor de edad
         if(calcularEDAD(fecha) < 18)
             //De forma automatica, no hablita el sufragio al ciudadano
             ciudadanoDatos = new CiudadanoMenor(fecha, nombre, sexo, false);   
         else
-        {
-            //En este caso, se debe escoger
-            System.out.println("\nIndique el permiso de sufragar\ntrue = habilitado, false = no habilitado.\n"
-                + "Si ingresa otro valor diferente a esos 2, se tomara como No habilitado");
-            habilitado = Boolean.parseBoolean(campo.readLine());
-            
+            //En este caso, adquiere el contenido de habilitado
             ciudadanoDatos = new Ciudadano(nombre, sexo, habilitado);
-        }
             
-        //Ingresar un rut como clave unica
-        System.out.println("\nIngrese un rut unico para identificar");
-        String nuevoRut = campo.readLine();
+        if(mapaCiudadano.containsKey(rut))
+            return "El rut: " + rut + " ya se encuentra ocupado...";
         
-        //Ciclo para asegurar un Rut unico
-        while(mapaCiudadano.containsKey(nuevoRut))
-        {
-            System.out.println("\nEl Rut " + nuevoRut + " esta OCUPADO.Favor de ingresar otro");
-            nuevoRut = campo.readLine();
-        }
-        
-        //Ingresa el dato Ciudadano al mapa
-        setMap(nuevoRut, ciudadanoDatos);
+        setMap(rut, ciudadanoDatos);
+        return "Se agrego el ciudadano de forma exitosa";
     }
     
     /**
      * Metodo para agregar ciudadanos a partir de un archivo CSV
      * @throws IOException excepciones de input/output
      */
-    public void agregarCiudadanos() throws IOException {
+    public String agregarCiudadanos() throws IOException {
         
         //Declaro variable para tener el directorio dentro del proyecto
         File dir = new File("./Datos_CSV/Ciudadano/");
@@ -169,6 +139,7 @@ public class CiudadanoPorRut {
         //Declaro la variable tipo Ciudadano para ingresar datos a cada atributo
         Ciudadano persona;
         String linea;//para leer cada linea del archivo
+        String repetidos = "";
         
         //Busco el archivo tipo csv
         for(String open : nombre)
@@ -210,35 +181,40 @@ public class CiudadanoPorRut {
                         setMap(fileCiudadano.get_csvField(linea,0), persona);
                     }
                     else
-                        System.out.println("RUT :" + fileCiudadano.get_csvField(linea,0) + " Ya existe...");
+                        repetidos += "\nRUT :" + fileCiudadano.get_csvField(linea,0) + " Ya existe...";
                     
                     //Paso a la sgte linea
                     linea = fileCiudadano.nextLine();
                 }
                 //CLOSE FILE
                 fileCiudadano.close();
-            }   
+            }
+        
+        return "Ya termino de ejecutar esta funcion\n" + repetidos;
     }        
     
     /**
      * /Metodo para mostrar los ciudadanos que hay en la coleccion
-     * @throws IOException excepciones de input/output
+     * @return 
+     * 
      */
-    public void mostrarCiudadanos() throws IOException{
+    public String mostrarCiudadanos(){
         
         //Variable tipo ciudadano para acceder a los datos
         Ciudadano ciudadano;
+        String mostrar = "";
  
         //Pregunto si el mapa esta vacio...
-        if( vacioCiudadanos() ) return;
+        if( vacioCiudadanos() ) return "La coleccion esta vacia";
         
         //Recorre cada mapa de la coleccion mostrando la key y contenido
         for(Map.Entry<String, Ciudadano> mapa : mapaCiudadano.entrySet())
         {
-            System.out.println("\nRUT: " + mapa.getKey());
             ciudadano = mapa.getValue();
-            ciudadano.mostrarCiudadano();
+            mostrar += "\nRUT: " + mapa.getKey() + ciudadano.mostrarCiudadano() + "\n";
         }
+        
+        return mostrar;
     }
     
     /**
@@ -246,51 +222,30 @@ public class CiudadanoPorRut {
      * @param rut el rut de un ciudadano
      * @throws IOException excepciones de input/output
      */
-    public void modificarCiudadano(String rut) throws IOException{
+    public String modificarCiudadano(String nombre, Boolean sexo, Boolean habilitado, String fecha, String rut){
         
         //Pregunto primero si la coleccion esta vacia y despues si el ciudadano
         //asociado al rut esta dentro de la coleccion
         
-        if( vacioCiudadanos() ) return;
-        if( !rutCiudadano(rut) ) return;
+        if( vacioCiudadanos() ) return "La coleccion esta vacia";
+        if( !rutCiudadano(rut) ) return "La coleccion No contiene ese rut:" + rut;
         
         //Imprimo los datos inciales
+        
+        String cambios = "";
         Ciudadano ciudadano = mapaCiudadano.get(rut);
-        System.out.println("\nDATOS ACTUALES:\nRUT: "+ rut);
-        ciudadano.mostrarCiudadano();
-        
-        //Se hace el mismo procedimiento en AgregarCiudadano(parametro) para 
-        //obtener los datos de input
-        BufferedReader campo = new BufferedReader(new InputStreamReader(System.in));
-        
-        String fecha, nombre;
-        Boolean sexo, habilitado;
-        
-        System.out.println("\nIngrese nombre y apellido");
-        nombre = campo.readLine();
-        
-        System.out.println("\nIndique el sexo\ntrue = hombre, false = mujer.\n"
-                + "Si ingresa otro valor diferente a esos 2, se tomara como mujer");
-        sexo = Boolean.parseBoolean(campo.readLine());
-        
-        System.out.println("Ingrese la fecha de nacimiento (formato dd/mm/yyyy)");
-        fecha = campo.readLine();
-        
+        cambios += "\nDATOS ACTUALES:\nRUT: " + rut + ciudadano.mostrarCiudadano();
+   
         if(calcularEDAD(fecha) < 18)
             ciudadano = new CiudadanoMenor(fecha, nombre, sexo, false);   
         else
-        {
-            System.out.println("\nIndique el permiso de sufragar\ntrue = habilitado, false = no habilitado.\n"
-                + "Si ingresa otro valor diferente a esos 2, se tomara como No habilitado");
-            habilitado = Boolean.parseBoolean(campo.readLine());
-            
             ciudadano = new Ciudadano(nombre, sexo, habilitado);
-        }
         
         //Se reemplaza los datos antiguos por nuevos datos ingresados y los imprime
         mapaCiudadano.replace(rut, ciudadano);
-        System.out.println("\nNuevos datos: ");
-        ciudadano.mostrarCiudadano();
+        cambios += "\nNuevos datos: " + ciudadano.mostrarCiudadano();
+        
+        return cambios;
     }
   
     
@@ -299,18 +254,18 @@ public class CiudadanoPorRut {
      * @param rut el rut de un ciudadano
      * @throws IOException excepciones de input/output
      */
-    public void eliminarCiudadano(String rut) throws IOException {
+    public String eliminarCiudadano(String rut) {
         
         //Pregunta si la coleccion esta vacia y si no esta el ciudadano asociado
         // al rut ingresado...
-        if( vacioCiudadanos() ) return;
-        if( !rutCiudadano(rut) ) return;
+        if( vacioCiudadanos() ) return "La coleccion Ciudadadano esta vacia";
+        if( !rutCiudadano(rut) ) return "La coleccion NO contiene este rut: " + rut;
         
-        //Si esta, se elimina el ciudadano e imprime sus datos
-        System.out.println("\nEl siguiente ciudadano fue eliminado");
-        System.out.println("RUT:" + rut);
+        
         Ciudadano ciudadano = mapaCiudadano.remove(rut);
         ciudadano.mostrarCiudadano();
+        
+        return "\nEl siguiente ciudadano fue eliminado:\nRUT: " + rut + ciudadano.mostrarCiudadano();
     }
     
     /**
@@ -318,13 +273,11 @@ public class CiudadanoPorRut {
      * @return true en caso de que este vacia y false que hay al menos 1
      * @throws IOException excepciones de input/output
      */
-    public boolean vacioCiudadanos() throws IOException{
+    public boolean vacioCiudadanos() {
         //Pregunto si esta vacia la coleccion
         if(mapaCiudadano.isEmpty())
-        {
-            System.out.println("No hay ciudadanos registrados");
             return true;
-        }
+        
         return false;
     }
     
@@ -335,13 +288,11 @@ public class CiudadanoPorRut {
      * @return false que no lo encontro y true si lo encontro.
      * @throws IOException excepciones de input/output
      */
-    public boolean rutCiudadano(String rut) throws IOException{
+    public boolean rutCiudadano(String rut){
         //Pregunto si la coleccion contiene el rut entregado
         if(!mapaCiudadano.containsKey(rut))
-        {
-            System.out.println("No hay ciudadano con rut: " + rut);
             return false;
-        }
+        
         return true;
     }
     
@@ -413,10 +364,10 @@ public class CiudadanoPorRut {
      * Metodo para mostrar el ciudadano mas viejo
      * @throws IOException excepciones de input/output
      */
-    public void mostrarCiudadanoMasViejo()  throws IOException {
+    public String mostrarCiudadanoMasViejo()  throws IOException {
         
         //Pregunto si el mapa esta vacio...
-        if( vacioCiudadanos() ) return;
+        if( vacioCiudadanos() ) return "La coleccion Ciudadano esta vacia";
         
         //Variables tipo aux
         String rut,respaldo,respaldoDefinitivo = "";
@@ -438,7 +389,7 @@ public class CiudadanoPorRut {
             }            
         }
         
-        System.out.println("El rut del ciudadano mas viejo es: " + respaldoDefinitivo );
+        return "El rut del ciudadano mas viejo es: " + respaldoDefinitivo ;
         
     }
     
@@ -446,13 +397,14 @@ public class CiudadanoPorRut {
      * Metodo para mostrar todos los ciudadanos habilitados
      * @throws IOException excepciones de input/output
      */
-    public void mostrarHabilitados() throws IOException{
+    public String mostrarHabilitados() throws IOException{
         
         //Verifico si esta vacia la coleccion
-        if( vacioCiudadanos() ) return;
+        if( vacioCiudadanos() ) return "La coleccion esta vacia";
         
         //Variable ciudadano y Arraylist de ciudadanos
         Ciudadano ciudadano;
+        String habilitados = "";
         ArrayList<Ciudadano> habilitado = new ArrayList<Ciudadano>();
         
         //Retorna un ciudadano de la coleccion, si este esta habilitado se agrega al
@@ -465,14 +417,14 @@ public class CiudadanoPorRut {
         
         //Hago exception en caso de que el tamaño de la lista sea 0
         if(habilitado.isEmpty())
-        {
-            System.out.println("\nNo hay ciudadanos habilitados\n");
-            return;
-        }
+            return "\nNo hay ciudadanos habilitados\n";
+        
         
         //Imprime todos los ciudadanos guardados en la lista
         for(int i = 0; i < habilitado.size(); i++)
-            System.out.println(habilitado.get(i).getNombre());
+            habilitados += "\n" + habilitado.get(i).getNombre();
+        
+        return habilitados;
     }
     
 }

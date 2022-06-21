@@ -116,18 +116,23 @@ public class Ciudadano {
      * Metodo para mostrar los datos de un ciudadano.
      * Nombre, Sexo y Habilitado
      */
-    public void mostrarCiudadano(){
+    public String mostrarCiudadano(){
         
-        System.out.println("NOMBRE: " + getNombre());
+        String mostrar = "";
+        
+        mostrar += "\nNOMBRE: " + getNombre();
+        
         if( isSexo() )
-            System.out.println("SEXO: Hombre");
+            mostrar += "\nSEXO: Hombre";
         else
-            System.out.println("SEXO: Mujer");
+            mostrar += "\nSEXO: Mujer";
         
         if( isHabilitado() )
-            System.out.println("PERMISO PARA SUGRAGAR: Habilitado");
+            mostrar += "\nPERMISO PARA SUFRAGAR: Habilitado";
         else
-            System.out.println("PERMISO PARA SUGRAGAR: NO Habilitado");
+            mostrar += "\nPERMISO PARA SUFRAGAR: NO Habilitado";
+        
+        return mostrar;
     }
     
     /**

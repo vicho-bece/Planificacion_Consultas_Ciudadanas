@@ -34,6 +34,12 @@ public class main {
         ConsultaPorID cc = new ConsultaPorID();
         cc.datosINICIAL();
         
+        //DATOS PARA EL CIUDADANO...
+        String fecha, nombre, rut;
+        Boolean sexo, habilitado;
+        
+        
+        
         //MENU DESDE LA CONSOLA...
         
         //Se ingresa a este ciclo
@@ -82,23 +88,69 @@ public class main {
                 
                             case "0": break;
                 
-                            case "1": pp.agregarCiudadanos(persona); break;
+                            case "1":
+                            {
+                                System.out.println("\nIngrese nombre y apellido");
+                                nombre = sub.readLine();
+        
+                                System.out.println("\nIndique el sexo\ntrue = hombre, false = mujer.\n"
+                                    + "Si ingresa otro valor diferente a esos 2, se tomara como mujer");
+                                sexo = Boolean.parseBoolean(sub.readLine());
+        
+                                System.out.println("Ingrese la fecha de nacimiento (formato dd/mm/yyyy)");
+                                fecha = sub.readLine();
+                                
+                                System.out.println("\nIndique el permiso de sufragar\ntrue = habilitado, false = no habilitado.\n"
+                                    + "Si ingresa otro valor diferente a esos 2, se tomara como No habilitado");
+                                habilitado = Boolean.parseBoolean(sub.readLine());
+                                
+                                System.out.println("\nIngrese un rut unico para identificar");
+                                rut = sub.readLine();
+        
+                                /*
+                                while(mapaCiudadano.containsKey(nuevoRut))
+                                {
+                                    System.out.println("\nEl Rut " + nuevoRut + " esta OCUPADO.Favor de ingresar otro");
+                                    nuevoRut = sub.readLine();
+                                }*/
+                                
+                                System.out.println(pp.agregarCiudadanos(nombre, sexo, habilitado, fecha, rut));
+                                break;
+                            } 
                 
-                            case "2": pp.agregarCiudadanos(); break;
+                            case "2": System.out.println(pp.agregarCiudadanos()); break;
                 
-                            case "3": pp.mostrarCiudadanos(); break;
+                            case "3": System.out.println(pp.mostrarCiudadanos()); break;
                 
                             case "4": 
                             {
                                 System.out.println("\nIngrese el rut del ciudadano...");
-                                pp.eliminarCiudadano(sub.readLine());
+                                rut = sub.readLine();
+                                
+                                System.out.println(pp.eliminarCiudadano(rut));
                                 break;
                             }
                 
                             case "5": 
                             {
-                                System.out.println("\nIngrese el rut del ciudadano...");
-                                pp.modificarCiudadano(sub.readLine());
+                                System.out.println("\nIngrese nombre y apellido");
+                                nombre = sub.readLine();
+        
+                                System.out.println("\nIndique el sexo\ntrue = hombre, false = mujer.\n"
+                                    + "Si ingresa otro valor diferente a esos 2, se tomara como mujer");
+                                sexo = Boolean.parseBoolean(sub.readLine());
+        
+                                System.out.println("Ingrese la fecha de nacimiento (formato dd/mm/yyyy)");
+                                fecha = sub.readLine();
+                                
+                                System.out.println("\nIndique el permiso de sufragar\ntrue = habilitado, false = no habilitado.\n"
+                                    + "Si ingresa otro valor diferente a esos 2, se tomara como No habilitado");
+                                habilitado = Boolean.parseBoolean(sub.readLine());
+                                
+                                System.out.println("\nIngrese un rut unico para identificar");
+                                rut = sub.readLine();
+                                
+                                pp.modificarCiudadano(nombre, sexo, habilitado, fecha, rut);
                                 break;
                             }
                             
@@ -108,9 +160,9 @@ public class main {
                                 break;
                             }
                             
-                            case "7": pp.mostrarCiudadanoMasViejo(); break ;
+                            case "7": System.out.println(pp.mostrarCiudadanoMasViejo()); break ;
                             
-                            case "8": pp.mostrarHabilitados(); break;
+                            case "8": System.out.println(pp.mostrarHabilitados()); break;
                         
                             default: System.out.println("\nEl numero que ingreso"
                                     + " no esta dentro de las operaciones..."); break;

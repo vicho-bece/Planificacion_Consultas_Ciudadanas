@@ -65,24 +65,29 @@ public class CiudadanoMenor extends Ciudadano {
      * Nombre, Sexo, Habilitado y edad
      */
     @Override
-    public void mostrarCiudadano(){
+    public String mostrarCiudadano(){
         
-        System.out.println("NOMBRE: " + getNombre());
+        String mostrar = "";
+        
+        mostrar += "\nNOMBRE: " + getNombre();
+        
         if( isSexo() )
-            System.out.println("SEXO: Hombre");
+            mostrar += "\nSEXO: Hombre";
         else
-            System.out.println("SEXO: Mujer");
+            mostrar += "\nSEXO: Mujer";
         
         if( isHabilitado() )
-            System.out.println("PERMISO PARA SUGRAGAR: Habilitado");
+            mostrar += "\nPERMISO PARA SUFRAGAR: Habilitado";
         else
-            System.out.println("PERMISO PARA SUGRAGAR: NO Habilitado");
+            mostrar += "\nPERMISO PARA SUFRAGAR: NO Habilitado";
         
         LocalDate actual = LocalDate.now();
         LocalDate birth = LocalDate.parse(nacimiento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         Period periodo = Period.between(birth, actual);
         
-        System.out.println("EDAD: " + periodo.getYears());
+        mostrar += "\nEDAD:" + periodo.getYears() + " MESES: " + periodo.getMonths();
+        
+        return mostrar;
     }
     
     /**
