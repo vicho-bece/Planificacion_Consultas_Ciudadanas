@@ -12,7 +12,7 @@ package Codigo;
  *
  * @author vicho
  */
-public class FormatoMultiple {
+public class FormatoMultiple extends FormatoLista {
     
     /**
      * rut: rut del votante
@@ -74,5 +74,8 @@ public class FormatoMultiple {
         this.voto = voto;
     }
     
-    
+    @Override
+    public  String formato_CSV(){
+        return (getRut() + ";" + getVoto() + "\n");
+    }
 }

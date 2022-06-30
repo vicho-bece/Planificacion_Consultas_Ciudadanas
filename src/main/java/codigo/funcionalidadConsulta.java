@@ -3,7 +3,8 @@ package Codigo;
 
 
 
-import java.io.IOException;
+
+import java.util.HashMap;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,17 +17,11 @@ import java.io.IOException;
  * @author vicho
  */
 
-/**
- * Clase tipo interfaz:
- * 
- * Utiliza para mostrar los datos de una consulta,
- * obtener la cantidada total de votos a partir de los contadores 
- * y obtener la opcion mas votada de la consulta
- * 
- */
 
 public interface funcionalidadConsulta {
-    public void mostrarConsulta(boolean lista) throws IOException;
-    public int sumaVotos() throws IOException;
-    public String opcionMasVotada() throws IOException;
+    public String mostrarConsulta(boolean lista) ;
+    public int sumaVotos();
+    public String opcionMasVotada();
+    public boolean eliminarVotos(String rut, Object lista);
+    public boolean eliminarVotos(HashMap<String, Ciudadano> ciudadanos);
 }

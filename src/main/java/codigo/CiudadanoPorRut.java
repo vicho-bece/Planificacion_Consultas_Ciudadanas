@@ -96,13 +96,8 @@ public class CiudadanoPorRut {
         setMap("100000000-0", mm);
     }
     
-    /**
-     * Metodo para agregar Ciudadanos al HashMap leyendo los datos desde teclado
-     *  
-     * @param ciudadanoDatos un ciudadano sin datos almacenados
-     * @throws IOException excepciones de input/output
-     */
-    public String agregarCiudadanos(String nombre, Boolean sexo, Boolean habilitado, String fecha, String rut) throws IOException{
+    
+    public String agregarCiudadanos(String nombre, Boolean sexo, Boolean habilitado, String fecha, String rut){
         
         Ciudadano ciudadanoDatos;
         
@@ -121,10 +116,7 @@ public class CiudadanoPorRut {
         return "Se agrego el ciudadano de forma exitosa";
     }
     
-    /**
-     * Metodo para agregar ciudadanos a partir de un archivo CSV
-     * @throws IOException excepciones de input/output
-     */
+    
     public String agregarCiudadanos() throws IOException {
         
         //Declaro variable para tener el directorio dentro del proyecto
@@ -193,11 +185,7 @@ public class CiudadanoPorRut {
         return "Ya termino de ejecutar esta funcion\n" + repetidos;
     }        
     
-    /**
-     * /Metodo para mostrar los ciudadanos que hay en la coleccion
-     * @return 
-     * 
-     */
+    
     public String mostrarCiudadanos(){
         
         //Variable tipo ciudadano para acceder a los datos
@@ -217,11 +205,7 @@ public class CiudadanoPorRut {
         return mostrar;
     }
     
-    /**
-     * Metodo para modificar los datos de un ciudadano dado rut
-     * @param rut el rut de un ciudadano
-     * @throws IOException excepciones de input/output
-     */
+    
     public String modificarCiudadano(String nombre, Boolean sexo, Boolean habilitado, String fecha, String rut){
         
         //Pregunto primero si la coleccion esta vacia y despues si el ciudadano
@@ -249,11 +233,7 @@ public class CiudadanoPorRut {
     }
   
     
-    /**
-     * Metodo para eliminar un ciudadano
-     * @param rut el rut de un ciudadano
-     * @throws IOException excepciones de input/output
-     */
+    
     public String eliminarCiudadano(String rut) {
         
         //Pregunta si la coleccion esta vacia y si no esta el ciudadano asociado
@@ -268,11 +248,7 @@ public class CiudadanoPorRut {
         return "\nEl siguiente ciudadano fue eliminado:\nRUT: " + rut + ciudadano.mostrarCiudadano();
     }
     
-    /**
-     * Metodo para verificar si la coleccion esta vacia.
-     * @return true en caso de que este vacia y false que hay al menos 1
-     * @throws IOException excepciones de input/output
-     */
+    
     public boolean vacioCiudadanos() {
         //Pregunto si esta vacia la coleccion
         if(mapaCiudadano.isEmpty())
@@ -281,13 +257,7 @@ public class CiudadanoPorRut {
         return false;
     }
     
-    /**
-     * Metodo para verificar que el ciudadano asociado al rut se encuentra dentro
-     * de la coleccion
-     * @param rut rut del ciudadano
-     * @return false que no lo encontro y true si lo encontro.
-     * @throws IOException excepciones de input/output
-     */
+    
     public boolean rutCiudadano(String rut){
         //Pregunto si la coleccion contiene el rut entregado
         if(!mapaCiudadano.containsKey(rut))
@@ -296,13 +266,7 @@ public class CiudadanoPorRut {
         return true;
     }
     
-    /**
-     * Metodo para calcular la edad de un ciudadano con la fecha de nacimiento
-     * y la fecha actual
-     * 
-     * @param fecha fecha de nacimiento
-     * @return La edad en formato Integer
-     */
+    
     public int calcularEDAD(String fecha)
     {
         //Transformo el formato String a LocalDate
@@ -314,57 +278,9 @@ public class CiudadanoPorRut {
         
         return periodo.getYears();
     }
-    /**
-     * Metodo para generar archivo.csv a paritr de lo que contenga la coleccion
-     * @throws IOException excepciones de input/output
-     */
-    public void archivoCiudadano() throws IOException{
-        
-        //Estrucutra de intento para prevenir errores de ejecucion
-        try
-        {
-            //Declaro una variable string que contenga el directorio de salido y nombre del archivo
-            //Y variable tipo Archivo
-            String ruta = "./Salida_CSV/Ciudadano/CIUDADANOS.csv";        
-            File nuevoArchivo = new File(ruta);
-            
-            //Pregunto si existe el archivo (CIUDADANOS.csv en este caso)
-            if(!nuevoArchivo.exists())
-                nuevoArchivo.createNewFile(); //Se crea el archivo
-            
-            //Declaro variable tipo Archivo/Escritura para modificar dentro del archivo
-            //este mismo apunta hacia el dato tipo Archivo
-            FileWriter archivoEscritura = new FileWriter(nuevoArchivo);
-            
-            //Declaro una variable tipo escritura para escribir en el Archivo/Escritura
-            BufferedWriter escribirDatos = new BufferedWriter(archivoEscritura);
-            
-            //Variable para obtener los datos
-            Ciudadano ciudadano;
-            
-            //Recorro la coleccion
-            for(Map.Entry<String, Ciudadano> mapa: mapaCiudadano.entrySet())
-            {
-                //Escribo en el archivo su RUT(key) y los datos del ciudadano segun el caso
-                //En formato csv
-                ciudadano = mapa.getValue();
-                escribirDatos.write(mapa.getKey() + ";" + ciudadano.formato_csv());
-            }
-            //Cierro el archivo.
-            escribirDatos.close();
-        }
-        catch(Exception e)//En caso de encontrar un error
-        {
-            e.printStackTrace();//Imprime el supuesto error en la consola
-        }
-            
-    }
+  
     
-    /**
-     * Metodo para mostrar el ciudadano mas viejo
-     * @throws IOException excepciones de input/output
-     */
-    public String mostrarCiudadanoMasViejo()  throws IOException {
+    public String mostrarCiudadanoMasViejo()   {
         
         //Pregunto si el mapa esta vacio...
         if( vacioCiudadanos() ) return "La coleccion Ciudadano esta vacia";
@@ -393,11 +309,7 @@ public class CiudadanoPorRut {
         
     }
     
-    /**
-     * Metodo para mostrar todos los ciudadanos habilitados
-     * @throws IOException excepciones de input/output
-     */
-    public String mostrarHabilitados() throws IOException{
+    public String mostrarHabilitados() {
         
         //Verifico si esta vacia la coleccion
         if( vacioCiudadanos() ) return "La coleccion esta vacia";

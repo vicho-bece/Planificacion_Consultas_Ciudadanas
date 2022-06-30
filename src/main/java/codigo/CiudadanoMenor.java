@@ -58,12 +58,7 @@ public class CiudadanoMenor extends Ciudadano {
         this.nacimiento = nacimiento;
     }
     
-    /**
-     * Sobreescritura de la clase Ciudadano
-     * 
-     * Metodo para mostrar los datos de un ciudadano
-     * Nombre, Sexo, Habilitado y edad
-     */
+    
     @Override
     public String mostrarCiudadano(){
         

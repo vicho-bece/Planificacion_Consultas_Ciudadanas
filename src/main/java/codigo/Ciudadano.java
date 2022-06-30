@@ -112,10 +112,7 @@ public class Ciudadano {
         this.habilitado = habilitado;
     }
     
-    /**
-     * Metodo para mostrar los datos de un ciudadano.
-     * Nombre, Sexo y Habilitado
-     */
+    
     public String mostrarCiudadano(){
         
         String mostrar = "";

@@ -7,9 +7,6 @@ package Codigo;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 /**
@@ -37,12 +34,14 @@ public class ConsultaMultiple extends Consulta{
      * Constructor de la clase
      */
     public ConsultaMultiple(){}
-
+    
+    
     /**
      * Getter de listaVotantes
      * 
      * @return retorna la lista de votantes de una consulta 
      */
+    @Override
     public ArrayList<FormatoMultiple> getListaVotantes() {
         return listaVotantes;
     }
@@ -136,40 +135,38 @@ public class ConsultaMultiple extends Consulta{
     public void setCont5() {
         this.cont5++;
     }
-
-    /**
-     * /Metodo implementado para mostrar los datos de una consulta
-     * 
-     * @param lista para acceder la lista segun lo implementa en ConsultaPorID
-     * @throws IOException excepciones de input/output
-     */
+    
     @Override
-    public void mostrarConsulta(boolean lista) throws IOException{
+    public String mostrarConsulta(boolean lista) {
         
-        System.out.println("ENUNCIADO: " + getEnunciado() + "\nFECHA: " + getFecha());
-        System.out.println("OPCION 1: " + getCont1() + "\nOPCION 2: " + getCont2());
-        System.out.println("OPCION 3: " + getCont3() + "\nOPCION 4: " + getCont4());
-        System.out.println("OPCION 5: " + getCont5());
+        String mostrar = "";
+        
+        mostrar += ("\nENUNCIADO: " + getEnunciado() + "\nFECHA: " + getFecha());
+        mostrar += ("\nOPCION 1: " + getCont1() + "\nOPCION 2: " + getCont2());
+        mostrar += ("\nOPCION 3: " + getCont3() + "\nOPCION 4: " + getCont4());
+        mostrar += ("\nOPCION 5: " + getCont5());
 
         if(lista)
         {
             //Verifica si la lista esta vacia
             if(listaVotantes.isEmpty())
             {
-                System.out.println("La lista de votantes esta vacia...");
-                return;
+                mostrar += "\nLa lista de votantes esta vacia...";
+                return mostrar;
             }
             
             //Se imprime todos los votantes que participaron. Rut y voto
-            System.out.println("\nLISTA DE PARTICIPANTES:\n");
+            mostrar += "\nLISTA DE PARTICIPANTES:\n";
             FormatoMultiple mm;
             
             for(int i = 0; i < listaVotantes.size(); i++)
             {
                 mm = listaVotantes.get(i);
-                System.out.println((i+1) + ")" + mm.getRut() + " " + mm.getVoto());
+                mostrar += "\n" + (i+1) + ")" + mm.getRut() + " " + mm.getVoto();
             }
-        }  
+        }
+        
+        return mostrar;
     }
     
     /**
@@ -196,15 +193,17 @@ public class ConsultaMultiple extends Consulta{
                 default: break;
             }
         }
+        
+        setCheck(true);
     }
     
     /**
      * Metodo para retornar la suma de votos de las 5 contadores
      * @return retorna la suma total entre los 5 contadores
-     * @throws IOException excepciones de input/output
+     * 
      */
     @Override
-    public int sumaVotos() throws IOException{
+    public int sumaVotos() {
         return (getCont1() + getCont2() + getCont3() + getCont4() + getCont5());
     }
     
@@ -214,10 +213,10 @@ public class ConsultaMultiple extends Consulta{
      * cumple con la sentencia
      * 
      * @return la opcion mas votada en String
-     * @throws IOException excepciones de input/output
+     * 
      */
     @Override
-    public String opcionMasVotada() throws IOException{
+    public String opcionMasVotada() {
         
         
         if( getCont1() > getCont2() )
@@ -241,47 +240,73 @@ public class ConsultaMultiple extends Consulta{
         return "OPCION 5: " + getCont5();
     }
     
-    /**
-     * Metodo para generar un archivo de los votos de una consulta multiple
-     * @param key la clave de una consulta
-     * @throws IOException excepciones de input/output
-     */
-    public void generarArchivoVOTOSMultiple(Object key) throws IOException{
+    @Override
+    public String modificarVoto(int opcion, String rut){
         
-        //Si no hay datos en la lista finalizo la operacion
-        if(listaVotantes.isEmpty()) return;
+        FormatoMultiple voto;
         
-        try
+        for(int i = 0; i < listaVotantes.size(); i++)
         {
-            //Directorio para los votos y variable tipo archivo
-            String ruta = ("./Salida_CSV/Votos_Multiple/VotoMulti" +(int)key+ ".csv");
-            File newfile = new File(ruta);
+            voto = listaVotantes.get(i);
             
-            //Pregunto si no existe un archivo
-            if(!newfile.exists())
-                newfile.createNewFile();//Se crea uno nuevo
-            
-            //Archivo de escritura y buffer de escritura en el archivo
-            FileWriter archivoEscritura = new FileWriter(newfile);
-            BufferedWriter escribirDatos = new BufferedWriter(archivoEscritura);
-            FormatoMultiple voto;
-            
-            //Escribo la key en la primera, en referencia a los archivos de lectura
-            escribirDatos.write((int)key + "\n");
-            
-            //Recorro la lista de votantes
-            for(int i = 0; i < listaVotantes.size(); i++)
+            //Si lo encuentro
+            if(voto.getRut().equals(rut))
             {
-                voto = listaVotantes.get(i);
-                escribirDatos.write(voto.getRut() + ";" + voto.getVoto() + "\n");
+                voto.setVoto(opcion);
+                return "El votante del rut: " + rut + " a cambiado su voto a " + opcion;
             }
-       
-            escribirDatos.close();//Cierro el archivo
-                    
         }
-        catch(Exception e)//Encuentra el error
+        
+        return "No hay votante con el rut: " + rut;
+    }
+    
+    @Override
+    public boolean eliminarVotos(String rut, Object lista){
+        
+        for(int i = 0; i < listaVotantes.size(); i++){
+            if(listaVotantes.get(i).getRut().equals(rut))
+                return false;
+        }
+        
+        agregarVoto( (FormatoMultiple)lista );
+        return true;
+    }
+    
+    @Override
+    public boolean eliminarVotos(HashMap<String, Ciudadano> ciudadanos){
+        
+        FormatoMultiple formatoB;
+        
+        //Recorro la lista
+        for(int i = 0; i < listaVotantes.size(); i++)
         {
-            e.printStackTrace();//Imprime dicho error
+            formatoB = listaVotantes.get(i);
+            //Pregunto si esta en la coleccion de ciudadanos
+            if(ciudadanos.containsKey(formatoB.getRut()))
+            {
+                //Habilitado para sufragar
+                if( !ciudadanos.get(formatoB.getRut()).isHabilitado() )
+                {
+                    System.out.println("Voto eliminado, ciudadano no habilitado: " + formatoB.getRut());
+                    listaVotantes.remove(i);
+                    i--;
+                }
+            }
+            else
+            {
+                System.out.println("Voto eliminado, ciudadano no registrado: " + formatoB.getRut());
+                listaVotantes.remove(i);
+                i--;
+            }
         }
+        
+        return true;
+    }
+    
+    @Override
+    public String formatoCSV(){
+        return (getEnunciado() + ";" + getFecha() + ";" + isCheck() + ";" +
+                getCont1() + ";" + getCont2() + ";" + getCont3() + ";" + getCont4()
+                + ";" + getCont5() + "\n");
     }
 }

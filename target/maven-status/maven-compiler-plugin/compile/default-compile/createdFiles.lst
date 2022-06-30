@@ -1,6 +1,7 @@
 Ventanas\VentanaMenuCiudadanos$1.class
 Ventanas\VentanaMenuConsultas$1.class
 Ventanas\VentanaMenuConsultas.class
+Ventanas\ArchivoCiudadano.class
 Codigo\FormatoMultiple.class
 Ventanas\VentanaMenuCiudadanos.class
 Codigo\Ciudadano.class
@@ -8,6 +9,7 @@ Ventanas\VentanaMenuPrincipal$2.class
 Codigo\CiudadanoMenor.class
 Codigo\CSV.class
 Ventanas\VentanaMenuPrincipal$3.class
+Ventanas\ArchivoConsulta.class
 Ventanas\VentanaMenuPrincipal.class
 Ventanas\VentanaMenuCiudadanos$4.class
 Codigo\ConsultaMultiple.class
@@ -16,8 +18,11 @@ Codigo\ConsultaBinaria.class
 Codigo\CiudadanoPorRut.class
 Codigo\Consulta.class
 Ventanas\VentanaMenuCiudadanos$2.class
+Ventanas\Strategy_ArchivoSalida.class
+Ventanas\ArchivoLista.class
 Ventanas\VentanaMenuCiudadanos$3.class
 Ventanas\VentanaMenuPrincipal$1.class
+Codigo\FormatoLista.class
 Ventanas\VentanaMenuPrincipal$4.class
 Codigo\FormatoBinario.class
 Codigo\ConsultaPorID.class

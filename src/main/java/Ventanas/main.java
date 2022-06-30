@@ -8,9 +8,7 @@ package Ventanas;
  * and open the template in the editor.
  */
 
-import Codigo.ConsultaPorID;
-import Codigo.CiudadanoPorRut;
-import Codigo.Ciudadano;
+import Codigo.*;
 import java.io.*;
 /**
  *
@@ -22,7 +20,7 @@ public class main {
         
         //Declaro las varaibles para acceder a colecciones y atributos de Ciudadanos
         CiudadanoPorRut pp = new CiudadanoPorRut();
-        Ciudadano persona = new Ciudadano();
+        
         pp.datosINICIALES();
        
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
@@ -34,10 +32,13 @@ public class main {
         ConsultaPorID cc = new ConsultaPorID();
         cc.datosINICIAL();
         
-        //DATOS PARA EL CIUDADANO...
-        String fecha, nombre, rut;
-        Boolean sexo, habilitado;
+        ArchivoCiudadano csv1 = new ArchivoCiudadano();
+        ArchivoConsulta csv2 = new ArchivoConsulta();
         
+        //DATOS PARA EL CIUDADANO...
+        String fecha, nombre, rut, opcion, enunciado;
+        Boolean sexo, habilitado;
+        int clave, keyNum;
         
         
         //MENU DESDE LA CONSOLA...
@@ -59,7 +60,7 @@ public class main {
             
             eleccionMenu = read.readLine();
             eleccionSubmenu = "1";
-            int keyNum;
+            
             
             switch(eleccionMenu){
                 
@@ -156,7 +157,7 @@ public class main {
                             
                             case "6": 
                             {
-                                pp.archivoCiudadano();
+                                csv1.generarArchivo(pp, 0);
                                 break;
                             }
                             
@@ -199,16 +200,42 @@ public class main {
                             
                             case "0": break;
                             
-                            case "1": cc.agregarConsulta(); break;
+                            case "1": 
+                            {
+                                System.out.println("1 = Consulta Binaria / 2 = Consulta Multiple");
+                                opcion = sub.readLine();
+
+                                //1 = Consulta Binaria
+                                //2 = Consulta Multiple
+
+                                //Verifico que la opcion sea valida
+                                while(!"1".equals(opcion) && !"2".equals(opcion))
+                                {
+                                    System.out.println("1 = Consulta Binaria / 2 = Consulta Multiple");
+                                    opcion = sub.readLine();
+                                }
+                                
+                                //Datos de la consulta
+                                System.out.println("INGRESE ENUNCIADO");
+                                enunciado = sub.readLine();
+                                System.out.println("INGRESE FECHA");
+                                fecha = sub.readLine();
+
+                                //Clave unica
+                                System.out.println("INGRESE CLAVE UNICA");
+                                clave = Integer.parseInt(sub.readLine());
+                                System.out.println(cc.agregarConsulta(opcion, enunciado, fecha, clave));
+                                break;
+                            } 
                 
-                            case "2": cc.mostrarConsultas(); break;
-                            
+                            case "2": System.out.println(cc.mostrarConsultas()); break;
                             
                             case "3":
                             {
                                 System.out.println("\nIngrese la clave de la consulta"
                                         + " para ver la lista");
-                                cc.imprimirVotos(Integer.parseInt( sub.readLine() ));
+                                clave = Integer.parseInt( sub.readLine() );
+                                System.out.println(cc.imprimirVotos(clave));
                                 break;
                             }
                             
@@ -216,29 +243,41 @@ public class main {
                             {
                                 System.out.println("\nIngrese la clave de la consulta"
                                         + " para cargar sus votos...");
-                                cc.cargarVotosBinarios(Integer.parseInt( sub.readLine() ) );
-                                cc.cargarVotosMultiples(Integer.parseInt( sub.readLine() ) );
+        
+                                System.out.println( cc.cargarVotos(Integer.parseInt( sub.readLine() ))  );
                                 break;
                             }
                             case "5":
                             {
                                 System.out.println("\nIngrese la clave de la consulta"
                                         + " para modificarlo");
-                                cc.modificarConsulta(Integer.parseInt( sub.readLine() ));
+                                clave = Integer.parseInt( sub.readLine() );
+                                
+                                System.out.println("\nIngrese el enunciado que desea reemplazar");
+                                enunciado = sub.readLine();
+                                
+                                System.out.println("\n Ingrese una nueva fecha");
+                                fecha = sub.readLine();
+                                
+                                System.out.println("\nEn caso de que los votos ya estan"
+                                        + " contados, indique la resolucion de la consulta");
+                                
+                                
+                                System.out.println(cc.modificarConsulta(clave, enunciado, fecha, sub.readLine()));
                                 break;
                             }
                             case "6":
                             {
                                 System.out.println("\nIngrese la clave de la consulta"
                                         + " para eliminarlo");
-                                cc.eliminarConsulta(Integer.parseInt( sub.readLine() ));
+                                clave = Integer.parseInt( sub.readLine() );
+                                System.out.println(cc.eliminarConsulta(clave));
                                 break;
                             }
                             
                             case "7":
                             {
-                                cc.generarArchivoMultiple();
-                                cc.generarArchivoBinario();
+                                csv2.generarArchivo(cc, 0);
                                 break;
                             }
                 
@@ -246,9 +285,9 @@ public class main {
                             {
                                 System.out.println("\nIngrese la clave de la consulta"
                                         + " para revisar sus votos");
-                                keyNum = Integer.parseInt(sub.readLine());
-                                if( cc.eliminarVotosBinarios(keyNum, pp.getMap()) || cc.eliminarVotosMultiples(keyNum, pp.getMap()))
-                                    cc.contarVOTOS(keyNum);
+                                clave = Integer.parseInt(sub.readLine());
+                                if( cc.eliminarVoto(clave, pp.getMap()) )
+                                    System.out.println(cc.contarVOTOS(clave));
                             
                                 break;
                             }
@@ -257,10 +296,24 @@ public class main {
                             {
                                 System.out.println("\nIngrese la clave de la consulta"
                                         + " para cambiar el voto");
+                                clave = Integer.parseInt(sub.readLine());
+                                System.out.println("El rut del votante");
+                                rut = sub.readLine();
+                                System.out.println("Si la consulta corresponde a Multiple"
+                                        + ", elige la opcion del 1 al 5. Si corresponde"
+                                        + " a Binario, siga la misma instruccion");
+                                
                                 keyNum = Integer.parseInt(sub.readLine());
-                                System.out.println("Y el rut del votante");
-                                cc.modificarVotoBinario(keyNum, sub.readLine());
-                                cc.modificarVotoMultiple(keyNum, sub.readLine());
+                                
+                                while( keyNum < 1 || keyNum > 5  )
+                                {
+                                    System.out.println("La opcion que eligio no corresponde al dominio."
+                                            + "Favor de seguir la instruccion");
+                                    keyNum = Integer.parseInt(sub.readLine());
+                                }
+                                
+                                System.out.println(cc.modificarVotos(clave, rut, keyNum));
+                                
                                 break;
                             }
                             
@@ -268,8 +321,8 @@ public class main {
                             {
                                 System.out.println("\nIngrese la clave de la consulta"
                                         + " que busca");
-                                keyNum = Integer.parseInt(sub.readLine());
-                                cc.buscarConsulta(keyNum);
+                                clave = Integer.parseInt(sub.readLine());
+                                System.out.println(cc.buscarConsulta(clave));
                                 break;
                             }
                             
@@ -277,16 +330,16 @@ public class main {
                             {
                                 System.out.println("\nIngrese la fecha para buscar"
                                         + " la o las consultas asociadas a tal fecha");
-                                cc.buscarConsulta( sub.readLine() );
+                                System.out.println(cc.buscarConsulta( sub.readLine() ));
                                 break;
                             }
                             
-                            case "12": cc.consultaMenosVotos(); break;
+                            case "12": System.out.println(cc.consultaMenosVotos()); break;
                             
-                            case "13": cc.opcionesMasVotadas(); break;
+                            case "13": System.out.println(cc.opcionesMasVotadas()); break;
                             
                             default: System.out.println("\nEl numero que ingreso"
-                                    + " no esta dentro de las operaciones..."); break;
+                                    + " no esta dentro de las operaciones..."); break;//REVISAR
                         }
                     }
                     break;

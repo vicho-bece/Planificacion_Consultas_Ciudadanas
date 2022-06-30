@@ -14,7 +14,7 @@ package Codigo;
  *
  * @author vicho
  */
-public class FormatoBinario {
+public class FormatoBinario extends FormatoLista {
     
     /**
      * rut: rut del votante, no necesariamente tiene que estar en el mapa
@@ -90,5 +90,8 @@ public class FormatoBinario {
         this.voto = voto;
     }
 
-    
+    @Override
+    public String formato_CSV(){
+        return (getRut() + ";" + isVoto() + "\n");
+    }
 }

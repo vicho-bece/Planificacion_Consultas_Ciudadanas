@@ -7,7 +7,6 @@ package Codigo;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.io.*;
 import java.util.*;
 /**
  *
@@ -41,6 +40,7 @@ public class ConsultaBinaria extends Consulta{
      * 
      * @return la listaVotantes de una consulta 
      */
+    @Override
     public ArrayList<FormatoBinario> getListaVotantes() {
         return listaVotantes;
     }
@@ -91,38 +91,36 @@ public class ConsultaBinaria extends Consulta{
     }
     
     
-    /**
-     * Metodo implementado para mostrar los datos de una consulta 
-     * y la lista de los votantes segun la situacion
-     * 
-     * @param lista para acceder a los datos de la lista de votantes 
-     * @throws IOException excepciones de input/output
-     */
+    
     @Override
-    public void mostrarConsulta(boolean lista) throws IOException{
-        System.out.println("ENUNCIADO: " + getEnunciado() + "\nFECHA: " + getFecha());
-        System.out.println("SI: " + getContSi() + "\nNO: " + getContNo());
+    public String mostrarConsulta(boolean lista) {
         
+        String mostrar = "";
+        
+        mostrar += "\nENUNCIADO: " + getEnunciado() + "\nFECHA: " + getFecha();
+        mostrar += "\nSI: " + getContSi() + "\nNO: " + getContNo();
         
         if(lista)
         {
             //Verifica si la lista esta vacia
             if(listaVotantes.isEmpty())
             {
-                System.out.println("La lista de votantes esta vacia...");
-                return;
+                mostrar += "\nLa lista de votantes esta vacia...";
+                return mostrar;
             }    
             
             //Imprime los votantes que participaron. Rut y voto.
-            System.out.println("\nLISTA DE VOTANTES:\n");
+            mostrar += "\nLISTA DE VOTANTES:\n";
             FormatoBinario bb;
             
             for(int i = 0; i < listaVotantes.size(); i++)
             {
                 bb = listaVotantes.get(i);
-                System.out.println((i+1) + ")" + bb.getRut() + " " + bb.isVoto());
+                mostrar += "\n" + ((i+1) + ")" + bb.getRut() + " " + bb.isVoto());
             }
-        }  
+        }
+        
+        return mostrar;
     }
     /**
      * Metodo implementado para contar los votos de una consulta binaria
@@ -141,25 +139,27 @@ public class ConsultaBinaria extends Consulta{
             else
                 setContNo();
         }
+        
+        setCheck(true);
     }
     
     /**
      * Metodo implementado para retornar la sumar los 2 contadores
      * @return la suma de votos de contSi y contNo
-     * @throws IOException excepciones de input/output
+     * 
      */
     @Override
-    public int sumaVotos() throws IOException{
+    public int sumaVotos() {
         return (getContSi() + getContNo());
     }
     
     /**
      * Metodo implementado para retornar la opcion mas votada
      * @return un String para imprimir que indica la opcion mas votada
-     * @throws IOException excepciones de input/output
+     * 
      */
     @Override
-    public String opcionMasVotada() throws IOException{
+    public String opcionMasVotada() {
         
         if( getContSi() > getContNo() )
             return("SI: " + getContSi());
@@ -167,47 +167,72 @@ public class ConsultaBinaria extends Consulta{
             return("NO: " + getContNo());
     }
     
-    /**
-     * Metodo de la clase para generar un archivo de los votos de una consulta binaria
-     * @param key la clave de una consulta
-     * @throws IOException excepciones de input/output
-     */
-    public void generarArchivoVOTOSBinario(Object key) throws IOException{
+    @Override
+    public String modificarVoto(int opcion, String rut){
         
-        //Si no hay datos en la lista finalizo la operacion
-        if(listaVotantes.isEmpty()) return;
+        FormatoBinario voto;
         
-        try
+        for(int i = 0; i < listaVotantes.size(); i++)
         {
-            //Directorio para los votos y variable tipo archivo
-            String ruta = ("./Salida_CSV/Votos_Binario/VotoBinario" +(int)key+ ".csv");
-            File newfile = new File(ruta);
+            voto = listaVotantes.get(i);
             
-            //Pregunto si no existe un archivo
-            if(!newfile.exists())
-                newfile.createNewFile();//Se crea uno nuevo
-            
-            //Archivo de escritura y buffer de escritura en el archivo
-            FileWriter archivoEscritura = new FileWriter(newfile);
-            BufferedWriter escribirDatos = new BufferedWriter(archivoEscritura);
-            FormatoBinario voto;
-            
-            //Escribo la key en la primera, en referencia a los archivos de lectura
-            escribirDatos.write((int)key + "\n");
-            
-            //Recorro la lista de votantes
-            for(int i = 0; i < listaVotantes.size(); i++)
+            //Al encontrar se invierte el voto
+            if(voto.getRut().equals(rut))
             {
-                voto = listaVotantes.get(i);
-                escribirDatos.write(voto.getRut() + ";" + voto.isVoto() + "\n");
+                boolean aux = !voto.isVoto();
+                voto.setVoto(aux);
+                return "El votante del rut: " + rut + " a cambiado su voto a " + aux;
             }
-       
-            escribirDatos.close();//Cierro el archivo
-                    
         }
-        catch(Exception e)//Encuentra el error
+        
+        return "No hay votante con el rut: " + rut;
+    }
+    
+    @Override
+    public boolean eliminarVotos(String rut, Object lista){
+        
+        for(int i = 0; i < listaVotantes.size(); i++){
+            if(listaVotantes.get(i).getRut().equals(rut))
+                return false;
+        }
+        
+        agregarVoto( (FormatoBinario)lista );
+        return true;
+    }
+    
+    @Override
+    public boolean eliminarVotos(HashMap<String, Ciudadano> ciudadanos){
+        
+        FormatoBinario formatoB;
+        
+        //Recorro la lista
+        for(int i = 0; i < listaVotantes.size(); i++)
         {
-            e.printStackTrace();//Imprime dicho error
+            formatoB = listaVotantes.get(i);
+            //Pregunto si esta en la coleccion de ciudadanos
+            if(ciudadanos.containsKey(formatoB.getRut()))
+            {
+                //Esta habilitado para sufragar
+                if( !ciudadanos.get(formatoB.getRut()).isHabilitado() )
+                {
+                    System.out.println("Voto eliminado, ciudadano no habilitado: " + formatoB.getRut());
+                    listaVotantes.remove(i);
+                    i--;
+                }
+            }
+            else
+            {
+                System.out.println("Voto eliminado, ciudadano no registrado: " + formatoB.getRut());
+                listaVotantes.remove(i);
+                i--;
+            }
         }
+        return true;
+    }
+    
+    @Override
+    public String formatoCSV(){
+        return (getEnunciado() + ";" + getFecha() + ";" + isCheck() + ";" +
+                getContSi() + ";" + getContNo() + "\n");
     }
 }
