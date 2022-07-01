@@ -309,4 +309,54 @@ public class ConsultaMultiple extends Consulta{
                 getCont1() + ";" + getCont2() + ";" + getCont3() + ";" + getCont4()
                 + ";" + getCont5() + "\n");
     }
+    
+    public String buscarVotante(String rut){
+        
+        FormatoMultiple voto;
+        
+        for(int i = 0; i < listaVotantes.size(); i++)
+        {
+            voto = listaVotantes.get(i);
+            
+            //Si lo encuentro
+            if(voto.getRut().equals(rut))
+                return "\nEl rut: " + rut + " participo en este consulta";
+        }
+        
+        return "\nEl rut: " + rut + " no se encontro en la lista de votantes"; 
+    }
+    
+    @Override
+    public String eliminarVotante(String rut){
+        
+         FormatoMultiple voto;
+        
+        for(int i = 0; i < listaVotantes.size(); i++)
+        {
+            voto = listaVotantes.get(i);
+            
+            //Si lo encuentro
+            if(voto.getRut().equals(rut))
+            {
+                listaVotantes.remove(i);
+                return "Se elimino el votante del rut:" + rut;
+            }
+                
+        }
+        
+        return "\nEl rut: " + rut + " no se encontro en la lista de votantes"; 
+    }
+    
+    @Override
+    public String agregarVotante(String rut, int voto){
+        
+        FormatoMultiple votante = new FormatoMultiple(rut, voto);
+        if(voto > 0 && voto < 6)
+        {
+            listaVotantes.add(votante);
+            return "Se agrego el votante exitosamente";
+        }
+        
+        return "La opcion que ingreso no esta dentro del dominio";
+    }
 }

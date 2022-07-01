@@ -24,4 +24,7 @@ public interface funcionalidadConsulta {
     public String opcionMasVotada();
     public boolean eliminarVotos(String rut, Object lista);
     public boolean eliminarVotos(HashMap<String, Ciudadano> ciudadanos);
+    public String buscarVotante(String rut);
+    public String eliminarVotante(String rut);
+    public String agregarVotante(String rut, int voto);
 }

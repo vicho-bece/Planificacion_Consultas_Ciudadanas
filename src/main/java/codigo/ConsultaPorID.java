@@ -100,7 +100,7 @@ public class ConsultaPorID {
         for(Map.Entry<Integer, Consulta> consulta : treemap.entrySet())
         {
             consultas = consulta.getValue();
-            mostrar += "\nCLAVE: " + consulta.getKey() + consultas.mostrarConsulta(false); 
+            mostrar += "\nCLAVE: " + consulta.getKey() + consultas.mostrarConsulta(false) + "\n"; 
         }
         
         return mostrar;
@@ -185,6 +185,13 @@ public class ConsultaPorID {
     
     //METODOS PARA LOS ELEMENTOS DE LA LISTA
     
+    public String agregarVoto(int key, String rut, int voto){
+        
+        if( !evitarCaidas(key) ) return "La coleccion esta vacia o bie no hay "
+                + "consulta asociado a la clave: " + key;
+        
+        return treemap.get(key).agregarVotante(rut, voto);
+    }
     
     public String cargarVotos(int key) throws IOException{
         
@@ -271,7 +278,17 @@ public class ConsultaPorID {
         return "Se ejecuto correctamente el metodo\n" + mostrar;
     }
     
-    
+    public String infoVontanteEnConsulta(int key, String rut) {
+        //Reviso si esta la consulta
+      
+        if ( !evitarCaidas(key) ) return "La coleccion esta vacia o bien no hay "
+                + "consulta asociada a la clave: " + key;
+        Consulta consulta = treemap.get(key);
+        
+        return "\nLa consulta con la clave: " + key + " le informata a continuacion."
+                + (consulta.buscarVotante(rut));
+        
+    }
     
     public String imprimirVotos(int key) {
         
@@ -297,7 +314,14 @@ public class ConsultaPorID {
         return treemap.get(key).modificarVoto(opcion, rut);
     }
     
-   
+   public String eliminarVoto(int key, String rut){
+       
+       if( !evitarCaidas(key) ) return "La coleccion esta vacia o bien no hay consulta"
+               + " asociado a la clave:" + key;
+       
+       
+       return treemap.get(key).eliminarVotante(rut);
+   }
     
     public boolean eliminarVoto(int key, HashMap<String, Ciudadano> ciudadanos){
         

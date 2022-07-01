@@ -51,14 +51,20 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jLabel1 = new javax.swing.JLabel();
         Finalizar_Programa = new javax.swing.JButton();
-        Submenu_Ciudadano = new javax.swing.JButton();
-        Submenu_Consultas = new javax.swing.JButton();
+        AgregarConsulta = new javax.swing.JButton();
+        MostrarConsultas = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        MostrarConsulta_y_Lista = new javax.swing.JButton();
+        AgregarCiudadano = new javax.swing.JButton();
+        MostrarCiudadanos = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        AgregarVoto = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -99,7 +105,7 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 204, 255));
 
-        jLabel1.setText("Planificacion de Consultas Ciudadanas");
+        jLabel1.setText("Mostrar Votos de una consulta");
 
         Finalizar_Programa.setText("Salir");
         Finalizar_Programa.addActionListener(new java.awt.event.ActionListener() {
@@ -108,31 +114,63 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        Submenu_Ciudadano.setText("Gestionar");
-        Submenu_Ciudadano.addActionListener(new java.awt.event.ActionListener() {
+        AgregarConsulta.setText("Agregar");
+        AgregarConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Submenu_CiudadanoActionPerformed(evt);
+                AgregarConsultaActionPerformed(evt);
             }
         });
 
-        Submenu_Consultas.setText("Gestionar");
-        Submenu_Consultas.addActionListener(new java.awt.event.ActionListener() {
+        MostrarConsultas.setText("Ejecutar");
+        MostrarConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Submenu_ConsultasActionPerformed(evt);
+                MostrarConsultasActionPerformed(evt);
             }
         });
 
         jLabel2.setText("MENU DE CIUDADANOS");
 
-        jLabel3.setText("Permite administrar la coleccion de Ciudadanos");
-
         jLabel4.setText("MENU DE CONSULTAS Y VOTOS");
 
-        jLabel5.setText("Permite administrar la coleccion de Consultas");
+        jLabel8.setText("Agregar nueva consulta desde teclado");
 
-        jLabel6.setText("Gestionar los Votos de cada Consulta");
+        jLabel9.setText("Mostrar todas las consultas de la coleccion");
 
-        jLabel7.setText("MENU PRINCIPAL");
+        jLabel10.setText("Mostrar la lista de votantes de una consulta");
+
+        MostrarConsulta_y_Lista.setText("Ejecutar");
+        MostrarConsulta_y_Lista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MostrarConsulta_y_ListaActionPerformed(evt);
+            }
+        });
+
+        AgregarCiudadano.setText("Agregar");
+        AgregarCiudadano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarCiudadanoActionPerformed(evt);
+            }
+        });
+
+        MostrarCiudadanos.setText("Ejecutar");
+        MostrarCiudadanos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MostrarCiudadanosActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Agregar un nuevo ciudadano desde teclado");
+
+        jLabel12.setText("Mostrar todos los ciudadano de la coleccion");
+
+        jLabel13.setText("Agregar Votos desde teclado");
+
+        AgregarVoto.setText("Agregar");
+        AgregarVoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarVotoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,53 +180,80 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Finalizar_Programa)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(91, 91, 91)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(Submenu_Consultas)
-                                    .addComponent(Submenu_Ciudadano))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(AgregarConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(MostrarConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(AgregarVoto)
+                                    .addComponent(MostrarConsulta_y_Lista, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(147, 147, 147)
-                .addComponent(jLabel7)
-                .addGap(0, 147, Short.MAX_VALUE))
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel1)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(AgregarCiudadano)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel11))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(MostrarCiudadanos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel12)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 113, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(Finalizar_Programa)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2))))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(Submenu_Ciudadano))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                    .addComponent(AgregarCiudadano)
+                    .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Submenu_Consultas)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addGap(10, 10, 10)
+                    .addComponent(MostrarCiudadanos)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AgregarConsulta)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MostrarConsultas))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AgregarVoto))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MostrarConsulta_y_Lista)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(Finalizar_Programa)
                 .addContainerGap())
         );
@@ -201,17 +266,41 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_Finalizar_ProgramaActionPerformed
 
-    private void Submenu_CiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Submenu_CiudadanoActionPerformed
-        VentanaMenuCiudadanos open = new VentanaMenuCiudadanos();
+    private void AgregarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarConsultaActionPerformed
+        Ventana_Agregar_Consulta open = new Ventana_Agregar_Consulta(consultas, this);
         open.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_Submenu_CiudadanoActionPerformed
+    }//GEN-LAST:event_AgregarConsultaActionPerformed
 
-    private void Submenu_ConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Submenu_ConsultasActionPerformed
-        VentanaMenuConsultas open = new VentanaMenuConsultas();
+    private void MostrarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarConsultasActionPerformed
+        Ventana_Mostrar_Consultas open = new Ventana_Mostrar_Consultas(consultas, this);
         open.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_Submenu_ConsultasActionPerformed
+    }//GEN-LAST:event_MostrarConsultasActionPerformed
+
+    private void AgregarCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarCiudadanoActionPerformed
+        Ventana_Agregar_Ciudadano open = new Ventana_Agregar_Ciudadano(ciudadanos, this);
+        open.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_AgregarCiudadanoActionPerformed
+
+    private void MostrarCiudadanosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarCiudadanosActionPerformed
+        Ventana_Mostrar_Ciudadanos open = new Ventana_Mostrar_Ciudadanos(ciudadanos, this);
+        open.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_MostrarCiudadanosActionPerformed
+
+    private void MostrarConsulta_y_ListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarConsulta_y_ListaActionPerformed
+        Ventana_Mostrar_Lista open = new Ventana_Mostrar_Lista(consultas, this);
+        open.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_MostrarConsulta_y_ListaActionPerformed
+
+    private void AgregarVotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarVotoActionPerformed
+        Ventana_Agregar_Voto open = new Ventana_Agregar_Voto(consultas, this);
+        open.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_AgregarVotoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,18 +338,24 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AgregarCiudadano;
+    private javax.swing.JButton AgregarConsulta;
+    private javax.swing.JButton AgregarVoto;
     private javax.swing.JButton Finalizar_Programa;
-    private javax.swing.JButton Submenu_Ciudadano;
-    private javax.swing.JButton Submenu_Consultas;
+    private javax.swing.JButton MostrarCiudadanos;
+    private javax.swing.JButton MostrarConsulta_y_Lista;
+    private javax.swing.JButton MostrarConsultas;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

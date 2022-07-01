@@ -235,4 +235,60 @@ public class ConsultaBinaria extends Consulta{
         return (getEnunciado() + ";" + getFecha() + ";" + isCheck() + ";" +
                 getContSi() + ";" + getContNo() + "\n");
     }
+    
+    public String buscarVotante(String rut){
+        
+        FormatoBinario voto;
+        
+        for(int i = 0; i < listaVotantes.size(); i++)
+        {
+            voto = listaVotantes.get(i);
+            
+            //Si lo encuentro
+            if(voto.getRut().equals(rut))
+                return "\nEl rut: " + rut + " participo en este consulta";
+        }
+        
+        return "\nEl rut: " + rut + " no se encontro en la lista de votantes"; 
+    }
+    
+    @Override
+    public String eliminarVotante(String rut){
+        
+         FormatoBinario voto;
+        
+        for(int i = 0; i < listaVotantes.size(); i++)
+        {
+            voto = listaVotantes.get(i);
+            
+            //Si lo encuentro
+            if(voto.getRut().equals(rut))
+            {
+                listaVotantes.remove(i);
+                return "Se elimino el votante del rut:" + rut;
+            }
+                
+        }
+        
+        return "\nEl rut: " + rut + " no se encontro en la lista de votantes"; 
+    }
+    
+    @Override
+    public String agregarVotante(String rut, int voto){
+        
+        FormatoBinario votante;
+        
+        if(voto == 1)
+            votante = new FormatoBinario(rut, true);
+        else
+        {
+            if(voto == 2)
+                votante = new FormatoBinario(rut, false);
+            else
+                return "La opcion del voto no es valido";
+        }
+        
+        listaVotantes.add(votante);
+        return "Se agrego el votante exitosamente";
+    }
 }
