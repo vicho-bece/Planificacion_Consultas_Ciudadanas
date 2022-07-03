@@ -396,7 +396,18 @@ public class ConsultaMultiple extends Consulta{
     @Override
     public String agregarVotante(String rut, int voto){
         
-        FormatoMultiple votante = new FormatoMultiple(rut, voto);
+        FormatoMultiple votante;
+        
+        for(int i = 0; i < listaVotantes.size(); i++)
+        {
+            votante = listaVotantes.get(i);
+            
+            //Si lo encuentro
+            if(votante.getRut().equals(rut))
+                return "\nEl rut: " + rut + " participo en este consulta";
+        }
+        
+        votante = new FormatoMultiple(rut, voto);
         if(voto > 0 && voto < 6)
         {
             listaVotantes.add(votante);

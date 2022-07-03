@@ -322,12 +322,23 @@ public class ConsultaBinaria extends Consulta{
      * Ninguna de las anteriores - opcion no valido
      * @param rut Rut del Votante
      * @param voto Su respuesta binaria
-     * @return Indica el resulta de la agregacion
+     * @return Indica el resultado de la agregacion
      */
     @Override
     public String agregarVotante(String rut, int voto){
         
         FormatoBinario votante;
+        
+        for(int i = 0; i < listaVotantes.size(); i++)
+        {
+            votante = listaVotantes.get(i);
+            
+            //Si lo encuentro
+            if(votante.getRut().equals(rut))
+                return "\nEl rut: " + rut + " participo en este consulta";
+        }
+        
+        
         
         if(voto == 1)
             votante = new FormatoBinario(rut, true);
