@@ -9,15 +9,26 @@ import Codigo.ConsultaPorID;
 import javax.swing.JFrame;
 
 /**
- *
+ * Clase para agregar un Votos de una Consulta
+ * Interfaz Grafica
  * @author vicho
  */
 public class Ventana_Agregar_Voto extends javax.swing.JFrame {
     
+    /**
+     * Coleccion de Consultas
+     * Ventana del Menu Principal
+     */
     private ConsultaPorID consultas;
     private JFrame menu;
     /**
      * Creates new form Ventana_Agregar_Voto
+     */
+    
+    /**
+     * Constructor con parametros
+     * @param consultas Coleccion de Consultas 
+     * @param menu Interfaz Grafica del Menu Principal
      */
     public Ventana_Agregar_Voto(ConsultaPorID consultas, JFrame menu) {
         initComponents();

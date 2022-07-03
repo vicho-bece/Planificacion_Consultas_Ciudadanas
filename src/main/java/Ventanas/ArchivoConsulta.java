@@ -13,16 +13,24 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- *
+ * Clase que implementa metodos de esta Interfaz para patron STRATEGY
  * @author vicho
  */
 public class ArchivoConsulta implements Strategy_ArchivoSalida {
-
+    /**
+     * Constructor sin parametros
+     */
     public ArchivoConsulta() {
     }
     
     
-    
+    /**
+     * Metodo para generar archivo CSV de salida con Consultas de la Coleccion.
+     * Puede contener entre 1 y 2 tipos de Consultas en un mismo archivo CSV
+     * @param coleccion Coleccion de Consultas
+     * @param num Un 0, es irrelevante este parametro
+     * @throws IOException Error de Input/OutPut
+     */
     @Override
     public void generarArchivo(Object coleccion, int num) throws IOException{
         

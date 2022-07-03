@@ -9,6 +9,14 @@ package Codigo;
  *
  * @author vicho
  */
+/**
+ * Clase padre de los 2 Formatos de respuesta
+ * @author vicho
+ */
 public abstract class FormatoLista {
+    /**
+     * Metodo para convertir los datos de un Votante en CSV
+     * @return String con los datos de un Votante
+     */
     public abstract String formato_CSV();
 }

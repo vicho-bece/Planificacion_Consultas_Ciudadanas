@@ -74,6 +74,10 @@ public class FormatoMultiple extends FormatoLista {
         this.voto = voto;
     }
     
+    /**
+     * Metodo para almacenar votos multiples em formato CSV
+     * @return Un String con la informacion del Votante en CSV
+     */
     @Override
     public  String formato_CSV(){
         return (getRut() + ";" + getVoto() + "\n");

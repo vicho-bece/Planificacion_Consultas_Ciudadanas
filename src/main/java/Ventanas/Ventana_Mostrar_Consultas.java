@@ -7,15 +7,27 @@ package Ventanas;
 import Codigo.*;
 import javax.swing.JFrame;
 /**
- *
+ * Clase para mostrar las Consultas de la Coleccion
+ * Interfaz Grafica
  * @author vicho
  */
 public class Ventana_Mostrar_Consultas extends javax.swing.JFrame {
-    
+    /**
+     * Coleccion de Consultas
+     * Ventana del Menu Principal
+     */
     private ConsultaPorID consultas;
     private JFrame menu;
     /**
      * Creates new form Ventana_Mostrar_Consultas
+     */
+    
+    /**
+     * Constructor con parametros
+     * @param consultas Coleccion de Consultas 
+     * @param menu Interfaz Grafica del Menu Principal
+     * 
+     * Muestra todas las Consulta de la Coleccion con su informacion
      */
     public Ventana_Mostrar_Consultas(ConsultaPorID consultas, JFrame menu) {
         initComponents();

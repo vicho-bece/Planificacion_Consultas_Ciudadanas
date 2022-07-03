@@ -58,7 +58,13 @@ public class CiudadanoMenor extends Ciudadano {
         this.nacimiento = nacimiento;
     }
     
-    
+    /**
+     * Sobreescritura de la clase Ciudadano
+     * 
+     * Metodo para mostrar la informacion de un CiudadanoMenor.
+     * Se emplea el java.time para calcular la edad y meses con respecto a la fecha de nacimiento
+     * @return Un String con los datos del CiudadanoMenor
+     */
     @Override
     public String mostrarCiudadano(){
         
@@ -76,6 +82,7 @@ public class CiudadanoMenor extends Ciudadano {
         else
             mostrar += "\nPERMISO PARA SUFRAGAR: NO Habilitado";
         
+        
         LocalDate actual = LocalDate.now();
         LocalDate birth = LocalDate.parse(nacimiento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         Period periodo = Period.between(birth, actual);
@@ -87,6 +94,7 @@ public class CiudadanoMenor extends Ciudadano {
     
     /**
      * Sobreescritura de la clase Ciudadano
+     * 
      * Metodo para generar un cadena en formato CSV con los datos de un ciudadano
      * @return  String con los datos separados en ';'
      */

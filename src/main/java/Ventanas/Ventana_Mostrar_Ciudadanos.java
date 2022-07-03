@@ -9,15 +9,27 @@ import Codigo.CiudadanoPorRut;
 import javax.swing.JFrame;
 
 /**
- *
+ * Clase para mostrar los Ciudadanos de la Coleccion
+ * Interfaz Grafica
  * @author vicho
  */
 public class Ventana_Mostrar_Ciudadanos extends javax.swing.JFrame {
     
+    /**
+     * Coleccion de Ciudadanos
+     * Ventana del Menu Principal
+     */
     private CiudadanoPorRut ciudadanos;
     private JFrame menu;
     /**
      * Creates new form Ventana_Mostrar_Ciudadanos
+     */
+    /**
+     * Constructor con parametros
+     * @param ciudadanos Coleccion de Ciudadanos 
+     * @param menu Interfaz Grafica del Menu Principal
+     * 
+     * Y muestra los Ciudadanos de la Coleccion con sus datos correspondientes
      */
     public Ventana_Mostrar_Ciudadanos(CiudadanoPorRut ciudadanos, JFrame menu) {
         initComponents();

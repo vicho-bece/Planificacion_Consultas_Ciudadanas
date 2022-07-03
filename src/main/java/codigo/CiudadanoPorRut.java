@@ -9,6 +9,7 @@ package Codigo;
  */
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -51,6 +52,9 @@ public class CiudadanoPorRut {
         mapaCiudadano.put(rut, ciudadano);
     }
     
+    /**
+     * Metodo para poblar la coleccion de Ciudadanos con datos iniciales
+     */
     public void datosINICIALES(){
         
         Ciudadano ciudadano = new Ciudadano();
@@ -96,7 +100,17 @@ public class CiudadanoPorRut {
         setMap("100000000-0", mm);
     }
     
-    
+    /**
+     * Metodo para agregar un Ciudadano a la coleccion de Ciudadano, cuyos parametros
+     * permite construir el Ciudadano dependiendo el caso
+     * 
+     * @param nombre Nombre/Identidad del Ciudadano
+     * @param sexo Sexo del Ciudadano
+     * @param habilitado Habilitado para sufragar
+     * @param fecha Fecha de nacimiento
+     * @param rut Rut del Ciudadano para identificarlo
+     * @return Retorna un mensaje (String) que indica el resultado de la operacion
+     */
     public String agregarCiudadanos(String nombre, Boolean sexo, Boolean habilitado, String fecha, String rut){
         
         Ciudadano ciudadanoDatos;
@@ -116,7 +130,12 @@ public class CiudadanoPorRut {
         return "Se agrego el ciudadano de forma exitosa";
     }
     
-    
+    /**
+     * Metodo para agregar Ciudadanos desde un archivo de formato CSV
+     * @return Retorna un mensaje (String) que indica el termino de la operacion y
+     * los Ciudadanos que se repitieron por RUT
+     * @throws IOException Error de Input/OutPut
+     */
     public String agregarCiudadanos() throws IOException {
         
         //Declaro variable para tener el directorio dentro del proyecto
@@ -157,17 +176,19 @@ public class CiudadanoPorRut {
                         sexo = Boolean.parseBoolean(fileCiudadano.get_csvField(linea,2));
                         habilitado = Boolean.parseBoolean(fileCiudadano.get_csvField(linea,3));
                         
-                        
-                        if( cadena.contains(" ") )
+                        //Pregunto si el String contiene ese caracter(se utiliza para las fechas)
+                        if( !cadena.contains("/") )
                             persona = new Ciudadano(cadena, sexo, habilitado);
                         else
                         {
                             name = fileCiudadano.get_csvField(linea, 4);
                             
+                            //Se calcula la edad que determina el tipo de Ciudadano
                             if(calcularEDAD(cadena) < 18)
-                                habilitado = false;
+                                persona = new CiudadanoMenor(cadena, name, sexo, false);
+                            else
+                                persona = new Ciudadano(name, sexo, habilitado);
                             
-                            persona = new CiudadanoMenor(cadena, name, sexo, habilitado);
                         }
                         //Ingreso el ciudadano al mapa
                         setMap(fileCiudadano.get_csvField(linea,0), persona);
@@ -185,7 +206,10 @@ public class CiudadanoPorRut {
         return "Ya termino de ejecutar esta funcion\n" + repetidos;
     }        
     
-    
+    /**
+     * Metodo para mostrar todos los Ciudadanos que contiene la Coleccion de Ciudadanos
+     * @return Un String con todos los Ciudadanos y su informacion
+     */
     public String mostrarCiudadanos(){
         
         //Variable tipo ciudadano para acceder a los datos
@@ -205,7 +229,15 @@ public class CiudadanoPorRut {
         return mostrar;
     }
     
-    
+    /**
+     * Metodo para modificar un Ciudadano a partir del rut asociado
+     * @param nombre Nombre del Ciudadano
+     * @param sexo Sexo del Ciudadano
+     * @param habilitado Habilitado para sufragar
+     * @param fecha Fecha de nacimiento
+     * @param rut Rut del Ciudadano que desea modificar la informacion
+     * @return Un mensaje de que la operacion tuvo fallas o muestra los cambios del Ciudadano
+     */
     public String modificarCiudadano(String nombre, Boolean sexo, Boolean habilitado, String fecha, String rut){
         
         //Pregunto primero si la coleccion esta vacia y despues si el ciudadano
@@ -233,7 +265,12 @@ public class CiudadanoPorRut {
     }
   
     
-    
+    /**
+     * Metodo para eliminar un Ciudadano con el rut asociado
+     * @param rut Rut del Ciudadano a eliminar
+     * @return Un mensaje que indica posibles fallos en la operacion o que se elimino el
+     * Ciudadano y mostrando su informacion
+     */
     public String eliminarCiudadano(String rut) {
         
         //Pregunta si la coleccion esta vacia y si no esta el ciudadano asociado
@@ -248,7 +285,10 @@ public class CiudadanoPorRut {
         return "\nEl siguiente ciudadano fue eliminado:\nRUT: " + rut + ciudadano.mostrarCiudadano();
     }
     
-    
+    /**
+     * Metodo para verificar que la coleccion este vacia
+     * @return True = si esta vacio / False = contiene minimo un Ciudadano 
+     */
     public boolean vacioCiudadanos() {
         //Pregunto si esta vacia la coleccion
         if(mapaCiudadano.isEmpty())
@@ -257,7 +297,11 @@ public class CiudadanoPorRut {
         return false;
     }
     
-    
+    /**
+     * Metodo para verificar que el Ciudadano dado rut se no encuentra en la coleccion
+     * @param rut Rut del Ciudadano para averiguar
+     * @return False = No esta en la Coleccion / True = Contiene el Ciudadano 
+     */
     public boolean rutCiudadano(String rut){
         //Pregunto si la coleccion contiene el rut entregado
         if(!mapaCiudadano.containsKey(rut))
@@ -266,7 +310,12 @@ public class CiudadanoPorRut {
         return true;
     }
     
-    
+    /**
+     * Metodo para calcular la Edad de un Ciudadano con la fecha de nacimiento.
+     * Permite saber el tipo de Ciudadano
+     * @param fecha Fecha de nacimiento 
+     * @return La edad del Ciudadano en años
+     */
     public int calcularEDAD(String fecha)
     {
         //Transformo el formato String a LocalDate
@@ -279,7 +328,10 @@ public class CiudadanoPorRut {
         return periodo.getYears();
     }
   
-    
+    /**
+     * Metodo para mostrar el Ciudadano mas viejo de la Coleccion
+     * @return Un String que indica tal Ciudadano o alguna falla en la operacion
+     */
     public String mostrarCiudadanoMasViejo()   {
         
         //Pregunto si el mapa esta vacio...
@@ -309,6 +361,10 @@ public class CiudadanoPorRut {
         
     }
     
+    /**
+     * Metodo para mostrar todos los Ciudadanos de la Coleccion que esten HABILITADOS para sufragar
+     * @return Un String con todos los Ciudadanos Habilitados
+     */
     public String mostrarHabilitados() {
         
         //Verifico si esta vacia la coleccion
@@ -337,6 +393,25 @@ public class CiudadanoPorRut {
             habilitados += "\n" + habilitado.get(i).getNombre();
         
         return habilitados;
+    }
+    
+    /**
+     * Metodo para verificar que la fecha sea del formato dd/MM/yyyy
+     * @param fecha Una fecha desde Input
+     * @return true = formato inadecuado / false = formato correcto
+     */
+    public boolean formatoFECHA( String fecha ){
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        formato.setLenient(false);
+        
+        try{
+            Date test = formato.parse(fecha);
+        } catch (Exception e){
+            return true;
+        }
+        
+        return false;
     }
     
 }

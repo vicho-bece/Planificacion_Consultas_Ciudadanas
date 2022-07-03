@@ -13,14 +13,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- *
+ *Clase que implementa metodos de esta Interfaz para patron STRATEGY
  * @author vicho
  */
 public class ArchivoLista implements Strategy_ArchivoSalida {
-
+    /**
+     * Construtor sin parametros
+     */
     public ArchivoLista() {
     }
     
+    /**
+     * Metodo para generar archivo CSV de salida con Votos de una Consulta.
+     * Solo puede contener un SOLO formato de respuestas en un mismo archivo CSV
+     * @param coleccion La lista de Votantes de una Consulta
+     * @param num La clave de la Consulta que inserta en la 1era linea del archivo
+     * @throws IOException Error de Input/OutPut
+     */
     @Override
     public void generarArchivo(Object coleccion, int num) throws IOException{
         

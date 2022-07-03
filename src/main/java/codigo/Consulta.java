@@ -27,6 +27,7 @@ public abstract class Consulta implements funcionalidadConsulta{
     /**
      * fecha: Fecha de la consulta realizada
      * enunciado: Enunciado de la consulta propuesta
+     * check: Indica si la consulta ya conto sus votos
      */
     private String enunciado; 
     private String fecha; 
@@ -49,7 +50,12 @@ public abstract class Consulta implements funcionalidadConsulta{
         this.check = consulta.check;
     }
     
-    
+    /**
+     * Constructor con 3 parametros
+     * @param enunciado Enunciado de la Consulta
+     * @param fecha Fecha que se realizo la Consulta
+     * @param check Verificacion que se conto los votos
+     */
     public Consulta(String enunciado, String fecha, boolean check){
         
         //Con parametros
@@ -88,11 +94,19 @@ public abstract class Consulta implements funcionalidadConsulta{
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-
+    
+    /**
+     * Getter de check
+     * @return Verificacion que se contaron los votos en booleano
+     */
     public boolean isCheck() {
         return check;
     }
-
+    
+    /**
+     * Setter de check
+     * @param check El estado actual de conteo de votos
+     */
     public void setCheck(boolean check) {
         this.check = check;
     }
@@ -102,9 +116,23 @@ public abstract class Consulta implements funcionalidadConsulta{
      */
     public abstract void contarVotos();
     
+    /**
+     * Metodo abstracto para modificar un Voto con el rut del votante
+     * @param opcion Respuesta que opto
+     * @param rut Rut del Votante
+     * @return El resultado de la operacion
+     */
     public abstract String modificarVoto(int opcion, String rut);
     
+    /**
+     * Metodo para guardar la informacion de una Consulta en formato CSV
+     * @return Un String con la informacion de una Consulta
+     */
     public abstract String formatoCSV();
     
+    /**
+     * Metodo para obtener la lista de Votantes
+     * @return un ArrayList que contiene los votos
+     */
     public abstract ArrayList getListaVotantes();
 }

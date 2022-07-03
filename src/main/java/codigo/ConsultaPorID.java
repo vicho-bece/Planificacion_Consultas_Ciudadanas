@@ -48,9 +48,9 @@ public class ConsultaPorID {
     
     //METODOS PARA ELEMENTOS DEL TREEMAP
     
+    
     /**
-     * Metodo para agregar una consulta
-     * 
+     * Metodo para agregar datos iniciales a la Coleccion de Consultas
      */
     public void datosINICIAL(){
         Consulta consulta = new ConsultaMultiple();
@@ -65,6 +65,14 @@ public class ConsultaPorID {
         agregarConsultas(consulta, 2);
     }
     
+    /**
+     * Metodo para agregar una consulta con datos de los parametros entregados
+     * @param opcion Tipo de la Consulta
+     * @param enunciado Enunciado de la Consulta
+     * @param fecha Fecha estimada/realizada
+     * @param clave Un clave numerica para identificarlo
+     * @return Un String que indica clave repetida o exito de la operacion
+     */
     public String agregarConsulta(String opcion, String enunciado, String fecha, int clave) {
         
         Consulta cc;
@@ -85,7 +93,10 @@ public class ConsultaPorID {
         return "La consulta se agrego exitosamente";
     }
     
-    
+    /**
+     * Metodo para mostrar todas las consultas de la Coleccion
+     * @return Un String que contiene todas las consultas con sus datos [no incluye lista]
+     */
     public String mostrarConsultas() {
         
         String mostrar = "";
@@ -106,7 +117,15 @@ public class ConsultaPorID {
         return mostrar;
     }
     
-    
+    /**
+     * Metodo para modificar los datos de una Consulta sea Multiple/Binaria
+     * Si los votos fueron contados, solo permite agregar la resolucion de la Consulta
+     * @param key La clave de la Consulta
+     * @param enunciado Nuevo enunciado de la Consulta
+     * @param fecha Fecha estimada
+     * @param resolucion Conclusion de la Consulta, en caso de que los votos fueron contados
+     * @return Un String con el resultado de la operacion segun sea la situacion
+     */
     public String modificarConsulta(int key, String enunciado, String fecha, String resolucion){
         
         //Prevenir errores y preguntas por la consulta dada key
@@ -135,7 +154,12 @@ public class ConsultaPorID {
         return mostrar;
     }
    
-    
+    /**
+     * Metodo para eliminar un Consulta de la Coleccion con la clave numerica
+     * @param key Clave de una Consulta
+     * @return Un String con posibles fallos en la operacion o se elimina la consulta mostrando
+     * sus datos [incluye lista]
+     */
     public String eliminarConsulta(int key) {
         
         //Evitar caidas
@@ -151,7 +175,11 @@ public class ConsultaPorID {
         return mostrar;
     }
     
-    
+    /**
+     * Metodo para buscar una Consulta de la Coleccion con la clave
+     * @param key Clave de la Consulta
+     * @return Un String que no esta la consulta o muestra los datos de la consulta [no incluye lista]
+     */
     public String buscarConsulta(int key) {
         
         if( !evitarCaidas(key) ) return "No hay consulta asociada a la clave: " + key;
@@ -160,7 +188,12 @@ public class ConsultaPorID {
         return consulta.mostrarConsulta(false);
     }
     
-    
+    /**
+     * Metodo para buscar una o mas Consulta de la Coleccion con filtro a la fecha
+     * @param date Fecha para buscar
+     * @return Un String con la coleccion vacia, no hay Consultas asociadas a la fecha
+     * o entre 1 o mas Consultas con sus datos [no incluye lista]
+     */
     public String buscarConsulta(String date) {
         
         
@@ -184,7 +217,13 @@ public class ConsultaPorID {
     } 
     
     //METODOS PARA LOS ELEMENTOS DE LA LISTA
-    
+    /**
+     * Metodo para agregar un Voto, por Input, de una Consulta asociado a la clave
+     * @param key Clave de la consulta
+     * @param rut Rut del Votante
+     * @param voto Respuesta que opto
+     * @return Indica posibles errores o el resultado de la operacion
+     */
     public String agregarVoto(int key, String rut, int voto){
         
         if( !evitarCaidas(key) ) return "La coleccion esta vacia o bie no hay "
@@ -193,6 +232,14 @@ public class ConsultaPorID {
         return treemap.get(key).agregarVotante(rut, voto);
     }
     
+    /**
+     * Metodo para insertar los Votos de una Consulta, cuyos datos se obtienen desde 
+     * un archivo formato CSV
+     * @param key La clave de la consulta para insertar los votos y para buscar los votos correspondientes
+     * @return Un String posibles errores / Termino la ejecucion de la operacion y los 
+     * Votantes que se eliminaron para prevenir votos repetidos
+     * @throws IOException Error de Input/OutPut
+     */
     public String cargarVotos(int key) throws IOException{
         
         //Evito las caidas
@@ -278,6 +325,13 @@ public class ConsultaPorID {
         return "Se ejecuto correctamente el metodo\n" + mostrar;
     }
     
+    /**
+     * Metodo para buscar un Votante de la Lista de un Consulta.
+     * Se llama al metodo interior segun el tipo de la Consulta
+     * @param key Clave de la Consulta
+     * @param rut Rut del Votante
+     * @return Un String con posibles errores o el resultado de la operacion
+     */
     public String infoVontanteEnConsulta(int key, String rut) {
         //Reviso si esta la consulta
       
@@ -289,7 +343,12 @@ public class ConsultaPorID {
                 + (consulta.buscarVotante(rut));
         
     }
-    
+    /**
+     * Metodo para mostrar los datos de la Consulta incluyendo la lista de Votantes. 
+     * 
+     * @param key Clave de la Consulta
+     * @return Un String con posibles errores o la informacion de la Consulta
+     */
     public String imprimirVotos(int key) {
         
         //Reviso si esta la consulta
@@ -305,7 +364,14 @@ public class ConsultaPorID {
     }
     
     
-   
+   /**
+    * Metodo para modificar la respuesta de un Votante con el rut, de una Consulta
+    * con Clave asociada. Se llama el metodo interior segun el tipo de Consulta
+    * @param key Clave de la Consulta
+    * @param rut Rut del Votante
+    * @param opcion Respuesta a cambiar
+    * @return Resultado de la operacion
+    */
     public String modificarVotos(int key, String rut, int opcion) {
         
         if( !evitarCaidas(key) ) return "La coleccion esta vacia o bien no hay"
@@ -314,6 +380,13 @@ public class ConsultaPorID {
         return treemap.get(key).modificarVoto(opcion, rut);
     }
     
+    /**
+     * Metodo para eliminar un Votante, con rut, de la lista de una Consulta dada clave.
+     * Se llama al metodo interior segun el tipo de Consulta
+     * @param key Clave de la Consulta
+     * @param rut Rut del votante
+     * @return El resultado de la operacion
+     */
    public String eliminarVoto(int key, String rut){
        
        if( !evitarCaidas(key) ) return "La coleccion esta vacia o bien no hay consulta"
@@ -323,9 +396,15 @@ public class ConsultaPorID {
        return treemap.get(key).eliminarVotante(rut);
    }
     
-    public boolean eliminarVoto(int key, HashMap<String, Ciudadano> ciudadanos){
-        
-        if( !evitarCaidas(key) ) return false;
+   /**
+    * Metodo para eliminar Votos mal intencionados de una Consulta de la Coleccion.
+    * Se llama al metodo interior segun el tipo de la Consulta que responde y emplea el uso de la Coleccion
+    * de Ciudadanos que contiene los Ciudadanos registrados
+    * @param key Clave de una Consulta
+    * @param ciudadanos Coleccion de Ciudadanos
+    * @return Un String con los Votantes eliminados
+    */
+    public String eliminarVoto(int key, HashMap<String, Ciudadano> ciudadanos){
         
         return treemap.get(key).eliminarVotos(ciudadanos);  
     }
@@ -333,7 +412,10 @@ public class ConsultaPorID {
     
     //METODOS DEL NEGOCIO
     
-    
+    /**
+     * Metodo para encontrar la Consulta con menos Votos de la Coleccion
+     * @return Solo una consulta de la Coleccion
+     */
     public String consultaMenosVotos() {
         
         if( !evitarCaidas(null) ) return "La coleccion se encuentra vacia";
@@ -365,7 +447,10 @@ public class ConsultaPorID {
         return treemap.get(key).mostrarConsulta(false);
     }
     
-    
+    /**
+     * Metodo para mostrar la opcion mas Votada de todas las Consulta de la Coleccion
+     * @return Un String que contiene la opcion mas votada de todas de la Consultas
+     */
     public String opcionesMasVotadas() {
         
         if ( !evitarCaidas(null) ) return "La coleccion se encuentra vacia";
@@ -386,14 +471,24 @@ public class ConsultaPorID {
     
     //METODOS ADICIONALES
     
-    
+    /**
+     * Metodo para contar los Votos de una Consulta de la Coleccion con la clave asociada
+     * @param key Clave de una Consulta
+     * @return Indica que se contaron los votos
+     */
     public String contarVOTOS(int key) {
         
         treemap.get(key).contarVotos();
         return "Los votos fueron contados exitosamente...";
     }
     
-    
+    /**
+     * Metodo para prevenir errores de ejecucion relacionado con la Coleccion de Consultas
+     * Verifica si la coleccion esta vacia o no contiene una Consulta asociada a la clave
+     * [Siempre y cuando la clave no tenga valor NULL]
+     * @param key La clave de la Consulta o valor NULL
+     * @return Indica que todo esta en orden o posible falla
+     */
     public boolean evitarCaidas(Object key){
         
         //Si la coleccion esta vacia
@@ -407,5 +502,25 @@ public class ConsultaPorID {
                 return false;
         
         return true;
+    }
+    
+    /**
+     * Metodo para verificar que el String del parametro, su contenido sea solo 
+     * dato numerico
+     * @param contenido El String que almaceno desde Input
+     * @return true = no es dato numerico / false = es un dato numerico
+     */
+    public boolean datoNUMERICO(String contenido){
+        
+        if(contenido.equals(""))
+            return true;
+        
+        try{
+            Integer.parseInt(contenido);
+        } catch(Exception e){
+            return true;
+        }
+        
+        return false;
     }
 }

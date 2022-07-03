@@ -7,15 +7,25 @@ package Ventanas;
 import Codigo.*;
 import javax.swing.JFrame;
 /**
- *
+ * Clase para agregar una Consulta a la Coleccion 
+ * Interfaz grafica para insertar el Ciudadano con los datos ingresados 
  * @author vicho
  */
 public class Ventana_Agregar_Consulta extends javax.swing.JFrame {
     
+    /**
+     * Coleccion de Consultas
+     * Ventana del Menu Principal
+     */
     private ConsultaPorID consultas;
     private JFrame menu;
     /**
      * Creates new form Agregar_Consulta
+     */
+    /**
+     * Constructor con parametros
+     * @param consultas Coleccion de Consultas 
+     * @param menu Interfaz Grafica del Menu Principal
      */
     public Ventana_Agregar_Consulta(ConsultaPorID consultas, JFrame menu) {
         initComponents();

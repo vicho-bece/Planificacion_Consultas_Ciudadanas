@@ -9,15 +9,25 @@ import Codigo.ConsultaPorID;
 import javax.swing.JFrame;
 
 /**
- *
+ * Clase para mostrar los Votos de una Consulta
+ * Interfaz Grafica
  * @author vicho
  */
 public class Ventana_Mostrar_Lista extends javax.swing.JFrame {
-    
+    /**
+     * Coleccion de Consultas
+     * Ventana del Menu Principal
+     */
     private ConsultaPorID consultas;
     private JFrame menu;
     /**
      * Creates new form Ventana_Mostrar_Lista
+     */
+    
+    /**
+     * Constructor con parametros
+     * @param consultas Coleccion de Consultas 
+     * @param menu Interfaz Grafica del Menu Principal
      */
     public Ventana_Mostrar_Lista(ConsultaPorID consultas, JFrame menu) {
         initComponents();

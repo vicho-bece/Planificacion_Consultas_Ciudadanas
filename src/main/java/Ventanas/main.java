@@ -10,13 +10,21 @@ package Ventanas;
 
 import Codigo.*;
 import java.io.*;
+
 /**
- *
+ * Clase main desde consola, encaragado de hacer los Input/Outputs del programa
  * @author vicho
  */
 public class main {
     
-    public static void main(String arg[]) throws IOException, DatoNumerico_Exception{
+    /**
+     * Ejecucion del programa
+     * @param arg Dato sin utilizar
+     * @throws IOException [Input/Output]
+     * @throws DatoNumerico_Exception [Inserta dato distinto a un Numerico] 
+     * @throws Fecha_Exception [Formato fecha incorrecta]
+     */
+    public static void main(String arg[]) throws IOException, DatoNumerico_Exception, Fecha_Exception{
         
         //Declaro las varaibles para acceder a colecciones y atributos de Ciudadanos
         CiudadanoPorRut pp = new CiudadanoPorRut();
@@ -98,8 +106,11 @@ public class main {
                                     + "Si ingresa otro valor diferente a esos 2, se tomara como mujer");
                                 sexo = Boolean.parseBoolean(sub.readLine());
         
-                                System.out.println("Ingrese la fecha de nacimiento (formato dd/mm/yyyy)");
+                                System.out.println("Ingrese la fecha de nacimiento (formato dd/MM/yyyy)");
                                 fecha = sub.readLine();
+                                
+                                if(pp.formatoFECHA(fecha))
+                                    throw new Fecha_Exception();
                                 
                                 System.out.println("\nIndique el permiso de sufragar\ntrue = habilitado, false = no habilitado.\n"
                                     + "Si ingresa otro valor diferente a esos 2, se tomara como No habilitado");
@@ -134,8 +145,11 @@ public class main {
                                     + "Si ingresa otro valor diferente a esos 2, se tomara como mujer");
                                 sexo = Boolean.parseBoolean(sub.readLine());
         
-                                System.out.println("Ingrese la fecha de nacimiento (formato dd/mm/yyyy)");
+                                System.out.println("Ingrese la fecha de nacimiento (formato dd/MM/yyyy)");
                                 fecha = sub.readLine();
+                                
+                                if(pp.formatoFECHA(fecha))
+                                    throw new Fecha_Exception();
                                 
                                 System.out.println("\nIndique el permiso de sufragar\ntrue = habilitado, false = no habilitado.\n"
                                     + "Si ingresa otro valor diferente a esos 2, se tomara como No habilitado");
@@ -144,7 +158,7 @@ public class main {
                                 System.out.println("\nIngrese un rut unico para identificar");
                                 rut = sub.readLine();
                                 
-                                pp.modificarCiudadano(nombre, sexo, habilitado, fecha, rut);
+                                System.out.println(pp.modificarCiudadano(nombre, sexo, habilitado, fecha, rut));
                                 break;
                             }
                             
@@ -214,14 +228,16 @@ public class main {
                                 //Datos de la consulta
                                 System.out.println("INGRESE ENUNCIADO");
                                 enunciado = sub.readLine();
-                                System.out.println("INGRESE FECHA");
+                                System.out.println("INGRESE FECHA (dd/MM/yyyy)");
                                 fecha = sub.readLine();
-
+                                
+                                if(pp.formatoFECHA(fecha))
+                                    throw new Fecha_Exception();
                                 //Clave unica
                                 System.out.println("INGRESE CLAVE UNICA (un numero)");
                                 
                                 contenido = sub.readLine();
-                                if(contenido.equals(""))
+                                if(cc.datoNUMERICO(contenido))
                                     throw new DatoNumerico_Exception();
                                     
                                 clave = Integer.parseInt(contenido);
@@ -235,7 +251,13 @@ public class main {
                             {
                                 System.out.println("\nIngrese la clave numerico de la consulta"
                                         + " para ver la lista");
-                                clave = Integer.parseInt( sub.readLine() );
+                                
+                                contenido = sub.readLine();
+                                if(cc.datoNUMERICO(contenido))
+                                    throw new DatoNumerico_Exception();
+                                    
+                                clave = Integer.parseInt(contenido);
+                                
                                 System.out.println(cc.imprimirVotos(clave));
                                 break;
                             }
@@ -244,21 +266,35 @@ public class main {
                             {
                                 System.out.println("\nIngrese la clave numerico de la consulta"
                                         + " para cargar sus votos...");
-        
-                                System.out.println( cc.cargarVotos(Integer.parseInt( sub.readLine() ))  );
+                                
+                                contenido = sub.readLine();
+                                if(cc.datoNUMERICO(contenido))
+                                    throw new DatoNumerico_Exception();
+                                    
+                                clave = Integer.parseInt(contenido);
+                                
+                                System.out.println( cc.cargarVotos(clave ) );
                                 break;
                             }
                             case "5":
                             {
                                 System.out.println("\nIngrese la clave numerico de la consulta"
                                         + " para modificarlo");
-                                clave = Integer.parseInt( sub.readLine() );
+                                
+                                contenido = sub.readLine();
+                                if(cc.datoNUMERICO(contenido))
+                                    throw new DatoNumerico_Exception();
+                                    
+                                clave = Integer.parseInt(contenido);
                                 
                                 System.out.println("\nIngrese el enunciado que desea reemplazar");
                                 enunciado = sub.readLine();
                                 
-                                System.out.println("\n Ingrese una nueva fecha");
+                                System.out.println("\n Ingrese una nueva fecha (dd/MM/yyyy)");
                                 fecha = sub.readLine();
+                                
+                                if(pp.formatoFECHA(fecha))
+                                    throw new Fecha_Exception();
                                 
                                 System.out.println("\nEn caso de que los votos ya estan"
                                         + " contados, indique la resolucion de la consulta");
@@ -271,7 +307,11 @@ public class main {
                             {
                                 System.out.println("\nIngrese la clave numerico de la consulta"
                                         + " para eliminarlo");
-                                clave = Integer.parseInt( sub.readLine() );
+                                contenido = sub.readLine();
+                                if(cc.datoNUMERICO(contenido))
+                                    throw new DatoNumerico_Exception();
+                                    
+                                clave = Integer.parseInt(contenido);
                                 System.out.println(cc.eliminarConsulta(clave));
                                 break;
                             }
@@ -281,15 +321,24 @@ public class main {
                                 csv2.generarArchivo(cc, 0);
                                 break;
                             }
-                
+             
                             case "8":
                             {
                                 System.out.println("\nIngrese la clave numerico de la consulta"
                                         + " para revisar sus votos");
-                                clave = Integer.parseInt(sub.readLine());
-                                if( cc.eliminarVoto(clave, pp.getMap()) )
+                                contenido = sub.readLine();
+                                if(cc.datoNUMERICO(contenido))
+                                    throw new DatoNumerico_Exception();
+                                    
+                                clave = Integer.parseInt(contenido);
+                                if( !cc.evitarCaidas(clave) )
+                                {
+                                    System.out.println(cc.eliminarVoto(clave, pp.getMap()));
                                     System.out.println(cc.contarVOTOS(clave));
-                            
+                                }
+                                else
+                                    System.out.println("La consulta esta vacia o bien"
+                                            + " no consulta con la clave asociada:" + clave);
                                 break;
                             }
                             
@@ -297,20 +346,34 @@ public class main {
                             {
                                 System.out.println("\nIngrese la clave numerico de la consulta"
                                         + " para cambiar el voto");
-                                clave = Integer.parseInt(sub.readLine());
+                                contenido = sub.readLine();
+                                if(cc.datoNUMERICO(contenido))
+                                    throw new DatoNumerico_Exception();
+                                    
+                                clave = Integer.parseInt(contenido);
                                 System.out.println("El rut del votante");
                                 rut = sub.readLine();
                                 System.out.println("Si la consulta corresponde a Multiple"
                                         + ", elige la opcion del 1 al 5. Si corresponde"
                                         + " a Binario, siga la misma instruccion");
                                 
-                                keyNum = Integer.parseInt(sub.readLine());
+                                contenido = sub.readLine();
+                                if(cc.datoNUMERICO(contenido))
+                                    throw new DatoNumerico_Exception();
+                                    
+                                keyNum = Integer.parseInt(contenido);
+                                
+               
                                 
                                 while( keyNum < 1 || keyNum > 5  )
                                 {
                                     System.out.println("La opcion que eligio no corresponde al dominio."
                                             + "Favor de seguir la instruccion");
-                                    keyNum = Integer.parseInt(sub.readLine());
+                                    contenido = sub.readLine();
+                                    if(cc.datoNUMERICO(contenido))
+                                        throw new DatoNumerico_Exception();
+                                    
+                                    keyNum = Integer.parseInt(contenido);
                                 }
                                 
                                 System.out.println(cc.modificarVotos(clave, rut, keyNum));
@@ -322,7 +385,11 @@ public class main {
                             {
                                 System.out.println("\nIngrese la clave numerico de la consulta"
                                         + " que busca");
-                                clave = Integer.parseInt(sub.readLine());
+                                contenido = sub.readLine();
+                                if(cc.datoNUMERICO(contenido))
+                                    throw new DatoNumerico_Exception();
+                                    
+                                clave = Integer.parseInt(contenido);
                                 System.out.println(cc.buscarConsulta(clave));
                                 break;
                             }
@@ -331,7 +398,11 @@ public class main {
                             {
                                 System.out.println("\nIngrese la fecha para buscar"
                                         + " la o las consultas asociadas a tal fecha");
-                                System.out.println(cc.buscarConsulta( sub.readLine() ));
+                                fecha = sub.readLine();
+                                
+                                if(pp.formatoFECHA(fecha))
+                                    throw new Fecha_Exception();
+                                System.out.println(cc.buscarConsulta( fecha ));
                                 break;
                             }
                             
@@ -343,7 +414,11 @@ public class main {
                             {
                                 System.out.println("\nIngrese la clave numerico de la consulta");
                                 
-                                clave = Integer.parseInt(sub.readLine());
+                                contenido = sub.readLine();
+                                if(cc.datoNUMERICO(contenido))
+                                    throw new DatoNumerico_Exception();
+                                    
+                                clave = Integer.parseInt(contenido);
                                 System.out.println("\nIngrese el rut del votante que desea buscar");
                                 rut = sub.readLine();
                                 
@@ -355,7 +430,11 @@ public class main {
                             {
                                 System.out.println("\nIngrese la clave numerico de la consulta");
                                 
-                                clave = Integer.parseInt(sub.readLine());
+                                contenido = sub.readLine();
+                                if(cc.datoNUMERICO(contenido))
+                                    throw new DatoNumerico_Exception();
+                                    
+                                clave = Integer.parseInt(contenido);
                                 System.out.println("\nIngrese el rut del votante que desea buscar");
                                 rut = sub.readLine();
                                 
@@ -368,7 +447,11 @@ public class main {
                                 
                                 System.out.println("\nIngrese la clave numerico de la consulta");
                                 
-                                clave = Integer.parseInt(sub.readLine());
+                                contenido = sub.readLine();
+                                if(cc.datoNUMERICO(contenido))
+                                    throw new DatoNumerico_Exception();
+                                    
+                                clave = Integer.parseInt(contenido);
                                 System.out.println("\nIngrese el rut del votante que desea buscar");
                                 rut = sub.readLine();
                                 
@@ -376,13 +459,21 @@ public class main {
                                         + ", elige la opcion del 1 al 5.\nSi corresponde"
                                         + " a Binario, 1 = true y 2 = false");
                                 
-                                keyNum = Integer.parseInt(sub.readLine());
+                                contenido = sub.readLine();
+                                if(cc.datoNUMERICO(contenido))
+                                    throw new DatoNumerico_Exception();
+                                    
+                                keyNum = Integer.parseInt(contenido);
                                 
                                 while( keyNum < 1 || keyNum > 5  )
                                 {
                                     System.out.println("La opcion que eligio no corresponde al dominio."
                                             + "Favor de seguir la instruccion");
-                                    keyNum = Integer.parseInt(sub.readLine());
+                                    contenido = sub.readLine();
+                                    if(cc.datoNUMERICO(contenido))
+                                        throw new DatoNumerico_Exception();
+                                    
+                                    keyNum = Integer.parseInt(contenido);
                                 }
                                 
                                 System.out.println( cc.agregarVoto(clave, rut, keyNum) );
@@ -390,7 +481,7 @@ public class main {
                                 break;
                             }
                             default: System.out.println("\nEl numero que ingreso"
-                                    + " no esta dentro de las operaciones..."); break;//REVISAR
+                                    + " no esta dentro de las operaciones..."); break;
                         }
                     }
                     break;

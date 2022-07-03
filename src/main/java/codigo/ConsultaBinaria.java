@@ -91,7 +91,11 @@ public class ConsultaBinaria extends Consulta{
     }
     
     
-    
+    /**
+     * Metodo para mostrar la informacion de una Consulta Binaria c/s la lista de votantes
+     * @param lista La opcion de mostrar la lista en boolean
+     * @return La informacion de una Consulta c/s la lista
+     */
     @Override
     public String mostrarConsulta(boolean lista) {
         
@@ -123,7 +127,8 @@ public class ConsultaBinaria extends Consulta{
         return mostrar;
     }
     /**
-     * Metodo implementado para contar los votos de una consulta binaria
+     * Metodo implementado para contar los votos de una consulta binaria e indicar que
+     * se contaron los votos
      */
     @Override
     public void contarVotos(){
@@ -167,6 +172,14 @@ public class ConsultaBinaria extends Consulta{
             return("NO: " + getContNo());
     }
     
+    
+    /**
+     * Metodo para modificar el voto binario de un Votante con el Rut
+     * @param opcion Respuesta que opto (En realidad, solo se invierte el voto con
+     * respecto al anterior)
+     * @param rut Rut del Votante
+     * @return Un mensaje que indica el resultado de la operacion
+     */
     @Override
     public String modificarVoto(int opcion, String rut){
         
@@ -188,23 +201,37 @@ public class ConsultaBinaria extends Consulta{
         return "No hay votante con el rut: " + rut;
     }
     
+    /**
+     * Metodo para eliminar los votos repetidos durante el ingreso de votos por CSV
+     * @param rut Rut del votante, para ver si se repite
+     * @param voto Contiene el rut y respuesta de un votante
+     * @return Indica si esta repetido o no
+     */
     @Override
-    public boolean eliminarVotos(String rut, Object lista){
+    public boolean eliminarVotos(String rut, Object voto){
         
         for(int i = 0; i < listaVotantes.size(); i++){
             if(listaVotantes.get(i).getRut().equals(rut))
                 return false;
         }
         
-        agregarVoto( (FormatoBinario)lista );
+        agregarVoto( (FormatoBinario)voto );
         return true;
     }
     
+    /**
+     * Metodo para revisar que los Votantes de la lista esten en la Coleccion de Ciudadanos
+     * y que se encuentra Habilitados para sufragar. Si no cumple ambas condiciones se elimina 
+     * de la lista
+     * 
+     * @param ciudadanos La coleccion de Ciudadanos
+     * @return Un String que indica los Votantes eliminados
+     */
     @Override
-    public boolean eliminarVotos(HashMap<String, Ciudadano> ciudadanos){
+    public String eliminarVotos(HashMap<String, Ciudadano> ciudadanos){
         
         FormatoBinario formatoB;
-        
+        String mostrar = "";
         //Recorro la lista
         for(int i = 0; i < listaVotantes.size(); i++)
         {
@@ -215,27 +242,37 @@ public class ConsultaBinaria extends Consulta{
                 //Esta habilitado para sufragar
                 if( !ciudadanos.get(formatoB.getRut()).isHabilitado() )
                 {
-                    System.out.println("Voto eliminado, ciudadano no habilitado: " + formatoB.getRut());
+                    mostrar +=("\nVoto eliminado, ciudadano no habilitado: " + formatoB.getRut());
                     listaVotantes.remove(i);
                     i--;
                 }
             }
             else
             {
-                System.out.println("Voto eliminado, ciudadano no registrado: " + formatoB.getRut());
+                mostrar += ("\nVoto eliminado, ciudadano no registrado: " + formatoB.getRut());
                 listaVotantes.remove(i);
                 i--;
             }
         }
-        return true;
+        return mostrar;
     }
     
+    /**
+     * Metodo para almacenar los datos de una Consulta Binaria, no incluye la lista
+     * @return Un String con la informacion de una Consulta Binaria
+     */
     @Override
     public String formatoCSV(){
         return (getEnunciado() + ";" + getFecha() + ";" + isCheck() + ";" +
                 getContSi() + ";" + getContNo() + "\n");
     }
     
+    /**
+     * Metodo para buscar un Votante de la lista con el rut
+     * @param rut Rut del Votante
+     * @return Indica el resultado de la busqueda
+     */
+    @Override
     public String buscarVotante(String rut){
         
         FormatoBinario voto;
@@ -252,6 +289,11 @@ public class ConsultaBinaria extends Consulta{
         return "\nEl rut: " + rut + " no se encontro en la lista de votantes"; 
     }
     
+    /**
+     * Metodo para eliminar un Votante de la lista con el rut
+     * @param rut Rut del Votante
+     * @return Indica el resultado de la eliminacion
+     */
     @Override
     public String eliminarVotante(String rut){
         
@@ -273,6 +315,15 @@ public class ConsultaBinaria extends Consulta{
         return "\nEl rut: " + rut + " no se encontro en la lista de votantes"; 
     }
     
+    /**
+     * Metodo para agregar un Votante de la lista de Votantes.
+     * voto = 1 - true
+     * voto = 2 - false
+     * Ninguna de las anteriores - opcion no valido
+     * @param rut Rut del Votante
+     * @param voto Su respuesta binaria
+     * @return Indica el resulta de la agregacion
+     */
     @Override
     public String agregarVotante(String rut, int voto){
         

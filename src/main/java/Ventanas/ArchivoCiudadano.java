@@ -14,16 +14,24 @@ import java.util.*;
 
 
 /**
- *
+ * Clase que implementa metodos de esta Interfaz para patron STRATEGY
  * @author vicho
  */
 public class ArchivoCiudadano implements Strategy_ArchivoSalida {
-
+    /**
+     * Constructor sin parametros
+     */
     public ArchivoCiudadano() {
     }
     
     
-    
+    /**
+     * Metodo para generar archivo CSV de salida con Ciudadanos de la Coleccion.
+     * Puede contener entre 1 y 2 tipos de Ciudadanos en un mismo archivo CSV
+     * @param coleccion Coleccion de Ciudadanos
+     * @param num Un 0, es irrelevante este parametro
+     * @throws IOException Error de Input/OutPut
+     */
     @Override
     public void generarArchivo(Object coleccion, int num) throws IOException{
         try

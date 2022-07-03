@@ -7,7 +7,7 @@ package Codigo;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.io.IOException;
+
 import java.util.*;
 /**
  *
@@ -136,6 +136,11 @@ public class ConsultaMultiple extends Consulta{
         this.cont5++;
     }
     
+    /**
+     * Metodo para mostrar los datos de una Consulta Multiple c/s la lista de Votantes
+     * @param lista Opcion de mostrar la lista
+     * @return Un String con los datos de una consulta
+     */
     @Override
     public String mostrarConsulta(boolean lista) {
         
@@ -170,7 +175,8 @@ public class ConsultaMultiple extends Consulta{
     }
     
     /**
-     * Metodo implementado para contar los votos de una consulta multiple
+     * Metodo implementado para contar los votos de una consulta multiple e indicar
+     * que se conto los votos de la consulta
      */
     @Override
     public void contarVotos(){
@@ -240,6 +246,12 @@ public class ConsultaMultiple extends Consulta{
         return "OPCION 5: " + getCont5();
     }
     
+    /**
+     * Metodo para modificar un Voto multiple de un Votante con el rut
+     * @param opcion Respuesta que opto del 1 al 5
+     * @param rut Rut del Votante
+     * @return Un String que indica el resultado de la operacion
+     */
     @Override
     public String modificarVoto(int opcion, String rut){
         
@@ -260,23 +272,37 @@ public class ConsultaMultiple extends Consulta{
         return "No hay votante con el rut: " + rut;
     }
     
+    /**
+     * Metodo para prevenir que repita votos con el uso de la
+     * @param rut Rut del votante para investigar
+     * @param voto Contiene el rut y respuesta del Votante
+     * @return Indica si se repite el voto o se agrega el voto 
+     */
     @Override
-    public boolean eliminarVotos(String rut, Object lista){
+    public boolean eliminarVotos(String rut, Object voto){
         
         for(int i = 0; i < listaVotantes.size(); i++){
             if(listaVotantes.get(i).getRut().equals(rut))
                 return false;
         }
         
-        agregarVoto( (FormatoMultiple)lista );
+        agregarVoto( (FormatoMultiple)voto );
         return true;
     }
     
+    /**
+     * Metodo para revisar que los Votantes de la lista esten en la Coleccion de Ciudadanos
+     * y que se encuentra Habilitados para sufragar. Si no cumple ambas condiciones se elimina 
+     * de la lista
+     * 
+     * @param ciudadanos Coleccion de Ciudadanos
+     * @return Un String que contiene los Votantes que se eliminaron
+     */
     @Override
-    public boolean eliminarVotos(HashMap<String, Ciudadano> ciudadanos){
+    public String eliminarVotos(HashMap<String, Ciudadano> ciudadanos){
         
         FormatoMultiple formatoB;
-        
+        String mostrar = "";
         //Recorro la lista
         for(int i = 0; i < listaVotantes.size(); i++)
         {
@@ -287,22 +313,26 @@ public class ConsultaMultiple extends Consulta{
                 //Habilitado para sufragar
                 if( !ciudadanos.get(formatoB.getRut()).isHabilitado() )
                 {
-                    System.out.println("Voto eliminado, ciudadano no habilitado: " + formatoB.getRut());
+                    mostrar += ("\nVoto eliminado, ciudadano no habilitado: " + formatoB.getRut());
                     listaVotantes.remove(i);
                     i--;
                 }
             }
             else
             {
-                System.out.println("Voto eliminado, ciudadano no registrado: " + formatoB.getRut());
+                mostrar += ("\nVoto eliminado, ciudadano no registrado: " + formatoB.getRut());
                 listaVotantes.remove(i);
                 i--;
             }
         }
         
-        return true;
+        return mostrar;
     }
     
+    /**
+     * Metodo para almacenar los datos de una Consulta Multiple, no incluye lista
+     * @return Un String de la informacion de una Consulta Multiple
+     */
     @Override
     public String formatoCSV(){
         return (getEnunciado() + ";" + getFecha() + ";" + isCheck() + ";" +
@@ -310,6 +340,11 @@ public class ConsultaMultiple extends Consulta{
                 + ";" + getCont5() + "\n");
     }
     
+    /**
+     * Metodo para buscar un Votante de la lista con el rut
+     * @param rut Rut del Votante a buscar
+     * @return Indica que resultado de la busqueda
+     */
     public String buscarVotante(String rut){
         
         FormatoMultiple voto;
@@ -326,6 +361,11 @@ public class ConsultaMultiple extends Consulta{
         return "\nEl rut: " + rut + " no se encontro en la lista de votantes"; 
     }
     
+    /**
+     * Metodo para eliminar un Votante de la lista con el rut
+     * @param rut Rut del Votante a eliminar
+     * @return Indica el resultado de la eliminacion
+     */
     @Override
     public String eliminarVotante(String rut){
         
@@ -347,6 +387,12 @@ public class ConsultaMultiple extends Consulta{
         return "\nEl rut: " + rut + " no se encontro en la lista de votantes"; 
     }
     
+    /**
+     * Metodo para agregar un Votante a la lista de Votantes.
+     * @param rut Rut del votante
+     * @param voto Respuesta que opto
+     * @return Indica que resultado de la agregacion
+     */
     @Override
     public String agregarVotante(String rut, int voto){
         

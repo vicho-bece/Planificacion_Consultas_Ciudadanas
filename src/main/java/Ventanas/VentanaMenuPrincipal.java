@@ -6,18 +6,24 @@
 package Ventanas;
 import Codigo.*;
 /**
- *
+ * Clase del Menu Principal
+ * Intefaz grafica, otorgado opciones para realizar operaciones
  * @author vicho
  */
 public class VentanaMenuPrincipal extends javax.swing.JFrame {
-
+    
+    /**
+     * Atributos que contiene las Colecciones necesarias
+     */
     private CiudadanoPorRut ciudadanos;
     private ConsultaPorID consultas;            
     /**
      * Creates new form VentanaMenuPrincipal
      */
     
-    
+    /**
+     * Constructor sin parametros
+     */
     public VentanaMenuPrincipal() {
         initComponents(); 
         

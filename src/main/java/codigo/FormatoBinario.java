@@ -89,7 +89,11 @@ public class FormatoBinario extends FormatoLista {
     public void setVoto(boolean voto) {
         this.voto = voto;
     }
-
+    
+    /**
+     * Metodo para almacenar votos binarios en formato CSV
+     * @return Un String con informacion del Votante en CSV
+     */
     @Override
     public String formato_CSV(){
         return (getRut() + ";" + isVoto() + "\n");

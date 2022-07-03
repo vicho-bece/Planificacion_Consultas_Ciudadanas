@@ -8,15 +8,25 @@ package Ventanas;
 import javax.swing.JFrame;
 import Codigo.*;
 /**
- *
+ * Clase para agregar un Ciudadano a la Coleccion 
+ * Interfaz grafica para insertar el Ciudadano con los datos ingresados 
  * @author vicho
  */
 public class Ventana_Agregar_Ciudadano extends javax.swing.JFrame {
     
+    /**
+     * Coleccion de Ciudadanos
+     * Ventana del Menu Principal
+     */
     private CiudadanoPorRut ciudadanos;
     private JFrame menu;
     /**
      * Creates new form Ventana_Agregar_Ciudadano
+     */
+    /**
+     * Constructor con parametros
+     * @param ciudadanos Coleccion de Ciudadanos 
+     * @param menu Interfaz Grafica del Menu Principal
      */
     public Ventana_Agregar_Ciudadano(CiudadanoPorRut ciudadanos, JFrame menu) {
         initComponents();
